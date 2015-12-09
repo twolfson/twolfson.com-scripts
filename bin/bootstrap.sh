@@ -20,3 +20,8 @@ if ! which node &> /dev/null; then
   curl -sL https://deb.nodesource.com/setup_0.10 | sudo -E bash -
   sudo apt-get install -y "nodejs=0.10.41-1nodesource1~trusty1"
 fi
+
+# TODO: Set up NGINX
+# TODO: Set up data files for NGINX (both conf.d, SSL certs)
+#   Set up SSL certs via a `bootstrap-vagrant.sh` script
+# TODO: Set up process manager and init.d for said process manager
