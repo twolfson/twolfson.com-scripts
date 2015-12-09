@@ -1,0 +1,14 @@
+- [ ] Verify `node@v0.10.41` is installed
+- [ ] Verify `bash@latest` is installed
+- [ ] Verify shellshock, heartbleed, ghost are resolved
+- [ ] Verify only open ports are 22, 80, and 443
+- [ ] Verify only user with good default shell is ubuntu
+    - [ ] It's possible to `sudo -u root --shell $SHELL`, right?
+- [ ] Verify /etc/sshd configuration (e.g. only RSA handshake, no passwords)
+- [ ] Verify permissions on SSL certs (e.g. /etc/ssl/private)
+- [ ] Verify permissions on NGINX configs (e.g. /etc/nginx/conf.d)
+- [ ] Verify permissions on twolfson drive
+
+- [ ] In twolfson.com repo, prob add node security project check to test suite
+- [ ] In twolfson.com repo, add GZIP checks
+- [ ] In twolfson.com repo, /health with NODE_ENV=production check
