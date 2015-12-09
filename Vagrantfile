@@ -6,10 +6,6 @@ Vagrant.configure(2) do |config|
   # https://atlas.hashicorp.com/ubuntu/boxes/trusty64
   config.vm.box = "ubuntu/trusty64"
 
-  # Forward HTTP and HTTPS ports
-  config.vm.network "forwarded_port", guest: 80, host: 80
-  config.vm.network "forwarded_port", guest: 443, host: 443
-
   # Give additional memory and CPU to VirtualBox provider
   # https://docs.vagrantup.com/v2/virtualbox/configuration.html
   config.vm.provider "virtualbox" do |vb|
