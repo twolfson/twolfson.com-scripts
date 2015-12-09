@@ -16,5 +16,5 @@ fi
 # TODO: Upgrade to newer version of node
 if ! which node &> /dev/null; then
   curl -sL https://deb.nodesource.com/setup_0.10 | sudo -E bash -
-  sudo apt-get install -y nodejs==0.10.41-1nodesource1~trusty1
+  sudo apt-get install -y "nodejs=0.10.41-1nodesource1~trusty1"
 fi
