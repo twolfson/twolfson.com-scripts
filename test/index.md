@@ -12,6 +12,7 @@
 - [ ] TODO: Relocate SSL setup into `nginx.conf`
 - [ ] TODO: Look into HTTPS for www.
 - [ ] TODO: Look into why HTTPS for www. not redirecting
+- [ ] TODO: Remove `/etc/nginx/sites-{available,enabled}` or verify they are owned by root:root and only writable by owner and not executable by owner/group/other
 
 - [ ] In twolfson.com repo, prob add node security project check to test suite
 - [ ] In twolfson.com repo, add GZIP checks
