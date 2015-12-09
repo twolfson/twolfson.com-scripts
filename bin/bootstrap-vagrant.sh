@@ -35,4 +35,5 @@ if ! test -f /etc/ssl/certs/twolfson.com.crt; then
 fi
 
 # Invoke bootstrap.sh in our context
-. _bootstrap.sh
+cd /vagrant
+. bin/_bootstrap.sh
