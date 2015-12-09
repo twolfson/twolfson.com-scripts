@@ -21,7 +21,15 @@ if ! which node &> /dev/null; then
   sudo apt-get install -y "nodejs=0.10.41-1nodesource1~trusty1"
 fi
 
-# TODO: Set up NGINX
+# If NGINX isn't installed, then set it up
+# TOOD: Thinking about `apt-get` function to handle installs/updates
+if ! which nginx &> /dev/null; then
+  sudo apt-get install -y nginx=1.4.6-1ubuntu3.3
+fi
+
+# If there are no NGINX configuration files, then install them
+# TODO: Handle updates for conf.d
+#   Thinking about 3 functions to copy files, update ownership, update permissions
 # TODO: Set up data files for NGINX (both conf.d, SSL certs)
 #   Set up SSL certs via a `bootstrap-vagrant.sh` script
 # TODO: Set up process manager and init.d for said process manager
