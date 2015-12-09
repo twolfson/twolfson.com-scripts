@@ -27,6 +27,7 @@ if ! test -f /etc/ssl/certs/twolfson.com.crt; then
   sudo mv twolfson.com.crt /etc/ssl/certs/twolfson.com.crt
   sudo chown root:root /etc/ssl/certs/twolfson.com.crt
   sudo chmod a=rwx /etc/ssl/certs/twolfson.com.crt # Anyone can do all the things
+
   sudo mv twolfson.com.key /etc/ssl/private/twolfson.com.key
   sudo chown root:root /etc/ssl/private/twolfson.com.key
   sudo chmod u=r,g=,o /etc/ssl/private/twolfson.com.key # Only user can read this file
