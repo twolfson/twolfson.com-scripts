@@ -19,6 +19,10 @@ TODO: Document me
     - Only Digital Ocean for metrics
     - In-service error reporting depends on the service
         - TODO: We should standardize-ish...
+- Process manager
+    - Depends on the service
+        - TODO: Move away from `forever`?
+        - TODO: Maybe standardize on something?
 
 [testinfra]: https://github.com/philpep/testinfra
 
