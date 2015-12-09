@@ -11,6 +11,7 @@ TODO: Document me
 TODO: Document me
 
 - Servers are running on Digital Ocean
+- DNS is being managed by AWS
 - Tests are done via [testinfra][]
     - These are both meant to cover sanity and security
     - TODO: Write tests
