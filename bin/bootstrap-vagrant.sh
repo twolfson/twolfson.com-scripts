@@ -31,7 +31,7 @@ if ! test -f /etc/ssl/certs/twolfson.com.crt; then
 
   sudo mv twolfson.com.key /etc/ssl/private/twolfson.com.key
   sudo chown root:root /etc/ssl/private/twolfson.com.key
-  sudo chmod u=r,g=,o /etc/ssl/private/twolfson.com.key # Only user can read this file
+  sudo chmod u=r,g=,o= /etc/ssl/private/twolfson.com.key # Only user can read this file
 fi
 
 # Invoke bootstrap.sh in our context
