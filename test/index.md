@@ -10,6 +10,8 @@
 - [ ] Verify permissions on twolfson drive
 - [ ] Secure OpenSSH server as well -- see cipherli.st
 - [ ] TODO: Relocate SSL setup into `nginx.conf`
+- [ ] TODO: Look into HTTPS for www.
+- [ ] TODO: Look into why HTTPS for www. not redirecting
 
 - [ ] In twolfson.com repo, prob add node security project check to test suite
 - [ ] In twolfson.com repo, add GZIP checks
