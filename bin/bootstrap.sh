@@ -16,9 +16,9 @@ fi
 # If we haven't installed node or it's out of date, then set it up
 # https://github.com/nodesource/distributions/tree/96e9b7d40b6aff7ade7bc130d9e18fd140e9f4f8#installation-instructions
 node_version="0.10.41-1nodesource1~trusty1"
-if ! which node &> /dev/null; then
+if ! ls /var/lib/apt/lists/deb.nodesource.com* &> /dev/null; then
   curl -sL https://deb.nodesource.com/setup_0.10 | sudo -E bash -
 fi
-if (! which node &> /dev/null) || (! dpkg --list | grep nodejs | grep "$node_version"); then
+if ! dpkg --list | grep nodejs | grep "$node_version"; then
   sudo apt-get install -y "nodejs=0.10.41-1nodesource1~trusty1"
 fi
