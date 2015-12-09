@@ -3,6 +3,19 @@
 set -e
 set -x
 
+# Temporarily set up data directory inline
+# TODO: Set up data directory for production (set this one inside of `bootstrap-vagrant.sh`)
+#   Then, invoke `bootstrap.sh` (or maybe rename to `_bootstrap.sh` via a `. bootstrap.sh` so it's in the same shell -- or maybe us an export)
+data_dir="/vagrant/data"
+
+# Verify we have a data_dir variable set
+if test "$data_dir" = ""; then
+  echo "Environment variable \`data_dir\` wasn't set when calling \`bootstrap.sh\`." 1>&2
+  echo "Please verify it is set before running it." 1>&2
+  echo "Example: \`data_dir=\"/vagrant/data\"; . bin/bootstrap.sh\`" 1>&2
+  exit 1
+fi
+
 # If we haven't updated apt-get, then update it now
 # TODO: Use timestamp to update it on a schedule (e.g. 1 day)
 #   https://github.com/twolfson/twolfson.com-scripts/blob/150de4af2778e577ca3d57dab74b6dd7a0e1a55f/bin/bootstrap.sh#L6-L14
