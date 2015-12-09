@@ -10,18 +10,19 @@ data_dir="/vagrant/data"
 if ! test -f /etc/ssl/certs/twolfson.com.crt; then
   # Create our certificates
   # https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs#generate-a-self-signed-certificate
+  # https://www.openssl.org/docs/manmaster/apps/req.html#EXAMPLES
+  #   Country Name (2 letter code) [AU]:
+  #   State or Province Name (full name) [Some-State]:
+  #   Locality Name (eg, city) []:
+  #   Organization Name (eg, company) [Internet Widgits Pty Ltd]:
+  #   Organizational Unit Name (eg, section) []:
+  #   Common Name (e.g. server FQDN or YOUR name) []:
+  #   Email Address []:
+  openssl_subj="/C=US/ST=Illinois/L=Chicago/O=twolfson/CN=twolfson.com/emailAddress=todd@twolfson.com"
   openssl req \
     -newkey rsa:2048 -nodes -keyout twolfson.com.key \
     -x509 -days 365 -out twolfson.com.crt \
-    # https://www.openssl.org/docs/manmaster/apps/req.html#EXAMPLES
-    # Country Name (2 letter code) [AU]:
-    # State or Province Name (full name) [Some-State]:
-    # Locality Name (eg, city) []:
-    # Organization Name (eg, company) [Internet Widgits Pty Ltd]:
-    # Organizational Unit Name (eg, section) []:
-    # Common Name (e.g. server FQDN or YOUR name) []:
-    # Email Address []:
-    -subj "/C=US/ST=Illinois/L=Chicago/O=twolfson/CN=twolfson.com/emailAddress=todd@twolfson.com"
+    -subj "$openssl_subj"
 
   # Install our certificates
   sudo mv twolfson.com.crt /etc/ssl/certs/twolfson.com.crt
