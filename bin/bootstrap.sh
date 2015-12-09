@@ -41,11 +41,18 @@ if ! which nginx &> /dev/null; then
 fi
 
 # If there are no NGINX configuration files, then install them
-if ! test -f /etc/nginx/conf.d/twolfson.com.conf; then
-
-fi
 # TODO: Handle updates for conf.d
 #   Thinking about 3 functions to copy files, update ownership, update permissions
 # TODO: Set up SSL certs via a `bootstrap-vagrant.sh` script
+# TODO: Move all cp, chown, chmod logic into an `if` so we can handle nginx reload gracefully
 # TODO: Write script to install SSL certs on a server (e.g. rsync, ssh, chmod, chown, mv)
 # TODO: Set up process manager and init.d for said process manager
+if ! test -f /etc/nginx/conf.d/twolfson.com.conf; then
+  # Install our configuration
+  cp "$data_dir/etc/nginx/conf.d/twolfson.com.conf" /etc/nginx/conf.d/twolfson.com.conf
+  sudo chown root:root /etc/nginx/conf.d/twolfson.com.conf
+  sudo chmod chmod u=rw,g=r,o=r /etc/nginx/conf.d/twolfson.com.conf
+
+  # Reload the NGINX server
+  sudo /etc/init.d/nginx reload
+fi
