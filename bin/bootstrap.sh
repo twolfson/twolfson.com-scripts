@@ -3,11 +3,6 @@
 set -e
 set -x
 
-# Temporarily set up data directory inline
-# TODO: Set up data directory for production (set this one inside of `bootstrap-vagrant.sh`)
-#   Then, invoke `bootstrap.sh` (or maybe rename to `_bootstrap.sh` via a `. bootstrap.sh` so it's in the same shell -- or maybe us an export)
-data_dir="/vagrant/data"
-
 # Verify we have a data_dir variable set
 if test "$data_dir" = ""; then
   echo "Environment variable \`data_dir\` wasn't set when calling \`bootstrap.sh\`." 1>&2
@@ -43,7 +38,6 @@ fi
 # If there are no NGINX configuration files, then install them
 # TODO: Handle updates for conf.d
 #   Thinking about 3 functions to copy files, update ownership, update permissions
-# TODO: Set up SSL certs via a `bootstrap-vagrant.sh` script
 # TODO: Move all cp, chown, chmod logic into an `if` so we can handle nginx reload gracefully
 # TODO: Write script to install SSL certs on a server (e.g. rsync, ssh, chmod, chown, mv)
 # TODO: Set up process manager and init.d for said process manager
