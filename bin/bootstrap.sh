@@ -51,7 +51,7 @@ if ! test -f /etc/nginx/conf.d/twolfson.com.conf; then
   # Install our configuration
   cp "$data_dir/etc/nginx/conf.d/twolfson.com.conf" /etc/nginx/conf.d/twolfson.com.conf
   sudo chown root:root /etc/nginx/conf.d/twolfson.com.conf
-  sudo chmod chmod u=rw,g=r,o=r /etc/nginx/conf.d/twolfson.com.conf
+  sudo chmod u=rw,g=r,o=r /etc/nginx/conf.d/twolfson.com.conf
 
   # Reload the NGINX server
   sudo /etc/init.d/nginx reload
