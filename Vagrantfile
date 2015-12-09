@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
 
   # Provision our box with a script
   # TODO: Find syntax for path and start writing our bootstrap script
-  config.vm.provision "shell", inline <<-EOF
+  config.vm.provision "shell", inline: <<-EOF
     echo "Hello World"
   EOF
 end
