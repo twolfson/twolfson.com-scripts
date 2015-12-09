@@ -3,6 +3,7 @@
 Scripts used for bootstrapping and deploying services for `twolfson.com` and its subdomains.
 
 TODO: Document Vagrant and whatnot
+TODO: Transfer issues
 
 ## Getting Started
 TODO: Document me

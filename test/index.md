@@ -8,6 +8,8 @@
 - [ ] Verify permissions on SSL certs (e.g. /etc/ssl/private)
 - [ ] Verify permissions on NGINX configs (e.g. /etc/nginx/conf.d)
 - [ ] Verify permissions on twolfson drive
+- [ ] Secure OpenSSH server as well -- see cipherli.st
+- [ ] TODO: Relocate SSL setup into `nginx.conf`
 
 - [ ] In twolfson.com repo, prob add node security project check to test suite
 - [ ] In twolfson.com repo, add GZIP checks

@@ -14,6 +14,5 @@ Vagrant.configure(2) do |config|
   end
 
   # Provision our box with a script
-  # TODO: Find syntax for path and start writing our bootstrap script
   config.vm.provision "shell", path: "bin/bootstrap.sh"
 end
