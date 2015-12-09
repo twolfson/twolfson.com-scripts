@@ -2,15 +2,25 @@
 
 Scripts used for bootstrapping and deploying services for `twolfson.com` and its subdomains.
 
-// TODO: Add Travis CI
-// TODO: Add tests
+TODO: Document Vagrant and whatnot
 
 ## Getting Started
 TODO: Document me
 
 ## Documentation
-
 TODO: Document me
+
+- Servers are running on Digital Ocean
+- Tests are done via [testinfra][]
+    - These are both meant to cover sanity and security
+    - TODO: Write tests
+    - TODO: Add Travis CI
+- Monitoring
+    - Only Digital Ocean for metrics
+    - In-service error reporting depends on the service
+        - TODO: We should standardize-ish...
+
+[testinfra]: https://github.com/philpep/testinfra
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint via `npm run lint` and test via `npm test`.
