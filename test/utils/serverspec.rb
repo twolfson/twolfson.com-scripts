@@ -2,6 +2,35 @@
 require "serverspec"
 require "net/ssh"
 
+# Define file constants
+# Attribution to @brettlangdon for work on this
+USER_NONE = 0o000
+USER_R = 0o100
+USER_W = 0o200
+USER_X = 0o400
+USER_RW = USER_R | USER_W
+USER_RX = USER_R | USER_X
+USER_WX = USER_W | USER_X
+USER_RWX = USER_R | USER_W | USER_X
+
+GROUP_NONE = 0o000
+GROUP_R = 0o010
+GROUP_W = 0o020
+GROUP_X = 0o040
+GROUP_RW = GROUP_R | GROUP_W
+GROUP_RX = GROUP_R | GROUP_X
+GROUP_WX = GROUP_W | GROUP_X
+GROUP_RWX = GROUP_R | GROUP_W | GROUP_X
+
+OTHER_NONE = 0o000
+OTHER_R = 0o001
+OTHER_W = 0o002
+OTHER_X = 0o004
+OTHER_RW = OTHER_R | OTHER_W
+OTHER_RX = OTHER_R | OTHER_X
+OTHER_WX = OTHER_W | OTHER_X
+OTHER_RWX = OTHER_R | OTHER_W | OTHER_X
+
 # Load in our environment variable to the SSH config
 ssh_config = ENV.fetch("SSH_CONFIG")
 host = ENV.fetch("TARGET_HOST")

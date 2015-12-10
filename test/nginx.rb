@@ -25,6 +25,9 @@ describe "NGINX" do
   end
 
   it "has proper permissions for SSL certs" do
+    crt_file = file("/etc/ssl/certs/twolfson.com.crt")
+    expect(crt_file).to(be_mode((USER_RWX | GROUP_RWX | OTHER_RWX).to_s(8)))
+
     # TODO: Verify proper setup for SSL /etc/ssl/certs and /etc/ssl/private
     # TODO: Verify proper permissions for `sites-enabled` and `sites-available` (or their lack of existence)
     # TODO: Verify proper permissions for `twolfson.com.conf`
