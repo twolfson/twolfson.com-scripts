@@ -1,5 +1,5 @@
 # Load in our dependencies
-require "spec_helper"
+require_relative "utils/serverspec"
 
 # Start our tests
 # TODO: Is there a better, less space dependent syntax for these matchers?
