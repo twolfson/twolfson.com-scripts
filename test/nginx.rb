@@ -30,10 +30,10 @@ describe "NGINX" do
     expect(crt_file).to(be_owned_by(ROOT_USER))
     expect(crt_file).to(be_grouped_into(ROOT_GROUP))
 
-    crt_file = file("/etc/ssl/private/twolfson.com.crt")
-    expect(crt_file).to(be_mode((USER_RW | GROUP_NONE | OTHER_NONE).to_s(8)))
-    expect(crt_file).to(be_owned_by(ROOT_USER))
-    expect(crt_file).to(be_grouped_into(ROOT_GROUP))
+    key_file = file("/etc/ssl/private/twolfson.com.key")
+    expect(key_file.runner.get_mode()).to(equal(USER_RW | GROUP_NONE | OTHER_NONE).to_s(8))
+    expect(key_file.get_owner_user()).to(equal(ROOT_USER))
+    expect(key_file.get_owner_group()).to(equal(ROOT_GROUP))
 
     # TODO: Verify proper setup for SSL /etc/ssl/certs and /etc/ssl/private
     # TODO: Verify proper permissions for `sites-enabled` and `sites-available` (or their lack of existence)
