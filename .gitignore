@@ -1,2 +1,7 @@
 .vagrant/
 .updated-apt-get
+# Ignore binstubs from Bundler
+bin/htmldiff
+bin/ldiff
+bin/rspec
+bin/serverspec-init
