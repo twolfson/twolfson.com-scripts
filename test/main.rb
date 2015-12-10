@@ -2,7 +2,9 @@
 require_relative "utils/serverspec"
 
 # Start our tests
-# TODO: Is there a better, less space dependent syntax for these matchers?
+# DEV: We are avoiding the Serverspec variation of documentation because:
+#   - Spaces and subjects felt too magical; it's at the cost of developers understanding what's going on
+#   - By not using subjects, we catch edge cases like IPv6 support
 describe "NGINX" do
   it "is installed via apt" do
     expect(package("nginx")).to(be_installed())
@@ -20,5 +22,12 @@ describe "NGINX" do
     https_port = port(443)
     expect(https_port).to(be_listening().on("0.0.0.0"))
     expect(https_port).to(be_listening().on("::"))
+  end
+
+  it "has proper permissions for SSL certs" do
+    # TODO: Verify proper setup for SSL /etc/ssl/certs and /etc/ssl/private
+    # TODO: Verify proper permissions for `sites-enabled` and `sites-available` (or their lack of existence)
+    # TODO: Verify proper permissions for `twolfson.com.conf`
+    # TODO: Verify only `/etc/nginx/conf.d/twolfson.com.conf` exists
   end
 end
