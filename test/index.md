@@ -5,7 +5,7 @@
 - [ ] Verify only user with good default shell is ubuntu
     - [ ] It's possible to `sudo -u root --shell $SHELL`, right?
 - [ ] Verify /etc/sshd configuration (e.g. only RSA handshake, no passwords)
-- [ ] Verify permissions on SSL certs (e.g. /etc/ssl/private)
+- [x] Verify permissions on SSL certs (e.g. /etc/ssl/private)
 - [ ] Verify permissions on NGINX configs (e.g. /etc/nginx/conf.d)
 - [ ] Verify permissions on twolfson drive
 - [ ] Secure OpenSSH server as well -- see cipherli.st
