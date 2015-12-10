@@ -14,9 +14,9 @@ if test "$SKIP_PROVISION" != "TRUE"; then
 fi
 
 # Export the `ssh-config` for our Vagrant server
-export SSH_CONFIG="./.vagrant/ssh-config"
+export SSH_CONFIG=".vagrant/ssh-config"
 export TARGET_HOST="default"
 vagrant ssh-config > "$SSH_CONFIG"
 
 # Run our rspec tests (depends on SSH_CONFIG, TARGET_HOST)
-bin/rspec --color spec/*.rb
+bin/rspec --color test/*.rb
