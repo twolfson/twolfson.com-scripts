@@ -37,7 +37,6 @@ describe "NGINX" do
     expect(key_file).to(be_owned_by(ROOT_USER))
     expect(key_file).to(be_grouped_into(ROOT_GROUP))
 
-    # TODO: Verify proper setup for SSL /etc/ssl/certs and /etc/ssl/private
     # TODO: Verify proper permissions for `sites-enabled` and `sites-available` (or their lack of existence)
     # TODO: Verify proper permissions for `twolfson.com.conf`
     # TODO: Verify only `/etc/nginx/conf.d/twolfson.com.conf` exists
