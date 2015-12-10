@@ -19,4 +19,4 @@ export TARGET_HOST="default"
 vagrant ssh-config > "$SSH_CONFIG"
 
 # Run our rspec tests (depends on SSH_CONFIG, TARGET_HOST)
-bin/rspec --color "spec/*_spec.rb"
+bin/rspec --color spec/*_spec.rb
