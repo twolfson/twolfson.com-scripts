@@ -26,12 +26,14 @@ describe "NGINX" do
 
   it "has proper permissions for SSL certs" do
     crt_file = file("/etc/ssl/certs/twolfson.com.crt")
-    expect(crt_file).to(be_mode((USER_RWX | GROUP_RWX | OTHER_RWX).to_s(8)))
+    crt_mode = (USER_RWX | GROUP_RWX | OTHER_RWX).to_s(8)
+    expect(crt_file).to(be_mode(crt_mode))
     expect(crt_file).to(be_owned_by(ROOT_USER))
     expect(crt_file).to(be_grouped_into(ROOT_GROUP))
 
     key_file = file("/etc/ssl/private/twolfson.com.key")
-    expect(key_file.mode).to(eq((USER_R | GROUP_NONE | OTHER_NONE).to_s(8)))
+    key_mode = (USER_R | GROUP_NONE | OTHER_NONE).to_s(8)
+    expect(key_file).to(be_mode(key_mode))
     expect(key_file).to(be_owned_by(ROOT_USER))
     expect(key_file).to(be_grouped_into(ROOT_GROUP))
 
