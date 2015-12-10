@@ -31,6 +31,10 @@ OTHER_RX = OTHER_R | OTHER_X
 OTHER_WX = OTHER_W | OTHER_X
 OTHER_RWX = OTHER_R | OTHER_W | OTHER_X
 
+# Define user/group constants
+ROOT_USER = "root"
+ROOT_GROUP = "root"
+
 # Load in our environment variable to the SSH config
 ssh_config = ENV.fetch("SSH_CONFIG")
 host = ENV.fetch("TARGET_HOST")

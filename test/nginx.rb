@@ -27,6 +27,13 @@ describe "NGINX" do
   it "has proper permissions for SSL certs" do
     crt_file = file("/etc/ssl/certs/twolfson.com.crt")
     expect(crt_file).to(be_mode((USER_RWX | GROUP_RWX | OTHER_RWX).to_s(8)))
+    expect(crt_file).to(be_owned_by(ROOT_USER))
+    expect(crt_file).to(be_grouped_into(ROOT_GROUP))
+
+    crt_file = file("/etc/ssl/private/twolfson.com.crt")
+    expect(crt_file).to(be_mode((USER_RW | GROUP_NONE | OTHER_NONE).to_s(8)))
+    expect(crt_file).to(be_owned_by(ROOT_USER))
+    expect(crt_file).to(be_grouped_into(ROOT_GROUP))
 
     # TODO: Verify proper setup for SSL /etc/ssl/certs and /etc/ssl/private
     # TODO: Verify proper permissions for `sites-enabled` and `sites-available` (or their lack of existence)
