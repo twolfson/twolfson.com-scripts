@@ -2,7 +2,21 @@
 # Exit on first error
 set -e
 
-# Run our rspec tests
---color
---format documentation
-bin/rspec "spec/*_spec.rb"
+# If the Vagrant machine is offline, then complain and leave
+if ! vagrant status | grep "default\s+running" &> /dev/null; then
+  echo "Our \`vagrant\` machine isn't running. Please start it up via \`vagrant up\`." 1>&2
+  exit 1
+fi
+
+# If we should provision our Vagrant box, then provision it
+if test "$SKIP_PROVISION" != "TRUE"; then
+  vagrant provision
+fi
+
+# Export the `ssh-config` for our Vagrant server
+export SSH_CONFIG="./vagrant/ssh-config"
+export TARGET_HOST="default"
+vagrant ssh-config > "$SSH_CONFIG"
+
+# Run our rspec tests (depends on SSH_CONFIG, TARGET_HOST)
+bin/rspec --color "spec/*_spec.rb"

@@ -31,6 +31,7 @@ TODO: Document me
 ### Testing
 TODO: Document gem install bundle, bundle install, ./test.sh
 TODO: Prob include some explanation for Ruby novices
+TODO: Document SKIP_PROVISION?
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint via `npm run lint` and test via `npm test`.
