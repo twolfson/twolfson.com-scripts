@@ -1,5 +1,10 @@
+# Vagrant/bootstrapping files
 .vagrant/
 .updated-apt-get
+
+# Ruby dependencies (via bundler)
+vendor/
+
 # Ignore binstubs from Bundler
 bin/htmldiff
 bin/ldiff
