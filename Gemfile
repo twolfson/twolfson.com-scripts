@@ -3,5 +3,7 @@ source "https://rubygems.org"
 
 # Install dev dependencies
 group :development do
-  gem "serverspec", "~>2.24.3"
+  # TODO: Remove git ref once PR is landed
+  # https://github.com/mizzy/serverspec/pull/544
+  gem "serverspec", "~>2.24.3", :git => "https://github.com/twolfson/serverspec.git", :ref => 1533623
 end

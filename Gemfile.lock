@@ -1,3 +1,14 @@
+GIT
+  remote: https://github.com/twolfson/serverspec.git
+  revision: 1533623971c5d55cccea9991f60c4317cdc2ce61
+  ref: 1533623
+  specs:
+    serverspec (2.24.3)
+      multi_json
+      rspec (~> 3.0)
+      rspec-its
+      specinfra (~> 2.43)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -23,11 +34,6 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
-    serverspec (2.24.3)
-      multi_json
-      rspec (~> 3.0)
-      rspec-its
-      specinfra (~> 2.43)
     sfl (2.2)
     specinfra (2.44.7)
       net-scp
@@ -39,4 +45,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  serverspec (~> 2.24.3)
+  serverspec (~> 2.24.3)!
