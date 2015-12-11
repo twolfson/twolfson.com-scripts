@@ -35,7 +35,8 @@ describe "Open ports" do
       # into:
       # 80 (int)
       port_num = %r{(0\.0\.0\.0|::):([0-9]+) }.match(open_port)[2].to_i
-      expect(ALLOWED_PORTS).to(include(port_num))
+      expect(ALLOWED_PORTS).to(include(port_num),
+        "Did not expect \"#{port_num}\" to be listening to everything\n  \"#{open_port}\"")
     end
   end
 end
