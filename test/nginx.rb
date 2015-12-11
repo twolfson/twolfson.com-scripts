@@ -63,6 +63,6 @@ describe "NGINX" do
 
   it "has only expected configurations" do
     expect(command("ls /etc/nginx/sites-enabled").stdout).to(eq(""))
-    expect(command("ls /etc/nginx/conf.d").stdout).to(eq("twolfson.com.conf"))
+    expect(command("ls /etc/nginx/conf.d").stdout).to(eq(["twolfson.com.conf", ""].join("\n")))
   end
 end
