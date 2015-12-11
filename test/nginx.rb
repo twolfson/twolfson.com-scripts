@@ -36,17 +36,15 @@ describe "NGINX" do
     expect(key_file.group).to(eq(ROOT_GROUP))
   end
 
-  it "isn't hosting default site configuration" do
-    expect(command("ls /etc/nginx/sites-available").exit_status).not_to(eq(0))
-    expect(command("ls /etc/nginx/sites-enabled").exit_status).not_to(eq(0))
-    # TODO: Verify proper permissions for `sites-enabled` and `sites-available` (or their lack of existence)
-  end
-
   it "has proper permissions for configurations" do
+    # Verify only root can update directories
+
+    # Verify permissions for our configuration
     # TODO: Verify proper permissions for `twolfson.com.conf`
   end
 
   it "has only expected configurations" do
-    # TODO: Verify only `/etc/nginx/conf.d/twolfson.com.conf` exists
+    expect(command("ls /etc/nginx/sites-enabled").stdout).to(eq(""))
+    expect(command("ls /etc/nginx/conf.d").stdout).to(eq("twolfson.com.conf"))
   end
 end
