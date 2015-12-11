@@ -56,8 +56,8 @@ describe "Login shells" do
 
     # Collect the passwd entries for our users
     # Example output:
-    #   root:x:0:0:root:/root:/bin/bash
     #   daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+    #   ubuntu:x:1001:1001:Ubuntu:/home/ubuntu:/bin/bash
     # https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L53-L55
     passwd_entries_result = command("getent passwd")
     expect(passwd_entries_result.exit_status).to(eq(0))
@@ -71,7 +71,8 @@ describe "Login shells" do
       shell = passwd_entry_parts[6]
 
       # If our user is allowed, skip them
-      if ALLOWED_USERS.include?(user) || user == "root" || user == "sync"
+      # TODO: Lock down `root` and `sync` users
+      if ALLOWED_USERS.include?(user)
         next
       end
 
