@@ -43,7 +43,7 @@ fi
 # TODO: Set up process manager and init.d for said process manager
 if ! test -f /etc/nginx/conf.d/twolfson.com.conf; then
   # Install our configuration
-  cp "$data_dir/etc/nginx/conf.d/twolfson.com.conf" /etc/nginx/conf.d/twolfson.com.conf
+  sudo cp "$data_dir/etc/nginx/conf.d/twolfson.com.conf" /etc/nginx/conf.d/twolfson.com.conf
   sudo chown root:root /etc/nginx/conf.d/twolfson.com.conf
   sudo chmod u=rw,g=r,o=r /etc/nginx/conf.d/twolfson.com.conf
 
@@ -74,3 +74,12 @@ fi
 if test "$(getent passwd sync | cut -f 7 -d ":")" != "/usr/sbin/nologin"; then
   sudo usermod --shell /usr/sbin/nologin sync
 fi
+
+# Update sshd config
+# TODO: Find conditional to handle this
+sudo cp "$data_dir/etc/ssh/sshd_conf" /etc/ssh/sshd_conf
+sudo chown root:root /etc/nginx/conf.d/twolfson.com.conf
+sudo chmod u=rw,g=r,o=r /etc/nginx/conf.d/twolfson.com.conf
+
+# Reload our SSH server
+/etc/init.d/ssh reload
