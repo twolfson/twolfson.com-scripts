@@ -34,9 +34,17 @@ describe "NGINX" do
     expect(key_file.mode).to(eq((USER_R | GROUP_NONE | OTHER_NONE).to_s(8)))
     expect(key_file.owner).to(eq(ROOT_USER))
     expect(key_file.group).to(eq(ROOT_GROUP))
+  end
 
+  it "isn't hosting default site" do
     # TODO: Verify proper permissions for `sites-enabled` and `sites-available` (or their lack of existence)
+  end
+
+  it "has proper permissions for configurations" do
     # TODO: Verify proper permissions for `twolfson.com.conf`
+  end
+
+  it "has only expected configurations" do
     # TODO: Verify only `/etc/nginx/conf.d/twolfson.com.conf` exists
   end
 end
