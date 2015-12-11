@@ -77,9 +77,10 @@ fi
 
 # Update sshd config
 # TODO: Find conditional to handle this
-sudo cp "$data_dir/etc/ssh/sshd_conf" /etc/ssh/sshd_conf
-sudo chown root:root /etc/nginx/conf.d/twolfson.com.conf
-sudo chmod u=rw,g=r,o=r /etc/nginx/conf.d/twolfson.com.conf
+sudo cp "$data_dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
+sudo chown root:root /etc/ssh/sshd_config
+sudo chmod u=rw,g=r,o=r /etc/ssh/sshd_config
 
 # Reload our SSH server
-/etc/init.d/ssh reload
+# http://unix.stackexchange.com/a/127887
+sudo service ssh reload
