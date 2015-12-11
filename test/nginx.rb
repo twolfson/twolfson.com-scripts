@@ -36,7 +36,9 @@ describe "NGINX" do
     expect(key_file.group).to(eq(ROOT_GROUP))
   end
 
-  it "isn't hosting default site" do
+  it "isn't hosting default site configuration" do
+    expect(command("ls /etc/nginx/sites-available").exit_status).not_to(eq(0))
+    expect(command("ls /etc/nginx/sites-enabled").exit_status).not_to(eq(0))
     # TODO: Verify proper permissions for `sites-enabled` and `sites-available` (or their lack of existence)
   end
 
