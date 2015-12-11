@@ -37,7 +37,13 @@ describe "NGINX" do
   end
 
   it "has proper permissions for configurations" do
-    # Verify only root can write in directories
+    # Verify only root can modify nginf.conf
+    nginx_conf = file("/etc/nginx/nginx.conf")
+    expect(nginx_conf.mode).to(eq((USER_RW | GROUP_R | OTHER_R).to_s(8)))
+    expect(nginx_conf.owner).to(eq(ROOT_USER))
+    expect(nginx_conf.group).to(eq(ROOT_GROUP))
+
+    # Verify only root can write in conf directories
     conf_d_dir = file("/etc/nginx/conf.d")
     expect(conf_d_dir.mode).to(eq((USER_RWX | GROUP_RX | OTHER_RX).to_s(8)))
     expect(conf_d_dir.owner).to(eq(ROOT_USER))
