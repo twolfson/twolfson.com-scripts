@@ -5,8 +5,8 @@ DEV: We are avoiding the Serverspec variation of documentation because:
 
 # TODO: Delete this file after completing everything
 - [x] Verify `node@v0.10.41` is installed
-- [ ] Verify `bash@latest` is installed
-- [ ] Verify shellshock (bash), heartbleed (NGINX), ghost are resolved
+- [x] Verify `bash@latest` is installed
+- [x] Verify shellshock (bash), heartbleed (NGINX), poodle are resolved
 - [ ] Verify only open ports are 22, 80, and 443
 - [ ] Verify only user with good default shell is ubuntu
     - [ ] It's possible to `sudo -u root --shell $SHELL`, right?
