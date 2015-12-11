@@ -17,7 +17,7 @@ DEV: We are avoiding the Serverspec variation of documentation because:
 - [ ] TODO: Relocate SSL setup into `nginx.conf`
 - [x] TODO: Look into HTTPS for www.
 - [x] TODO: Remove `/etc/nginx/sites-{available,enabled}` or verify they are owned by root:root and only writable by owner and not executable by owner/group/other
-- x] TODO: Support IPv6 HTTPS
+- [x] TODO: Support IPv6 HTTPS
 
 - [ ] Next release, add drive setup
 - [ ] Verify permissions on twolfson drive
