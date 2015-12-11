@@ -13,7 +13,7 @@ DEV: We are avoiding the Serverspec variation of documentation because:
 - [ ] Verify /etc/sshd configuration (e.g. only RSA handshake, no passwords)
 - [x] Verify permissions on SSL certs (e.g. /etc/ssl/private)
 - [x] Verify permissions on NGINX configs (e.g. /etc/nginx/conf.d)
-- [ ] Secure OpenSSH server as well -- see cipherli.st
+- [x] Secure OpenSSH server as well -- see cipherli.st
 - [ ] TODO: Relocate SSL setup into `nginx.conf`
 - [x] TODO: Look into HTTPS for www.
 - [x] TODO: Remove `/etc/nginx/sites-{available,enabled}` or verify they are owned by root:root and only writable by owner and not executable by owner/group/other
