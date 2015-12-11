@@ -37,10 +37,22 @@ describe "NGINX" do
   end
 
   it "has proper permissions for configurations" do
-    # Verify only root can update directories
+    # Verify only root can write in directories
+    conf_d_dir = file("/etc/nginx/conf.d")
+    expect(conf_d_dir.mode).to(eq((USER_RWX | GROUP_RX | OTHER_RX).to_s(8)))
+    expect(conf_d_dir.owner).to(eq(ROOT_USER))
+    expect(conf_d_dir.group).to(eq(ROOT_GROUP))
 
-    # Verify permissions for our configuration
-    # TODO: Verify proper permissions for `twolfson.com.conf`
+    sites_available_dir = file("/etc/nginx/sites-available")
+    expect(sites_available_dir.mode).to(eq((USER_RWX | GROUP_RX | OTHER_RX).to_s(8)))
+    expect(sites_available_dir.owner).to(eq(ROOT_USER))
+    expect(sites_available_dir.group).to(eq(ROOT_GROUP))
+
+    # Verify permissions for our configurations
+    twolfson_com_conf = file("/etc/nginx/conf.d/twolfson.com.conf")
+    expect(twolfson_com_conf.mode).to(eq((USER_RW | GROUP_R | OTHER_R).to_s(8)))
+    expect(twolfson_com_conf.owner).to(eq(ROOT_USER))
+    expect(twolfson_com_conf.group).to(eq(ROOT_GROUP))
   end
 
   it "has only expected configurations" do
