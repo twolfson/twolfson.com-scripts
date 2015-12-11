@@ -2,9 +2,6 @@
 require_relative "utils/serverspec"
 
 # Start our tests
-# DEV: We are avoiding the Serverspec variation of documentation because:
-#   - Spaces and subjects felt too magical; it's at the cost of developers understanding what's going on
-#   - By not using subjects, we catch edge cases like IPv6 support
 describe "NGINX" do
   it "is installed via apt" do
     expect(package("nginx")).to(be_installed())

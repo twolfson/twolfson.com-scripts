@@ -1,3 +1,9 @@
+# TODO: Formalize this bit into docs
+DEV: We are avoiding the Serverspec variation of documentation because:
+    - Spaces and subjects felt too magical; it's at the cost of developers understanding what's going on
+    - By not using subjects, we catch edge cases like IPv6 support
+
+# TODO: Delete this file after completing everything
 - [ ] Verify `node@v0.10.41` is installed
 - [ ] Verify `bash@latest` is installed
 - [ ] Verify shellshock, heartbleed, ghost are resolved
@@ -6,13 +12,13 @@
     - [ ] It's possible to `sudo -u root --shell $SHELL`, right?
 - [ ] Verify /etc/sshd configuration (e.g. only RSA handshake, no passwords)
 - [x] Verify permissions on SSL certs (e.g. /etc/ssl/private)
-- [ ] Verify permissions on NGINX configs (e.g. /etc/nginx/conf.d)
+- [x] Verify permissions on NGINX configs (e.g. /etc/nginx/conf.d)
 - [ ] Verify permissions on twolfson drive
 - [ ] Secure OpenSSH server as well -- see cipherli.st
 - [ ] TODO: Relocate SSL setup into `nginx.conf`
 - [ ] TODO: Look into HTTPS for www.
 - [ ] TODO: Look into why HTTPS for www. not redirecting
-- [ ] TODO: Remove `/etc/nginx/sites-{available,enabled}` or verify they are owned by root:root and only writable by owner and not executable by owner/group/other
+- [x] TODO: Remove `/etc/nginx/sites-{available,enabled}` or verify they are owned by root:root and only writable by owner and not executable by owner/group/other
 - x] TODO: Support IPv6 HTTPS
 
 - [ ] In twolfson.com repo, prob add node security project check to test suite
