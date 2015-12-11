@@ -50,3 +50,12 @@ if ! test -f /etc/nginx/conf.d/twolfson.com.conf; then
   # Reload the NGINX server
   sudo /etc/init.d/nginx reload
 fi
+
+# If there are default NGINX configuration files, then remove them
+if test "$(ls /etc/nginx/sites-enabled)" != ""; then
+  # Remove the configurations
+  sudo rm /etc/nginx/sites-enabled/*
+
+  # Reload the NGINX server
+  sudo /etc/init.d/nginx reload
+fi
