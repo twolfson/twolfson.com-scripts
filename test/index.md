@@ -8,8 +8,8 @@ DEV: We are avoiding the Serverspec variation of documentation because:
 - [x] Verify `bash@latest` is installed
 - [x] Verify shellshock (bash), heartbleed (NGINX), poodle are resolved
 - [x] Verify only open ports are 22, 80, and 443
-- [ ] Verify only user with good default shell is ubuntu
-    - [ ] It's possible to `sudo -u root --shell $SHELL`, right?
+- [x] Verify only user with good default shell is ubuntu
+    - [x] It's possible to `sudo -u root --shell $SHELL`, right?
 - [ ] Verify /etc/sshd configuration (e.g. only RSA handshake, no passwords)
 - [x] Verify permissions on SSL certs (e.g. /etc/ssl/private)
 - [x] Verify permissions on NGINX configs (e.g. /etc/nginx/conf.d)
