@@ -1,4 +1,4 @@
-# twolfson.com-scripts [![Build status](https://travis-ci.org/twolfson/twolfson.com-scripts.png?branch=master)](https://travis-ci.org/twolfson/twolfson.com-scripts)
+# twolfson.com-scripts
 
 Scripts used for bootstrapping and deploying services for `twolfson.com` and its subdomains.
 
