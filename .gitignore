@@ -5,6 +5,9 @@
 # Ruby dependencies (via bundler)
 vendor/
 
+# Node dependencies (for releasing)
+node_modules/
+
 # Ignore binstubs from Bundler
 bin/htmldiff
 bin/ldiff
