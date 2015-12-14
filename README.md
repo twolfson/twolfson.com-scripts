@@ -92,6 +92,8 @@ To make iterating on our test suite faster, we have set up a `SKIP_PROVISION` en
 SKIP_PROVISION=TRUE ./test.sh
 ```
 
+[Ruby]: https://www.ruby-lang.org/en/
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Testing information can be found in the [Testing section](#testing).
 
