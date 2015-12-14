@@ -14,11 +14,11 @@ DEV: We are avoiding the Serverspec variation of documentation because:
 - [x] Verify permissions on SSL certs (e.g. /etc/ssl/private)
 - [x] Verify permissions on NGINX configs (e.g. /etc/nginx/conf.d)
 - [x] Secure OpenSSH server as well -- see cipherli.st
-- [ ] TODO: Relocate SSL setup into `nginx.conf`
 - [x] TODO: Look into HTTPS for www.
 - [x] TODO: Remove `/etc/nginx/sites-{available,enabled}` or verify they are owned by root:root and only writable by owner and not executable by owner/group/other
 - [x] TODO: Support IPv6 HTTPS
 
+- [ ] TODO: Relocate SSL setup into `nginx.conf`
 - [ ] Next release, add drive setup
 - [ ] Verify permissions on twolfson drive
 

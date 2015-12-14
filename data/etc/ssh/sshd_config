@@ -28,7 +28,8 @@ LogLevel INFO
 
 # Authentication:
 LoginGraceTime 120
-PermitRootLogin without-password
+# Prevent directly logging in as root. forever.
+PermitRootLogin no
 StrictModes yes
 
 RSAAuthentication yes
@@ -52,7 +53,8 @@ PermitEmptyPasswords no
 ChallengeResponseAuthentication no
 
 # Change to no to disable tunnelled clear text passwords
-PasswordAuthentication yes
+# Require logging in via RSA public keys only
+PasswordAuthentication no
 
 # Kerberos options
 #KerberosAuthentication no
