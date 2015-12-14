@@ -27,20 +27,38 @@ vagrant ssh
 ```
 
 ## Documentation
-TODO: Document me
+As a high level overview of our setup, we use the following:
 
-- Servers are running on Digital Ocean
-- DNS is being managed by AWS
-- Tests are done via [testinfra][]
-    - These are both meant to cover sanity and security
-    - TODO: Write tests
-    - TODO: Add Travis CI
+**Operations:**
+
+- [Digital Ocean][] for hosting our servers
+- [AWS][] for DNS management via [Route 53][]
+- [Google Apps][] for email management
+- Metrics
+    - Currently, we only have Digital Ocean for metrics
 - Monitoring
-    - Only Digital Ocean for metrics
+    - We use [UptimeRobot][] and [VisualPing][]
     - In-service error reporting depends on the service
-        - TODO: We should standardize-ish...
 
-[testinfra]: https://github.com/philpep/testinfra
+[Digital Ocean]: http://digitalocean.com/
+[AWS]: https://aws.amazon.com/
+[Route 53]: https://aws.amazon.com/route53/
+[Google Apps]: https://apps.google.com/
+[UptimeRobot]: https://uptimerobot.com/
+[VisualPing]: https://visualping.io/
+
+**Development:**
+
+- Provisioning is currently done by [bash][]
+    - This is to maximize ease of approach for new developers
+- Services are currently all [Node.js][]/[JavaScript][] based
+- Tests are done via [Serverspec][]
+    - These are both meant to cover sanity and security
+
+[bash]: https://www.gnu.org/software/bash/
+[Node.js]: https://nodejs.org/
+[JavaScript]: https://en.wikipedia.org/wiki/JavaScript
+[Serverspec]: http://serverspec.org/
 
 ### Testing
 TODO: Document gem install bundle, bundle install, ./test.sh
@@ -48,9 +66,7 @@ TODO: Prob include some explanation for Ruby novices
 TODO: Document SKIP_PROVISION?
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint via `npm run lint` and test via `npm test`.
-
-// TODO: Update test notes
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Testing information can be found in the [Testing section](#testing).
 
 ## Donating
 Support this project and [others by twolfson][gratipay] via [gratipay][].
