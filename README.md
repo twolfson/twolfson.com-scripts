@@ -4,9 +4,27 @@ Scripts used for bootstrapping and deploying services for `twolfson.com` and its
 
 This was created to provide a dotfiles-like setup that documents my personal server setup.
 
+TODO: Clean up TODO's into GitHub issues
+
 ## Getting Started
-TODO: Document me
-TODO: Document Vagrant and whatnot
+To get a local server running, we have created a [Vagrant][] setup.
+
+If you don't have Vagrant installed, then please follow the instructions at <http://www.vagrantup.com/>.
+
+[Vagrant]: http://www.vagrantup.com/
+
+Once Vagrant is installed, follow the steps below:
+
+```bash
+# Clone our repository
+git clone https://github.com/twolfson/twolfson.com-scripts
+
+# Start up a Vagrant instance
+vagrant up
+
+# SSH into the machine and poke around
+vagrant ssh
+```
 
 ## Documentation
 TODO: Document me
