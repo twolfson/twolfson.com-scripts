@@ -71,7 +71,6 @@ describe "Login shells" do
       shell = passwd_entry_parts[6]
 
       # If our user is allowed, skip them
-      # TODO: Lock down `root` and `sync` users
       if ALLOWED_USERS.include?(user)
         next
       end
