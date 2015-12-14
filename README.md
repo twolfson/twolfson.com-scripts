@@ -4,8 +4,6 @@ Scripts used for bootstrapping and deploying services for `twolfson.com` and its
 
 This was created to provide a dotfiles-like setup that documents my personal server setup.
 
-TODO: Clean up TODO's into GitHub issues
-
 ## Getting Started
 To get a local server running, we have created a [Vagrant][] setup.
 
@@ -60,7 +58,7 @@ As a high level overview of our setup, we use the following:
 [JavaScript]: https://en.wikipedia.org/wiki/JavaScript
 [Serverspec]: http://serverspec.org/
 
-## File structure
+### File structure
 This repository has the following file structure:
 
 - `.bundle/` - Configuration for Bundler (used for managing Ruby gems)
@@ -75,9 +73,24 @@ This repository has the following file structure:
 - `Vagrantfile` - Configuration for Vagrant
 
 ### Testing
-TODO: Document gem install bundle, bundle install, ./test.sh
-TODO: Prob include some explanation for Ruby novices
-TODO: Document SKIP_PROVISION?
+As mentioned in the high level overview, we use [Serverspec][] for testing. This is a [Ruby][] gem so you will need it installed to run our tests:
+
+```bash
+# Install bundler to manage gems for local directory
+gem install bundler
+
+# Install dependencies for this repo
+bundle install
+
+# Run our tests
+./test.sh
+```
+
+To make iterating on our test suite faster, we have set up a `SKIP_PROVISION` environment variable. This skips running `vagrant provision` in our tests:
+
+```bash
+SKIP_PROVISION=TRUE ./test.sh
+```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Testing information can be found in the [Testing section](#testing).
