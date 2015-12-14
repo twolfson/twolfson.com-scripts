@@ -60,6 +60,20 @@ As a high level overview of our setup, we use the following:
 [JavaScript]: https://en.wikipedia.org/wiki/JavaScript
 [Serverspec]: http://serverspec.org/
 
+## File structure
+This repository has the following file structure:
+
+- `.bundle/` - Configuration for Bundler (used for managing Ruby gems)
+- `bin/` - Contains our executable files (e.g. bootstraping scripts)
+- `data/` - Contains static files used during provisioning
+    - This starts at `/` as if it were the root of a file system
+    - For multiple environment projects, it's good to have a `data/{{env}}` for each setup (e.g. `data/development`, `data/production`)
+- `test/` - Container for our test files
+- `CHANGELOG.md` - CHANGELOG of what has changed during each release of this repository
+- `README.md` - Documentation for this repository
+- `SECURITY.md` - Documentation for security considerations in this repository
+- `Vagrantfile` - Configuration for Vagrant
+
 ### Testing
 TODO: Document gem install bundle, bundle install, ./test.sh
 TODO: Prob include some explanation for Ruby novices
