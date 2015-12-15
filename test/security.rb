@@ -17,7 +17,7 @@ describe "Open ports" do
 
     # If we are in Vagrant or Travis CI
     # DEV: This is running on the host OS which is why `which vagrant` works
-    if `which vagrant` != "" || ENV["TRAVIS"] == "1"
+    if `which vagrant` != "" || ENV["TRAVIS"] == "true"
       # Use `sudo` to get additional info (e.g. pid/program)
       # tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      617/rpcbind
       # tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      1016/nginx
@@ -28,7 +28,7 @@ describe "Open ports" do
       # Filter out trusted programs
       if `which vagrant` != ""
         open_ports.select! { |open_port| ! %r{/(rpcbind|rpc.statd|dhclient)\s*$}.match(open_port) }
-      elsif ENV["TRAVIS"] == "1"
+      elsif ENV["TRAVIS"] == "true"
         # TODO: Add filtering here
       end
     end
@@ -57,7 +57,7 @@ describe "Login shells" do
     if `which vagrant` != ""
       ALLOWED_USERS.push("vagrant")
     # Otherise, if we are on Travis CI, allow "travis" and "me" users
-    elsif ENV["TRAVIS"] == "1"
+    elsif ENV["TRAVIS"] == "true"
       ALLOWED_USERS.push("travis", "me")
     end
 
