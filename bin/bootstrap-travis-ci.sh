@@ -4,7 +4,12 @@ set -e
 set -x
 
 # Set up our data directory
-data_dir="$(pwd)/data"
+# https://docs.travis-ci.com/user/environment-variables/#Default-Environment-Variables
+if test "$TRAVIS_BUILD_DIR" = ""; then
+  echo "Expected \`TRAVIS_BUILD_DIR\` environment variable to be set but it was not. Something is seriously wrong." 1&>2
+  exit 1
+fi
+data_dir="$TRAVIS_BUILD_DIR/data"
 
 # If we haven't set up SSL certificates, then generate and install them
 if ! test -f /etc/ssl/certs/twolfson.com.crt; then
