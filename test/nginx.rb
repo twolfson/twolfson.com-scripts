@@ -21,27 +21,12 @@ describe "NGINX" do
     expect(https_port).to(be_listening().on("::"))
   end
 
-  # https://github.com/mizzy/specinfra/blob/v2.46.0/spec/backend/exec/build_command_spec.rb#L35-L42
-  before do
-    RSpec.configure {|c| c.shell = '/usr/bin/sudo -u root /bin/bash' }
-  end
-
-  after do
-    RSpec.configure {|c| c.shell = nil }
-  end
-
   it "has proper permissions for SSL certs" do
     crt_file = file("/etc/ssl/certs/twolfson.com.crt")
     expect(crt_file.mode).to(eq((USER_RWX | GROUP_RWX | OTHER_RWX).to_s(8)))
     expect(crt_file.owner).to(eq(ROOT_USER))
     expect(crt_file.group).to(eq(ROOT_GROUP))
 
-    puts command('whoami').stdout
-    set(:disable_sudo, false)
-    puts `whoami`
-    puts `ls -la /etc/ssl/private/twolfson.com.key`
-    puts `ls -la /etc/ssl/private`
-    puts `ls -la /etc/ssl`
     key_file = file("/etc/ssl/private/twolfson.com.key")
     expect(key_file.mode).to(eq((USER_R | GROUP_NONE | OTHER_NONE).to_s(8)))
     expect(key_file.owner).to(eq(ROOT_USER))
