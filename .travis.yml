@@ -6,13 +6,12 @@ dist: trusty
 # https://docs.travis-ci.com/user/trusty-ci-environment#Image-differences-from-Precise
 language: generic
 
-install:
-  # Install our Ruby dependencies
-  # TODO: Remove `|| true` fallbacks
-  - which bundler || true
-  - gem install bundler || true
-  - sudo gem install bundler
+before_install:
+  # Output OS information
+  - ruby --version
+  - bundler --version
 
+install:
   # Install repo specific dependencies
   - bundle install
 
@@ -21,7 +20,7 @@ script:
   - bin/bootstrap-travis-ci.sh
 
   # Run Travis tests
-  - sudo -u root ./test.sh
+  - ./test.sh
 
 # Only receive notifications on the start of a new branch and when it changes status
 notifications:
