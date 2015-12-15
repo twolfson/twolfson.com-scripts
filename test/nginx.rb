@@ -27,6 +27,8 @@ describe "NGINX" do
     expect(crt_file.owner).to(eq(ROOT_USER))
     expect(crt_file.group).to(eq(ROOT_GROUP))
 
+    puts command('whoami').stdout
+    set(:disable_sudo, false)
     puts `whoami`
     puts `ls -la /etc/ssl/private/twolfson.com.key`
     puts `ls -la /etc/ssl/private`

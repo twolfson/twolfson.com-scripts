@@ -21,7 +21,7 @@ script:
   - bin/bootstrap-travis-ci.sh
 
   # Run Travis tests
-  - ./test.sh
+  - sudo -u root ./test.sh
 
 # Only receive notifications on the start of a new branch and when it changes status
 notifications:
