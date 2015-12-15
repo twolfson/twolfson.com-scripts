@@ -27,6 +27,7 @@ describe "NGINX" do
     expect(crt_file.owner).to(eq(ROOT_USER))
     expect(crt_file.group).to(eq(ROOT_GROUP))
 
+    puts `whoami`
     puts `ls -la /etc/ssl/private/twolfson.com.key`
     puts `ls -la /etc/ssl/private`
     puts `ls -la /etc/ssl`
