@@ -27,6 +27,9 @@ describe "NGINX" do
     expect(crt_file.owner).to(eq(ROOT_USER))
     expect(crt_file.group).to(eq(ROOT_GROUP))
 
+    puts `ls -la /etc/ssl/private/twolfson.com.key`
+    puts `ls -la /etc/ssl/private`
+    puts `ls -la /etc/ssl`
     key_file = file("/etc/ssl/private/twolfson.com.key")
     expect(key_file.mode).to(eq((USER_R | GROUP_NONE | OTHER_NONE).to_s(8)))
     expect(key_file.owner).to(eq(ROOT_USER))
