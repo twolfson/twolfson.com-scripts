@@ -15,9 +15,9 @@ describe "Open ports" do
     expect(open_ports_result.exit_status).to(eq(0))
     open_ports = open_ports_result.stdout.split("\n")
 
-    # If we are in Vagrant
-    # DEV: This is running on the host OS
-    if `which vagrant` != ""
+    # If we are in Vagrant or Travis CI
+    # DEV: This is running on the host OS which is why `which vagrant` works
+    if `which vagrant` != "" || ENV["TRAVIS"] == "1"
       # Use `sudo` to get additional info (e.g. pid/program)
       # tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      617/rpcbind
       # tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      1016/nginx
@@ -26,7 +26,11 @@ describe "Open ports" do
       open_ports = open_ports_result.stdout.split("\n")
 
       # Filter out trusted programs
-      open_ports.select! { |open_port| ! %r{/(rpcbind|rpc.statd|dhclient)\s*$}.match(open_port) }
+      if `which vagrant` != ""
+        open_ports.select! { |open_port| ! %r{/(rpcbind|rpc.statd|dhclient)\s*$}.match(open_port) }
+      elsif ENV["TRAVIS"] == "1"
+        # TODO: Add filtering here
+      end
     end
 
     # Verify we only have our allowed ports
