@@ -9,7 +9,8 @@ if test "$TRAVIS_BUILD_DIR" = ""; then
   echo "Expected \`TRAVIS_BUILD_DIR\` environment variable to be set but it was not. Something is seriously wrong." 1&>2
   exit 1
 fi
-data_dir="$TRAVIS_BUILD_DIR/data"
+base_dir="$TRAVIS_BUILD_DIR"
+data_dir="$base_dir/data"
 
 # If we haven't set up SSL certificates, then generate and install them
 if ! test -f /etc/ssl/certs/twolfson.com.crt; then
@@ -40,5 +41,5 @@ if ! test -f /etc/ssl/certs/twolfson.com.crt; then
 fi
 
 # Invoke bootstrap.sh in our context
-cd /vagrant
+cd "$base_dir"
 . bin/_bootstrap.sh

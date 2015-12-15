@@ -4,7 +4,8 @@ set -e
 set -x
 
 # Set up our data directory
-data_dir="/vagrant/data"
+base_dir="/vagrant"
+data_dir="$base_dir/data"
 
 # If we haven't set up SSL certificates, then generate and install them
 if ! test -f /etc/ssl/certs/twolfson.com.crt; then
@@ -35,5 +36,5 @@ if ! test -f /etc/ssl/certs/twolfson.com.crt; then
 fi
 
 # Invoke bootstrap.sh in our context
-cd /vagrant
+cd "$base_dir"
 . bin/_bootstrap.sh
