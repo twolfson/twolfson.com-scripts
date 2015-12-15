@@ -10,5 +10,7 @@ group :development do
   # TODO: Remove git ref once PR is landed
   # Added `sudo` support to `:exec` backend
   #   https://github.com/mizzy/specinfra/pull/509
-  gem "specinfra", "~>2.46.0", :git => "https://github.com/twolfson/specinfra.git", :ref => "cb1961f"
+  # Repaired Ruby<2.0.0 support for `net-ssh`
+  #   https://github.com/mizzy/specinfra/pull/510
+  gem "specinfra", "~>2.46.0", :git => "https://github.com/twolfson/specinfra.git", :ref => "07a4b29"
 end
