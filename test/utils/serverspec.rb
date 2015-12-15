@@ -36,8 +36,8 @@ ROOT_USER = "root"
 ROOT_GROUP = "root"
 
 # Load in our environment variable to the SSH config
-ssh_config = ENV.fetch("SSH_CONFIG")
-host = ENV.fetch("TARGET_HOST")
+# ssh_config = ENV.fetch("SSH_CONFIG")
+# host = ENV.fetch("TARGET_HOST")
 
 # Extract the SSH setup for our server
 #   Host default
@@ -46,9 +46,9 @@ host = ENV.fetch("TARGET_HOST")
 #     Port 2222
 # into:
 #   {host_name, user, port, ...}
-options = Net::SSH::Config.for(host, [ssh_config])
+# options = Net::SSH::Config.for(host, [ssh_config])
 
 # Configure serverspec
-set(:backend, :ssh)
-set(:host, options[:host_name])
-set(:ssh_options, options)
+set(:backend, :exec)
+# set(:host, options[:host_name])
+# set(:ssh_options, options)
