@@ -35,20 +35,30 @@ OTHER_RWX = OTHER_R | OTHER_W | OTHER_X
 ROOT_USER = "root"
 ROOT_GROUP = "root"
 
-# Load in our environment variable to the SSH config
-# ssh_config = ENV.fetch("SSH_CONFIG")
-# host = ENV.fetch("TARGET_HOST")
+# If we are using a SSH backend, then configure it
+if ENV["SERVERSPEC_BACKEND"] == "ssh"
+  # Load in our environment variable to the SSH config
+  ssh_config = ENV.fetch("SSH_CONFIG")
+  host = ENV.fetch("TARGET_HOST")
 
-# Extract the SSH setup for our server
-#   Host default
-#     HostName 127.0.0.1
-#     User vagrant
-#     Port 2222
-# into:
-#   {host_name, user, port, ...}
-# options = Net::SSH::Config.for(host, [ssh_config])
+  # Extract the SSH setup for our server
+  #   Host default
+  #     HostName 127.0.0.1
+  #     User vagrant
+  #     Port 2222
+  # into:
+  #   {host_name, user, port, ...}
+  options = Net::SSH::Config.for(host, [ssh_config])
 
-# Configure serverspec
-set(:backend, :exec)
-# set(:host, options[:host_name])
-# set(:ssh_options, options)
+  # Configure serverspec
+  set(:backend, :ssh)
+  set(:host, options[:host_name])
+  set(:ssh_options, options)
+# Otherwise, if we are using an exec backend, then configure it
+elsif ENV["SERVERSPEC_BACKEND"] == "exec"
+  set(:backend, :exec)
+# Otherwise, error out
+else
+  abort("Expected environment variable `SERVERSPEC_BACKEND` to be \"ssh\" or \"exec\" " +
+    "but it was \"#{ENV["SERVERSPEC_BACKEND"]}\". Please correct it")
+end
