@@ -18,5 +18,8 @@ export SSH_CONFIG=".vagrant/ssh-config"
 export TARGET_HOST="default"
 vagrant ssh-config > "$SSH_CONFIG"
 
+# Set up the backend for serverspec to run inside Vagrant
+export SERVERSPEC_BACKEND="ssh"
+
 # Run our tests
 . bin/_test.sh
