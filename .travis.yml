@@ -1,0 +1,34 @@
+# Leverage 14.04 LTS, same as Vagrant
+sudo: required
+dist: trusty
+
+# Set our language to generic for a minimal setup
+# https://docs.travis-ci.com/user/trusty-ci-environment#Image-differences-from-Precise
+language: generic
+
+install:
+  # Install our Ruby dependencies
+  # TODO: Remove `|| true` fallbacks
+  - which bundler || true
+  - gem install bundler || true
+  - sudo gem install bundler
+
+  # Install repo specific dependencies
+  - bundle install
+
+script:
+  # Run our provisioner
+  # TODO: Remove debugging statement `pwd`
+  - pwd
+  - bin/bootstrap-travis-ci.sh
+
+  # Run Travis tests
+  - ./test.sh
+
+# Only receive notifications on the start of a new branch and when it changes status
+notifications:
+  email:
+    recipients:
+      - todd@twolfson.com
+    on_success: change
+    on_failure: change
