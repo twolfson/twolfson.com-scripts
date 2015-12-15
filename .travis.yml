@@ -9,7 +9,7 @@ language: generic
 before_install:
   # Output OS information
   - ruby --version
-  - bundler --version
+  - bundle --version
 
 install:
   # Install repo specific dependencies
