@@ -6,24 +6,21 @@ dist: trusty
 # https://docs.travis-ci.com/user/trusty-ci-environment#Image-differences-from-Precise
 language: generic
 
+# DEV: Due to the nature of Travis CI, we must use the `exec` backend for testing
+#   Additionally, since we need to execute some commands as root
+#   and since Serverspec doesn't support `sudo` invocations with the `exec`
+#   we need to install/invoke our test commands with `sudo`
 before_install:
-  # Debug bundler and installed gems
-  - gem list
-  - dpkg --list | grep bundle
-
   # Install bundler for the root user
   - sudo gem install bundler
 
   # Output OS information
-  - ruby --version
-  - bundle --version
+  - sudo ruby --version
   - sudo bundle --version
 
 install:
   # Install repo specific dependencies
-  - bundle install
-  - ls vendor
-  - git diff
+  - sudo bundle install
 
 script:
   # Run our provisioner

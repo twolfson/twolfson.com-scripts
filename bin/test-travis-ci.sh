@@ -6,4 +6,4 @@ set -e
 export SERVERSPEC_BACKEND="exec"
 
 # Run our tests
-. bin/_test.sh
+sudo --preserve-env bin/_test.sh
