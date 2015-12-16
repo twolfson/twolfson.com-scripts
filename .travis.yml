@@ -7,6 +7,10 @@ dist: trusty
 language: generic
 
 before_install:
+  # Debug bundler and installed gems
+  - gem list
+  - dpkg --list | grep bundle
+
   # Install bundler for the root user
   - sudo gem install bundler
 
@@ -18,6 +22,8 @@ before_install:
 install:
   # Install repo specific dependencies
   - bundle install
+  - ls vendor
+  - git diff
 
 script:
   # Run our provisioner
