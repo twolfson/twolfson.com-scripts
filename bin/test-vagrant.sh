@@ -22,4 +22,4 @@ vagrant ssh-config > "$SSH_CONFIG"
 export SERVERSPEC_BACKEND="ssh"
 
 # Run our tests
-bin/_test.sh
+. bin/_test.sh
