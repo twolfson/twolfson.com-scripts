@@ -10,6 +10,7 @@ language: generic
 #   Additionally, since we need to execute some commands as root
 #   and since Serverspec doesn't support `sudo` invocations with the `exec`
 #   we need to install/invoke our test commands with `sudo`
+#   https://github.com/mizzy/specinfra/pull/509
 before_install:
   # Install bundler for the root user
   - sudo gem install bundler
