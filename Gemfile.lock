@@ -9,17 +9,6 @@ GIT
       rspec-its
       specinfra (~> 2.43)
 
-GIT
-  remote: https://github.com/twolfson/specinfra.git
-  revision: 07a4b29fb14ee5bd854235ee36ccfaead382b1ff
-  ref: 07a4b29
-  specs:
-    specinfra (2.46.0)
-      net-scp
-      net-ssh (~> 2.7)
-      net-telnet
-      sfl
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -46,10 +35,15 @@ GEM
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
     sfl (2.2)
+    specinfra (2.47.0)
+      net-scp
+      net-ssh (>= 2.7, < 3.1)
+      net-telnet
+      sfl
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  net-ssh (~> 2.7)
   serverspec (~> 2.24.3)!
-  specinfra (~> 2.46.0)!

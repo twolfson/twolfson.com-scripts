@@ -7,10 +7,9 @@ group :development do
   # Added `.mode`, `.owner`, and `.group` attributes to file
   #   https://github.com/mizzy/serverspec/pull/544
   gem "serverspec", "~>2.24.3", :git => "https://github.com/twolfson/serverspec.git", :ref => "1533623"
-  # TODO: Remove git ref once PR is landed
-  # Added `sudo` support to `:exec` backend
-  #   https://github.com/mizzy/specinfra/pull/509
-  # Repaired Ruby<2.0.0 support for `net-ssh`
+  # Lock down `net-ssh` for `serverspec`/`specinfra` for Ruby < 2.0.0
   #   https://github.com/mizzy/specinfra/pull/510
-  gem "specinfra", "~>2.46.0", :git => "https://github.com/twolfson/specinfra.git", :ref => "07a4b29"
+  if Gem::Version.new(RUBY_VERSION.dup) < Gem::Version.new('2.0.0')
+    gem "net-ssh", "~> 2.9.2"
+  end
 end
