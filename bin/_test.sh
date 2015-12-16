@@ -3,4 +3,4 @@
 set -e
 
 # Run our rspec tests (depends on SSH_CONFIG, TARGET_HOST)
-bundle exec sudo rspec --color test/*.rb
+sudo --preserve-env bundle exec rspec --color test/*.rb
