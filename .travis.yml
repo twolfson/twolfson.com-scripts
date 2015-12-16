@@ -7,9 +7,13 @@ dist: trusty
 language: generic
 
 before_install:
+  # Install bundler for the root user
+  - sudo gem install bundler
+
   # Output OS information
   - ruby --version
   - bundle --version
+  - sudo bundle --version
 
 install:
   # Install repo specific dependencies
