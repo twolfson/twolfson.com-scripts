@@ -25,6 +25,8 @@ install:
 
 script:
   # Run our provisioner
+  # DEV: Avoid using `sudo` for this line
+  #   to guarantee provisioning can be done by a non-root user
   - bin/bootstrap-travis-ci.sh
 
   # Run Travis tests
