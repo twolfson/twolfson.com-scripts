@@ -72,6 +72,34 @@ This repository has the following file structure:
 - `SECURITY.md` - Documentation for security considerations in this repository
 - `Vagrantfile` - Configuration for Vagrant
 
+### Provisioning a new server
+To provision a new server via [Digital Ocean][], follow the steps below:
+
+- If we don't have a Digital Ocean SSH key pair yet, then generate one
+    - https://help.github.com/articles/generating-ssh-keys/
+- Create a new Ubuntu based droplet with our SSH key (14.04 x64)
+- Add public key to [data/home/ubuntu/.ssh/authorized_keys][] so we can `ssh` into the `ubuntu` user
+    - Digital Ocean's SSH key will initially be registered to `root` user but we dislike having direct SSH access into a `root` user
+- Once droplet has started, set up our `~/.ssh/config` on the local machine
+
+```
+# Replace `digital-my-server` with a better name
+# Replace 127.0.0.1 with droplet's public IP
+Host digital-my-server
+    User root
+    HostName 127.0.0.1
+```
+
+- Install our SSL certificates to the server
+    - `bin/install-ssl-certificates-remote.sh digital-my-server --crt path/to/my-domain.crt --key path/to/my-domain.key`
+    - If you are trying to get a replica working (e.g. don't have these certificates), then self-signed ones can be generated via the `openssl` command in `bin/bootstrap-vagrant.sh`
+- Bootstrap our server
+    - `bin/install-ssl-certificates-remote.sh digital-my-server`
+- Update `~/.ssh/config` to use `User ubuntu` instead of `User root`
+    - During the bootstrap process, we intentionally lock our `root` access via `ssh` for security
+
+[data/home/ubuntu/.ssh/authorized_keys]: data/home/ubuntu/.ssh/authorized_keys
+
 ### Testing
 As mentioned in the high level overview, we use [Serverspec][] for testing. This is a [Ruby][] gem so you will need it installed to run our tests:
 
