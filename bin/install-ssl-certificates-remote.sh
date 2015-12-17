@@ -49,7 +49,7 @@ rsync --chmod=0000 "$key_path" "$target_host":"twolfson.com.key"
 ssh "$target_host" <<EOF
 chown root:root twolfson.com.crt twolfson.com.key
 sudo chmod u=rwx,g=rwx,o=rwx twolfson.com.crt
-sudo chmod u=rw,g=,o= twolfson.com.crt twolfson.com.key
+sudo chmod u=rw,g=,o= twolfson.com.key
 sudo mv twolfson.com.crt /etc/ssl/certs/twolfson.com.crt
 sudo mv twolfson.com.key /etc/ssl/private/twolfson.com.key
 EOF
