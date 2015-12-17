@@ -13,3 +13,6 @@ bin/htmldiff
 bin/ldiff
 bin/rspec
 bin/serverspec-init
+
+# Ignore temporary files
+tmp/
