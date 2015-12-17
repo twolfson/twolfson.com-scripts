@@ -94,6 +94,18 @@ SKIP_PROVISION=TRUE ./test.sh
 
 [Ruby]: https://www.ruby-lang.org/en/
 
+### Validating production
+To run our test suite against a production machine, we can use the `bin/test-remote.sh` script.
+
+```bash
+# Before running our tests, please add the remote server to ~/.ssh/config
+# For example:
+# Host my-server
+#     User ubuntu
+#     HostName 127.0.0.1
+TARGET_HOST="{{name-of-host-in-ssh-config}}" bin/test-remote.sh
+```
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Testing information can be found in the [Testing section](#testing).
 
