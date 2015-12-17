@@ -42,5 +42,5 @@ rsync --chmod u=r,g=,o= --human-readable --archive --verbose --compress "data" "
 # DEV: This will always run whether bootstrap succeeds/fails
 trap "{ ssh \"$target_host\" \"rm -rf \\\"$target_dir\\\"\"; }" EXIT
 
-# TODO: Pipe in `_bootstrap.sh` to ssh? -- need to figure out data_dir somehow. maybe with a `sed` or if `ssh` has an `env`
-echo "hi"
+# Run our bootstrap on the remote server
+data_dir="$target_dir" ssh -o SendEnv=data_dir "$target_host" < bin/_bootstrap.sh
