@@ -7,7 +7,7 @@ set -e
 usage_str="Usage: $0 \"name-of-host-in-ssh-config\" --crt \"path/to/domain.crt\" --key \"path/to/domain.key\""
 target_host="$1"
 shift
-if test "$target_host" = ""; then
+if test "$target_host" = "" || test "${target_host:0:1}" = "-"; then
   echo "Target host was not set. Please pass it as an argument to \`$0\`" 1>&2
   echo "$usage_str" 1>&2
   exit 1
@@ -31,7 +31,6 @@ while true; do
 done
 
 # If we don't have a certificate key or bundle, then complain and leave
-echo "$key_path" "$crt_path"
 if test "$key_path" = ""; then
   echo "Certificate key was not set. Please pass it as an argument (\`--key\`) to \`$0\`" 1>&2
   echo "$usage_str" 1>&2
@@ -46,5 +45,4 @@ fi
 # Output all future commands
 set -x
 
-#
 # TODO: Write script to install SSL certs on a server (e.g. rsync, ssh, chmod, chown, mv)
