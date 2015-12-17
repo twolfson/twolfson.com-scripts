@@ -32,11 +32,7 @@ cd twolfson.com-scripts/
 # Checkout the requested branch
 git checkout "$branch"
 
-# Create a secure remote folder to upload to
-# DEV: We use mkdir to dodge timing attacks (even after we deleted `data`)
-ssh "$target_host" "rm -r data; mkdir --mode u=r,g=,o= data"
-
-# Upload our data, only allow for reads from user
+# Upload our data, only allow for reads from user and nothing else from anyone
 rsync --chmod u=r,g=,o= --human-readable --archive --verbose --compress "data" "$target_host":"data"
 
 # TODO: Pipe in `_bootstrap.sh` to ssh? -- need to figure out data_dir somehow. maybe with a `sed` or if `ssh` has an `env`
