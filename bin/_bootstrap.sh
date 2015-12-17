@@ -31,6 +31,11 @@ if ! id ubuntu &> /dev/null; then
 
   # Add ubuntu user to sudoers
   gpasswd -a ubuntu sudo
+
+  # Create a folder for SSH configuration
+  mkdir /home/ubuntu/.ssh
+  chown ubuntu:ubuntu /home/ubuntu/.ssh
+  chmod u=rwx,g=,o= /home/ubuntu/.ssh
 fi
 
 # Update authorized keys
