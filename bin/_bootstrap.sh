@@ -3,6 +3,9 @@
 set -e
 set -x
 
+# Placeholder for `sed` injection of `data_dir`
+# DATA_DIR_PLACEHOLDER
+
 # Verify we have a data_dir variable set
 if test "$data_dir" = ""; then
   echo "Environment variable \`data_dir\` wasn't set when calling \`bootstrap.sh\`." 1>&2

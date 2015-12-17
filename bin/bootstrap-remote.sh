@@ -43,4 +43,4 @@ rsync --chmod u=r,g=,o= --human-readable --archive --verbose --compress "data" "
 trap "{ ssh \"$target_host\" \"rm -rf \\\"$target_dir\\\"\"; }" EXIT
 
 # Run our bootstrap on the remote server
-data_dir="$target_dir" ssh -o SendEnv=data_dir "$target_host" < bin/_bootstrap.sh
+sed "s/# DATA_DIR_PLACEHOLDER/export data_dir=\"$target_dir\"/" bin/_bootstrap.sh | ssh "$target_host"
