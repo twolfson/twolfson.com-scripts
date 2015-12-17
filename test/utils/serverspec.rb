@@ -34,6 +34,8 @@ OTHER_RWX = OTHER_R | OTHER_W | OTHER_X
 # Define user/group constants
 ROOT_USER = "root"
 ROOT_GROUP = "root"
+UBUNTU_USER = "ubuntu"
+UBUNTU_GROUP = "ubuntu"
 
 # If we are using a SSH backend, then configure it
 if ENV["SERVERSPEC_BACKEND"] == "ssh"
