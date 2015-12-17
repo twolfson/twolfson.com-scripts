@@ -36,7 +36,7 @@ if ! id ubuntu &> /dev/null; then
   gpasswd -a ubuntu sudo
 
   # Create a folder for SSH configuration
-  mkdir /home/ubuntu/.ssh
+  mkdir --mode u=rwx,g=,o= /home/ubuntu/.ssh
   chown ubuntu:ubuntu /home/ubuntu/.ssh
   chmod u=rwx,g=,o= /home/ubuntu/.ssh
 fi
@@ -44,12 +44,12 @@ fi
 # Update authorized keys
 # DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
 # TODO: We need to make sure `data_dir` isn't editable at all upon upload
+chown ubuntu:ubuntu "$data_dir/home/ubuntu/.ssh/authorized_keys"
+chmod u=rw,g=,o= "$data_dir/home/ubuntu/.ssh/authorized_keys"
 cp "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_keys
-chown ubuntu:ubuntu /home/ubuntu/.ssh/authorized_keys
-chmod u=rw,g=,o= /home/ubuntu/.ssh/authorized_keys
+sudo chown root:root "$data_dir/root/.ssh/authorized_keys"
+sudo chmod u=rw,g=,o= "$data_dir/root/.ssh/authorized_keys"
 sudo cp "$data_dir/root/.ssh/authorized_keys" /root/.ssh/authorized_keys
-sudo chown root:root /root/.ssh/authorized_keys
-sudo chmod u=rw,g=,o= /root/.ssh/authorized_keys
 
 exit 1
 
@@ -75,9 +75,9 @@ fi
 # TODO: Set up process manager and init.d for said process manager
 if ! test -f /etc/nginx/conf.d/twolfson.com.conf; then
   # Install our configuration
+  sudo chown root:root "$data_dir/etc/nginx/conf.d/twolfson.com.conf"
+  sudo chmod u=rw,g=r,o=r "$data_dir/etc/nginx/conf.d/twolfson.com.conf"
   sudo cp "$data_dir/etc/nginx/conf.d/twolfson.com.conf" /etc/nginx/conf.d/twolfson.com.conf
-  sudo chown root:root /etc/nginx/conf.d/twolfson.com.conf
-  sudo chmod u=rw,g=r,o=r /etc/nginx/conf.d/twolfson.com.conf
 
   # Reload the NGINX server
   sudo /etc/init.d/nginx reload
@@ -109,9 +109,9 @@ fi
 
 # Update sshd config
 # TODO: Find conditional to handle this
+sudo chown root:root "$data_dir/etc/ssh/sshd_config"
+sudo chmod u=rw,g=r,o=r "$data_dir/etc/ssh/sshd_config"
 sudo cp "$data_dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
-sudo chown root:root /etc/ssh/sshd_config
-sudo chmod u=rw,g=r,o=r /etc/ssh/sshd_config
 
 # Reload our SSH server
 # http://unix.stackexchange.com/a/127887
