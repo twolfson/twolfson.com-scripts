@@ -94,7 +94,7 @@ Host digital-my-server
     - `bin/install-ssl-certificates-remote.sh digital-my-server --crt path/to/my-domain.crt --key path/to/my-domain.key`
     - If you are trying to get a replica working (e.g. don't have these certificates), then self-signed ones can be generated via the `openssl` command in `bin/bootstrap-vagrant.sh`
 - Bootstrap our server
-    - `bin/install-ssl-certificates-remote.sh digital-my-server`
+    - `bin/bootstrap-remote.sh digital-my-server`
 - TODO: Resume from here
 - TODO: Resume from here
 - TODO: Resume from here
