@@ -33,6 +33,21 @@ describe "OpenSSH" do
     expect(sshd_config_file.content).to(include("PasswordAuthentication no"))
   end
 
+  it "has expected persmission for root user's SSH directory" do
+    root_ssh_dir = file("/root/.ssh")
+    expect(root_ssh_dir.mode).to(eq((USER_RWX | GROUP_NONE | OTHER_NONE).to_s(8)))
+    expect(root_ssh_dir.owner).to(eq(ROOT_USER))
+    expect(root_ssh_dir.group).to(eq(ROOT_GROUP))
+  end
+
+  it "has no authorized keys for root user" do
+    root_authorized_keys_file = file("/root/.ssh/authorized_keys")
+    expect(root_authorized_keys_file.mode).to(eq((USER_RW | GROUP_NONE | OTHER_NONE).to_s(8)))
+    expect(root_authorized_keys_file.owner).to(eq(ROOT_USER))
+    expect(root_authorized_keys_file.group).to(eq(ROOT_GROUP))
+    expect(root_authorized_keys_file.content).to(eq(""))
+  end
+
   it "has expected persmission for ubuntu user's SSH directory" do
     ubuntu_ssh_dir = file("/home/ubuntu/.ssh")
     expect(ubuntu_ssh_dir.mode).to(eq((USER_RWX | GROUP_NONE | OTHER_NONE).to_s(8)))
