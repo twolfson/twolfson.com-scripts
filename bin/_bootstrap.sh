@@ -64,7 +64,6 @@ fi
 # TODO: Handle updates for conf.d
 #   Thinking about 3 functions to copy files, update ownership, update permissions
 # TODO: Move all cp, chown, chmod logic into an `if` so we can handle nginx reload gracefully
-# TODO: Write script to install SSL certs on a server (e.g. rsync, ssh, chmod, chown, mv)
 # TODO: Set up process manager and init.d for said process manager
 if ! test -f /etc/nginx/conf.d/twolfson.com.conf; then
   # Install our configuration
