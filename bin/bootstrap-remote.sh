@@ -34,6 +34,7 @@ git checkout "$branch"
 
 # Upload our data, only allow for reads from user and nothing else from anyone
 # Expanded -havz is `--human-readable --archive --verbose --compress`
-rsync --chmod u=r,g=,o= --human-readable --archive --verbose --compress "data" "$target_host":"data"
+target_dir="$(ssh \"$target_host\" \"echo -n \"$(pwd)/data\"\")"
+rsync --chmod u=r,g=,o= --human-readable --archive --verbose --compress "data" "$target_host":"$target_dir"
 
 # TODO: Pipe in `_bootstrap.sh` to ssh? -- need to figure out data_dir somehow. maybe with a `sed` or if `ssh` has an `env`
