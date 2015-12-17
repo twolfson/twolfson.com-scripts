@@ -20,6 +20,10 @@ if ! test -f .updated-apt-get; then
   touch .updated-apt-get
 fi
 
+# TODO: Verify an ubuntu user exists and we are them
+#   Otherwise, create the user with auth keys
+exit 1
+
 # If we haven't installed node, then set it up
 # https://github.com/nodesource/distributions/tree/96e9b7d40b6aff7ade7bc130d9e18fd140e9f4f8#installation-instructions
 # TODO: Handle out of date scenario
