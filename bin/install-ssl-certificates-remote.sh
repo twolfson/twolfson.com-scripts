@@ -18,16 +18,11 @@ fi
 # http://superuser.com/a/541675
 while true; do
   case "$1" in
-    --crt)
-      shift
-      crt_path="$1"
-      ;;
-    --key)
-      shift
-      key_path="$1"
-      ;;
+    # DEV: We can dodge `&&` since we are using `set -e`
+    --crt) shift; export crt_path="$1"; shift || break;;
+    --key) shift; export key_path="$1"; shift || break;;
+    *) break;;
   esac
-  shift || break
 done
 
 # If we don't have a certificate key or bundle, then complain and leave
