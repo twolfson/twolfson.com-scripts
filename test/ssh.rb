@@ -35,9 +35,9 @@ describe "OpenSSH" do
 
   it "has authorized keys for our ubuntu user" do
     ubuntu_authorized_keys_file = file("/home/ubuntu/.ssh/authorized_keys")
-    expect(sshd_config_file.mode).to(eq((USER_RW | GROUP_R | OTHER_R).to_s(8)))
-    expect(sshd_config_file.owner).to(eq(UBUNTU_USER))
-    expect(sshd_config_file.group).to(eq(UBUNTU_GROUP))
+    expect(ubuntu_authorized_keys_file.mode).to(eq((USER_RW | GROUP_R | OTHER_R).to_s(8)))
+    expect(ubuntu_authorized_keys_file.owner).to(eq(UBUNTU_USER))
+    expect(ubuntu_authorized_keys_file.group).to(eq(UBUNTU_GROUP))
     expect(ubuntu_authorized_keys_file.content).not_to(eq(""))
   end
 end
