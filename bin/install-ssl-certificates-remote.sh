@@ -40,4 +40,6 @@ fi
 # Output all future commands
 set -x
 
-# TODO: Write script to install SSL certs on a server (e.g. rsync, ssh, chmod, chown, mv)
+# Upload our certificates to the home directory with strict permissions
+rsync --chown=root:root --chmod=u=rwx,g=rwx,o=rwx "$crt_path" --super "$target_host":"/etc/ssl/twolfson.com.crt"
+rsync --chown=root:root --chmod=u=rw,g=,o= "$key_path" --super "$target_host":"/etc/ssl/twolfson.com.key"
