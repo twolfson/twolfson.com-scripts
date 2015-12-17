@@ -40,9 +40,14 @@ fi
 
 # Update authorized keys
 # DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
-sudo cp "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_keys
+# TODO: We need to make sure `data_dir` isn't editable at all upon upload
+cp "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_keys
 chown ubuntu:ubuntu /home/ubuntu/.ssh/authorized_keys
 chmod u=rw,g=,o= /home/ubuntu/.ssh/authorized_keys
+sudo cp "$data_dir/root/.ssh/authorized_keys" /root/.ssh/authorized_keys
+sudo chown root:root /root/.ssh/authorized_keys
+sudo chmod u=rw,g=,o= /root/.ssh/authorized_keys
+
 exit 1
 
 # If we haven't installed node, then set it up
