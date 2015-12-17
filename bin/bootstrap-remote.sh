@@ -19,7 +19,7 @@ set -x
 
 # Create a local directory for building
 if test -d "tmp/build/"; then
-  rm -rf tmp-build/
+  rm -rf tmp/build/
 fi
 mkdir -p tmp/build/
 cd tmp/build/
@@ -27,16 +27,16 @@ cd tmp/build/
 # Clone our repository for a fresh start
 # DEV: This is to prevent using accidentally dirty `data/`
 git clone git@github.com:twolfson/twolfson.com-scripts.git
-cd twolfson.cd-scripts/
+cd twolfson.com-scripts/
 
 # Checkout the requested branch
 git checkout "$branch"
 
 # Create a secure remote folder to upload to
 # DEV: We use mkdir to dodge timing attacks (even after we deleted `data`)
-ssh "$target_host" "rm -r data && mkdir --mode u=r,g=,o= data"
+ssh "$target_host" "rm -r data; mkdir --mode u=r,g=,o= data"
 
 # Upload our data, only allow for reads from user
-rsync --mode u=r,g=,o= "data" "$target_host":"data"
+rsync --chmod u=r,g=,o= --human-readable --archive --verbose --compress "data" "$target_host":"data"
 
 # TODO: Pipe in `_bootstrap.sh` to ssh? -- need to figure out data_dir somehow. maybe with a `sed` or if `ssh` has an `env`
