@@ -41,5 +41,15 @@ fi
 set -x
 
 # Upload our certificates to the home directory with strict permissions
-rsync --chown=root:root --chmod=u=rwx,g=rwx,o=rwx "$crt_path" --super "$target_host":"/etc/ssl/twolfson.com.crt"
-rsync --chown=root:root --chmod=u=rw,g=,o= "$key_path" --super "$target_host":"/etc/ssl/twolfson.com.key"
+# DEV: We use 0000 to prevent our own user from reading its contents
+rsync --chmod=0000 "$crt_path" "$target_host":"twolfson.com.crt"
+rsync --chmod=0000 "$key_path" "$target_host":"twolfson.com.key"
+
+# Correct permissions and relocate our files
+ssh "$target_host" <<EOF
+chown root:root twolfson.com.crt twolfson.com.key
+sudo chmod u=rwx,g=rwx,o=rwx twolfson.com.crt
+sudo chmod u=rw,g=,o= twolfson.com.crt twolfson.com.key
+sudo mv twolfson.com.crt /etc/ssl/certs/twolfson.com.crt
+sudo mv twolfson.com.key /etc/ssl/private/twolfson.com.key
+EOF
