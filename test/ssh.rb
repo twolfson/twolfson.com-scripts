@@ -33,9 +33,16 @@ describe "OpenSSH" do
     expect(sshd_config_file.content).to(include("PasswordAuthentication no"))
   end
 
-  it "has authorized keys for our ubuntu user" do
+  it "has expected persmission for ubuntu user's SSH directory" do
+    ubuntu_ssh_dir = file("/home/ubuntu/.ssh")
+    expect(ubuntu_ssh_dir.mode).to(eq((USER_RWX | GROUP_NONE | OTHER_NONE).to_s(8)))
+    expect(ubuntu_ssh_dir.owner).to(eq(UBUNTU_USER))
+    expect(ubuntu_ssh_dir.group).to(eq(UBUNTU_GROUP))
+  end
+
+  it "has authorized keys for ubuntu user" do
     ubuntu_authorized_keys_file = file("/home/ubuntu/.ssh/authorized_keys")
-    expect(ubuntu_authorized_keys_file.mode).to(eq((USER_RW | GROUP_R | OTHER_R).to_s(8)))
+    expect(ubuntu_authorized_keys_file.mode).to(eq((USER_RW | GROUP_NONE | OTHER_NONE).to_s(8)))
     expect(ubuntu_authorized_keys_file.owner).to(eq(UBUNTU_USER))
     expect(ubuntu_authorized_keys_file.group).to(eq(UBUNTU_GROUP))
     expect(ubuntu_authorized_keys_file.content).not_to(eq(""))
