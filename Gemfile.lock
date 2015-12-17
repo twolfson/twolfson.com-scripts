@@ -47,6 +47,3 @@ PLATFORMS
 DEPENDENCIES
   net-ssh (~> 2.9.2)
   serverspec (~> 2.24.3)!
-
-BUNDLED WITH
-   1.11.2

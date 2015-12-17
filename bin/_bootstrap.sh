@@ -20,8 +20,22 @@ if ! test -f .updated-apt-get; then
   touch .updated-apt-get
 fi
 
-# TODO: Verify an ubuntu user exists and we are them
-#   Otherwise, create the user with auth keys
+# If there is no ubuntu user, then create them
+# DEV: Digital Ocean's Ubuntu images provision us as the root user so we must create an ubuntu user
+# https://github.com/mizzy/specinfra/blob/v2.47.0/lib/specinfra/command/base/user.rb#L3-L5
+# https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04
+# https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on-ubuntu-and-centos
+if ! id ubuntu &> /dev/null; then
+  # Create password-less `ubuntu` user with metadata "Ubuntu"
+  adduser ubuntu --disabled-password --gecos "Ubuntu"
+
+  # Add ubuntu user to sudoers
+  gpasswd -a ubuntu sudo
+fi
+
+# Update authorized keys
+# DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
+sudo cp "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_keys
 exit 1
 
 # If we haven't installed node, then set it up
