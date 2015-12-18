@@ -38,10 +38,10 @@ fi
   # chmod u=rw,g=,o= "$data_dir/etc/sudoers.d/ubuntu"
   # cp "$data_dir/etc/sudoers.d/ubuntu" /etc/sudoers.d/ubuntu
 
-  # # Create a folder for SSH configuration
-  # mkdir --mode u=rwx,g=,o= /home/ubuntu/.ssh
-  # chown ubuntu:ubuntu /home/ubuntu/.ssh
-  # chmod u=rwx,g=,o= /home/ubuntu/.ssh
+  # Create a folder for SSH configuration
+  mkdir --mode u=rwx,g=,o= /home/ubuntu/.ssh
+  chown ubuntu:ubuntu /home/ubuntu/.ssh
+  chmod u=rwx,g=,o= /home/ubuntu/.ssh
 # fi
 
 # Update authorized keys
