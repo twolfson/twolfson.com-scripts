@@ -6,7 +6,7 @@ set -e
 target_host="$1"
 if test "$target_host" = ""; then
   echo "Target host was not set. Please pass it as an argument to \`$0\`" 1>&2
-  echo "Usage: $0 \"name-of-host-in-ssh-config\"" 1>&2
+  echo "Usage: $0 \"name-of-host-in-ssh-config\" <branch>" 1>&2
   exit 1
 fi
 branch="$2"
