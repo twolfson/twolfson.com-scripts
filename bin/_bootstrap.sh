@@ -36,12 +36,12 @@ fi
   # # gpasswd -a ubuntu sudo
   # chown root:root "$data_dir/etc/sudoers.d/ubuntu"
   # chmod u=rw,g=,o= "$data_dir/etc/sudoers.d/ubuntu"
-  # cp "$data_dir/etc/sudoers.d/ubuntu" /etc/sudoers.d/ubuntu
+  # mv "$data_dir/etc/sudoers.d/ubuntu" /etc/sudoers.d/ubuntu
 
-  # Create a folder for SSH configuration
-  mkdir --mode u=rwx,g=,o= /home/ubuntu/.ssh
-  chown ubuntu:ubuntu /home/ubuntu/.ssh
-  chmod u=rwx,g=,o= /home/ubuntu/.ssh
+  # # Create a folder for SSH configuration
+  # mkdir --mode u=rwx,g=,o= /home/ubuntu/.ssh
+  # chown ubuntu:ubuntu /home/ubuntu/.ssh
+  # chmod u=rwx,g=,o= /home/ubuntu/.ssh
 # fi
 
 # Update authorized keys
@@ -49,18 +49,18 @@ fi
 # TODO: We need to make sure `data_dir` isn't editable at all upon upload
 chown ubuntu:ubuntu "$data_dir/home/ubuntu/.ssh/authorized_keys"
 chmod u=rw,g=,o= "$data_dir/home/ubuntu/.ssh/authorized_keys"
-cp "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_keys
+mv "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_keys
 # # WARNING: THIS WILL LOCK OUT THE ROOT USER
 # sudo chown root:root "$data_dir/root/.ssh/authorized_keys"
 # sudo chmod u=rw,g=,o= "$data_dir/root/.ssh/authorized_keys"
-# sudo cp "$data_dir/root/.ssh/authorized_keys" /root/.ssh/authorized_keys
+# sudo mv "$data_dir/root/.ssh/authorized_keys" /root/.ssh/authorized_keys
 
 # # Update sshd config
 # # WARNING: THIS WILL LOCK OUT THE ROOT USER
 # # TODO: Find conditional to handle this
 # sudo chown root:root "$data_dir/etc/ssh/sshd_config"
 # sudo chmod u=rw,g=r,o=r "$data_dir/etc/ssh/sshd_config"
-# sudo cp "$data_dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
+# sudo mv "$data_dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
 
 # # Reload our SSH server
 # # http://unix.stackexchange.com/a/127887
@@ -86,13 +86,13 @@ fi
 # If there are no NGINX configuration files, then install them
 # TODO: Handle updates for conf.d
 #   Thinking about 3 functions to copy files, update ownership, update permissions
-# TODO: Move all cp, chown, chmod logic into an `if` so we can handle nginx reload gracefully
+# TODO: Move all mv, chown, chmod logic into an `if` so we can handle nginx reload gracefully
 # TODO: Set up process manager and init.d for said process manager
 if ! test -f /etc/nginx/conf.d/twolfson.com.conf; then
   # Install our configuration
   sudo chown root:root "$data_dir/etc/nginx/conf.d/twolfson.com.conf"
   sudo chmod u=rw,g=r,o=r "$data_dir/etc/nginx/conf.d/twolfson.com.conf"
-  sudo cp "$data_dir/etc/nginx/conf.d/twolfson.com.conf" /etc/nginx/conf.d/twolfson.com.conf
+  sudo mv "$data_dir/etc/nginx/conf.d/twolfson.com.conf" /etc/nginx/conf.d/twolfson.com.conf
 
   # Reload the NGINX server
   sudo /etc/init.d/nginx reload
