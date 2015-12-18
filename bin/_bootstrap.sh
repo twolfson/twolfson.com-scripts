@@ -55,16 +55,16 @@ mv "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_key
 # sudo chmod u=rw,g=,o= "$data_dir/root/.ssh/authorized_keys"
 # sudo mv "$data_dir/root/.ssh/authorized_keys" /root/.ssh/authorized_keys
 
-# # Update sshd config
-# # WARNING: THIS WILL LOCK OUT THE ROOT USER
-# # TODO: Find conditional to handle this
-# sudo chown root:root "$data_dir/etc/ssh/sshd_config"
-# sudo chmod u=rw,g=r,o=r "$data_dir/etc/ssh/sshd_config"
-# sudo mv "$data_dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
+# Update sshd config
+# WARNING: THIS WILL LOCK OUT THE ROOT USER
+# TODO: Find conditional to handle this
+sudo chown root:root "$data_dir/etc/ssh/sshd_config"
+sudo chmod u=rw,g=r,o=r "$data_dir/etc/ssh/sshd_config"
+sudo mv "$data_dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
 
-# # Reload our SSH server
-# # http://unix.stackexchange.com/a/127887
-# sudo service ssh reload
+# Reload our SSH server
+# http://unix.stackexchange.com/a/127887
+sudo service ssh reload
 
 exit 1
 
