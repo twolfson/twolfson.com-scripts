@@ -44,8 +44,6 @@ fi
   # chmod u=rwx,g=,o= /home/ubuntu/.ssh
 # fi
 
-exit 1
-
 # Update authorized keys
 # DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
 # TODO: We need to make sure `data_dir` isn't editable at all upon upload
