@@ -47,9 +47,21 @@ fi
 chown ubuntu:ubuntu "$data_dir/home/ubuntu/.ssh/authorized_keys"
 chmod u=rw,g=,o= "$data_dir/home/ubuntu/.ssh/authorized_keys"
 cp "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_keys
-# sudo chown root:root "$data_dir/root/.ssh/authorized_keys"
-# sudo chmod u=rw,g=,o= "$data_dir/root/.ssh/authorized_keys"
-# sudo cp "$data_dir/root/.ssh/authorized_keys" /root/.ssh/authorized_keys
+# WARNING: THIS WILL LOCK OUT THE ROOT USER
+sudo chown root:root "$data_dir/root/.ssh/authorized_keys"
+sudo chmod u=rw,g=,o= "$data_dir/root/.ssh/authorized_keys"
+sudo cp "$data_dir/root/.ssh/authorized_keys" /root/.ssh/authorized_keys
+
+# Update sshd config
+# WARNING: THIS WILL LOCK OUT THE ROOT USER
+# TODO: Find conditional to handle this
+sudo chown root:root "$data_dir/etc/ssh/sshd_config"
+sudo chmod u=rw,g=r,o=r "$data_dir/etc/ssh/sshd_config"
+sudo cp "$data_dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
+
+# Reload our SSH server
+# http://unix.stackexchange.com/a/127887
+sudo service ssh reload
 
 exit 1
 
@@ -106,13 +118,3 @@ fi
 if test "$(getent passwd sync | cut -f 7 -d ":")" != "/usr/sbin/nologin"; then
   sudo usermod --shell /usr/sbin/nologin sync
 fi
-
-# Update sshd config
-# TODO: Find conditional to handle this
-sudo chown root:root "$data_dir/etc/ssh/sshd_config"
-sudo chmod u=rw,g=r,o=r "$data_dir/etc/ssh/sshd_config"
-sudo cp "$data_dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
-
-# Reload our SSH server
-# http://unix.stackexchange.com/a/127887
-sudo service ssh reload
