@@ -32,11 +32,11 @@ fi
 #   # Create password-less `ubuntu` user with metadata "Ubuntu"
 #   adduser ubuntu --disabled-password --gecos "Ubuntu"
 
-  # Add ubuntu user to sudo group and sudoers
-  # gpasswd -a ubuntu sudo
-  chown root:root "$data_dir/etc/sudoers.d/ubuntu"
-  chmod u=rw,g=,o= "$data_dir/etc/sudoers.d/ubuntu"
-  cp "$data_dir/etc/sudoers.d/ubuntu" /etc/sudoers.d/ubuntu
+  # # Add ubuntu user to sudo group and sudoers
+  # # gpasswd -a ubuntu sudo
+  # chown root:root "$data_dir/etc/sudoers.d/ubuntu"
+  # chmod u=rw,g=,o= "$data_dir/etc/sudoers.d/ubuntu"
+  # cp "$data_dir/etc/sudoers.d/ubuntu" /etc/sudoers.d/ubuntu
 
   # # Create a folder for SSH configuration
   # mkdir --mode u=rwx,g=,o= /home/ubuntu/.ssh
@@ -52,21 +52,21 @@ exit 1
 chown ubuntu:ubuntu "$data_dir/home/ubuntu/.ssh/authorized_keys"
 chmod u=rw,g=,o= "$data_dir/home/ubuntu/.ssh/authorized_keys"
 cp "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_keys
-# WARNING: THIS WILL LOCK OUT THE ROOT USER
-sudo chown root:root "$data_dir/root/.ssh/authorized_keys"
-sudo chmod u=rw,g=,o= "$data_dir/root/.ssh/authorized_keys"
-sudo cp "$data_dir/root/.ssh/authorized_keys" /root/.ssh/authorized_keys
+# # WARNING: THIS WILL LOCK OUT THE ROOT USER
+# sudo chown root:root "$data_dir/root/.ssh/authorized_keys"
+# sudo chmod u=rw,g=,o= "$data_dir/root/.ssh/authorized_keys"
+# sudo cp "$data_dir/root/.ssh/authorized_keys" /root/.ssh/authorized_keys
 
-# Update sshd config
-# WARNING: THIS WILL LOCK OUT THE ROOT USER
-# TODO: Find conditional to handle this
-sudo chown root:root "$data_dir/etc/ssh/sshd_config"
-sudo chmod u=rw,g=r,o=r "$data_dir/etc/ssh/sshd_config"
-sudo cp "$data_dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
+# # Update sshd config
+# # WARNING: THIS WILL LOCK OUT THE ROOT USER
+# # TODO: Find conditional to handle this
+# sudo chown root:root "$data_dir/etc/ssh/sshd_config"
+# sudo chmod u=rw,g=r,o=r "$data_dir/etc/ssh/sshd_config"
+# sudo cp "$data_dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
 
-# Reload our SSH server
-# http://unix.stackexchange.com/a/127887
-sudo service ssh reload
+# # Reload our SSH server
+# # http://unix.stackexchange.com/a/127887
+# sudo service ssh reload
 
 exit 1
 
