@@ -1,0 +1,3 @@
+# Based off of AWS' sudoers.d
+# User rules for ubuntu
+ubuntu ALL=(ALL) NOPASSWD:ALL

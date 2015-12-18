@@ -28,18 +28,23 @@ fi
 # https://github.com/mizzy/specinfra/blob/v2.47.0/lib/specinfra/command/base/user.rb#L3-L5
 # https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04
 # https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on-ubuntu-and-centos
-if ! id ubuntu &> /dev/null; then
-  # Create password-less `ubuntu` user with metadata "Ubuntu"
-  adduser ubuntu --disabled-password --gecos "Ubuntu"
+# if ! id ubuntu &> /dev/null; then
+#   # Create password-less `ubuntu` user with metadata "Ubuntu"
+#   adduser ubuntu --disabled-password --gecos "Ubuntu"
 
-  # Add ubuntu user to sudoers
-  gpasswd -a ubuntu sudo
+  # Add ubuntu user to sudo group and sudoers
+  # gpasswd -a ubuntu sudo
+  chown root:root "$data_dir/etc/sudoers.d/ubuntu"
+  chmod u=rw,g=,o= "$data_dir/etc/sudoers.d/ubuntu"
+  cp "$data_dir/etc/sudoers.d/ubuntu" /etc/sudoers.d/ubuntu
 
-  # Create a folder for SSH configuration
-  mkdir --mode u=rwx,g=,o= /home/ubuntu/.ssh
-  chown ubuntu:ubuntu /home/ubuntu/.ssh
-  chmod u=rwx,g=,o= /home/ubuntu/.ssh
-fi
+  # # Create a folder for SSH configuration
+  # mkdir --mode u=rwx,g=,o= /home/ubuntu/.ssh
+  # chown ubuntu:ubuntu /home/ubuntu/.ssh
+  # chmod u=rwx,g=,o= /home/ubuntu/.ssh
+# fi
+
+exit 1
 
 # Update authorized keys
 # DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
