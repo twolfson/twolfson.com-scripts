@@ -95,9 +95,6 @@ Host digital-my-server
     - If you are trying to get a replica working (e.g. don't have these certificates), then self-signed ones can be generated via the `openssl` command in `bin/bootstrap-vagrant.sh`
 - Bootstrap our server
     - `bin/bootstrap-remote.sh digital-my-server`
-- TODO: Resume from here
-- TODO: Resume from here
-- TODO: Resume from here
 - Update `~/.ssh/config` to use `User ubuntu` instead of `User root`
     - During the bootstrap process, we intentionally lock our `root` access via `ssh` for security
 - Run our tests on the server
