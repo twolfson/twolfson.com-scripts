@@ -33,10 +33,10 @@ cd twolfson.com-scripts/
 git checkout "$branch"
 
 # Upload our data, only allow for reads from user and nothing else from anyone
-# Expanded -havz is `--human-readable --archive --verbose --compress`
+# Expanded -havzt is `--human-readable --archive --verbose --compress --times`
 base_target_dir="$(ssh "$target_host" "pwd")"
 target_dir="$base_target_dir/data"
-rsync --chmod u=rw,g=,o= --human-readable --archive --verbose --compress "data" "$target_host":"$base_target_dir"
+rsync --chmod u=rw,g=,o= --human-readable --archive --verbose --compress --times "data" "$target_host":"$base_target_dir"
 
 # Remove our sensitive files from the remote server on exit
 # http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_12_02.html
