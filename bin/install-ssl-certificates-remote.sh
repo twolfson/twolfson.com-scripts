@@ -42,11 +42,14 @@ set -x
 
 # Upload our certificates to the home directory with strict permissions
 # DEV: We use 0000 to prevent our own user from reading its contents
-rsync --havz --chmod=0000 "$crt_path" "$target_host":"twolfson.com.crt"
-rsync --havz --chmod=0000 "$key_path" "$target_host":"twolfson.com.key"
+rsync -havz --chmod=0000 "$crt_path" "$target_host":"twolfson.com.crt"
+rsync -havz --chmod=0000 "$key_path" "$target_host":"twolfson.com.key"
 
 # Correct permissions and relocate our files
 ssh "$target_host" <<EOF
+# Exit upon first error and echo commands
+set -e
+set -x
 chown root:root twolfson.com.crt twolfson.com.key
 sudo chmod u=rwx,g=rwx,o=rwx twolfson.com.crt
 sudo chmod u=rw,g=,o= twolfson.com.key
