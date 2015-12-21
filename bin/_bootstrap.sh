@@ -50,6 +50,7 @@ chown ubuntu:ubuntu "$data_dir/home/ubuntu/.ssh/authorized_keys"
 chmod u=rw,g=,o= "$data_dir/home/ubuntu/.ssh/authorized_keys"
 cp --preserve "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_keys
 # WARNING: THIS WILL LOCK OUT THE ROOT USER
+sudo chmod u=rwx,g=,o= "$data_dir/root/.ssh"
 sudo chown root:root "$data_dir/root/.ssh/authorized_keys"
 sudo chmod u=rw,g=,o= "$data_dir/root/.ssh/authorized_keys"
 sudo cp --preserve "$data_dir/root/.ssh/authorized_keys" /root/.ssh/authorized_keys
