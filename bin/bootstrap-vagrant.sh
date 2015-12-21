@@ -5,7 +5,15 @@ set -x
 
 # Set up our data directory
 base_dir="/vagrant"
-data_dir="$base_dir/data"
+src_dir="/vagrant/data"
+target_dir="$HOME/data"
+data_dir="$target_dir"
+
+# Copy our data to a non-shared directory to prevent permissions from getting messed up
+if test -d "$target_dir"; then
+  rm -r "$target_dir"
+fi
+cp --preserve --recursive "$src_dir" "$target_dir"
 
 # If we haven't set up SSL certificates, then generate and install them
 if ! test -f /etc/ssl/certs/twolfson.com.crt; then
