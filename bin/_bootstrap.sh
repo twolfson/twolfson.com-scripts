@@ -76,7 +76,7 @@ fi
 
 # If pip is out of date, then upgrade it
 if ! pip --version | grep "pip 7.1.2" &> /dev/null; then
-  sudo pip install pip --upgrade
+  sudo pip install "pip==7.1.2"
   source ~/.bashrc
 fi
 
