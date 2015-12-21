@@ -36,12 +36,12 @@ git checkout "$branch"
 # Expanded -havz is `--human-readable --archive --verbose --compress`
 base_target_dir="$(ssh "$target_host" "pwd")"
 target_dir="$base_target_dir/data"
-rsync --chmod u=r,g=,o= --human-readable --archive --verbose --compress "data" "$target_host":"$base_target_dir"
+rsync --chmod u=rw,g=,o= --human-readable --archive --verbose --compress "data" "$target_host":"$base_target_dir"
 
 # Remove our sensitive files from the remote server on exit
 # http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_12_02.html
 # DEV: This will always run whether bootstrap succeeds/fails
-trap "{ ssh \"$target_host\" \"rm -rf \\\"$target_dir\\\"\"; }" EXIT
+# trap "{ ssh \"$target_host\" \"rm -rf \\\"$target_dir\\\"\"; }" EXIT
 
 # Run our bootstrap on the remote server
 # DEV: We need to escape our target directory for the second sed
