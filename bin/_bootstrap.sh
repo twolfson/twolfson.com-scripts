@@ -114,17 +114,13 @@ if test "$(getent passwd sync | cut -f 7 -d ":")" != "/usr/sbin/nologin"; then
   sudo usermod --shell /usr/sbin/nologin sync
 fi
 
-echo "hey"
-test "$data_dir/etc/ssh/sshd_config" -nt /etc/ssh/sshd_config
-echo "not newer"
-
 # Update sshd config
 # WARNING: THIS WILL LOCK OUT THE ROOT USER
 # TODO: Find conditional to handle this
-# sudo chown root:root "$data_dir/etc/ssh/sshd_config"
-# sudo chmod u=rw,g=r,o=r "$data_dir/etc/ssh/sshd_config"
-# sudo cp --preserve "$data_dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
+sudo chown root:root "$data_dir/etc/ssh/sshd_config"
+sudo chmod u=rw,g=r,o=r "$data_dir/etc/ssh/sshd_config"
+sudo cp --preserve "$data_dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
 
 # Reload our SSH server
 # http://unix.stackexchange.com/a/127887
-# sudo service ssh reload
+sudo service ssh reload
