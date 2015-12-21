@@ -46,9 +46,9 @@ fi
 
 # Update authorized keys
 # DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
-chown ubuntu:ubuntu "$data_dir/home/ubuntu/.ssh/authorized_keys"
-chmod u=rw,g=,o= "$data_dir/home/ubuntu/.ssh/authorized_keys"
-cp --preserve "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_keys
+sudo chown ubuntu:ubuntu "$data_dir/home/ubuntu/.ssh/authorized_keys"
+sudo chmod u=rw,g=,o= "$data_dir/home/ubuntu/.ssh/authorized_keys"
+sudo cp --preserve "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_keys
 # WARNING: THIS WILL LOCK OUT THE ROOT USER
 sudo chmod u=rwx,g=,o= "/root/.ssh"
 sudo chown root:root "$data_dir/root/.ssh/authorized_keys"
