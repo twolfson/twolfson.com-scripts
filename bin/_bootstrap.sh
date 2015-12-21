@@ -125,6 +125,18 @@ if test "$(getent passwd sync | cut -f 7 -d ":")" != "/usr/sbin/nologin"; then
   sudo usermod --shell /usr/sbin/nologin sync
 fi
 
+# If supervisor is not installed, then install it
+if ! which supervisor &> /dev/null; then
+  sudo pip install "supervisor==3.2.0"
+fi
+
+# If we have a new config for supervisor, then update ourselves
+# https://github.com/Supervisor/initscripts/blob/master/ubuntu#L39
+# http://serverfault.com/a/96500
+# http://supervisord.org/running.html?highlight=startup#running-supervisord-automatically-on-startup
+# https://github.com/Supervisor/initscripts
+if test "$(cat /etc/supervisor.conf)"
+
 # Update sshd config
 # WARNING: THIS WILL LOCK OUT THE ROOT USER
 # TODO: Find conditional to handle this
