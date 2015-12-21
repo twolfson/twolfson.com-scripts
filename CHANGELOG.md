@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.3.1 - Fixed broken Travis CI
+
 1.3.0 - Added provisioning scripts for remote server
 
 1.2.0 - Removed `git` patches for `specinfra` after finding better solutions
