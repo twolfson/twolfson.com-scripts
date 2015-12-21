@@ -32,16 +32,21 @@ if ! id ubuntu &> /dev/null; then
   # Create password-less `ubuntu` user with metadata "Ubuntu"
   adduser ubuntu --disabled-password --gecos "Ubuntu"
 
-  # Add ubuntu user to sudo group and sudoers
+  # Add ubuntu user to sudo group (sudoers will be performed later)
   gpasswd -a ubuntu sudo
-  chown root:root "$data_dir/etc/sudoers.d/ubuntu"
-  chmod u=r,g=,o= "$data_dir/etc/sudoers.d/ubuntu"
-  cp --preserve "$data_dir/etc/sudoers.d/ubuntu" /etc/sudoers.d/ubuntu
 
   # Create a folder for SSH configuration
   mkdir --mode u=rwx,g=,o= /home/ubuntu/.ssh
   chown ubuntu:ubuntu /home/ubuntu/.ssh
   chmod u=rwx,g=,o= /home/ubuntu/.ssh
+fi
+
+# if there is no sudoers set up for the `ubuntu` user, then set it up
+# DEV: We keep this separate from `gpasswd` to run this for Travis CI
+if ! test -f /etc/sudoers.d/ubuntu; then
+  chown root:root "$data_dir/etc/sudoers.d/ubuntu"
+  chmod u=r,g=,o= "$data_dir/etc/sudoers.d/ubuntu"
+  cp --preserve "$data_dir/etc/sudoers.d/ubuntu" /etc/sudoers.d/ubuntu
 fi
 
 # Update authorized keys
