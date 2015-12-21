@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.3.2 - Repaired `bootstrap-remote.sh` for non-root user
+
 1.3.1 - Fixed broken Travis CI
 
 1.3.0 - Added provisioning scripts for remote server
