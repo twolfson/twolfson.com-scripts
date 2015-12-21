@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.3.3 - Repaired chown's not sticking during Vagrant bootstrap
+
 1.3.2 - Repaired `bootstrap-remote.sh` for non-root user
 
 1.3.1 - Fixed broken Travis CI
