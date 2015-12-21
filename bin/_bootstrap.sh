@@ -44,9 +44,9 @@ fi
 # if there is no sudoers set up for the `ubuntu` user, then set it up
 # DEV: We keep this separate from `gpasswd` to run this for Travis CI
 if ! test -f /etc/sudoers.d/ubuntu; then
-  chown root:root "$data_dir/etc/sudoers.d/ubuntu"
-  chmod u=r,g=,o= "$data_dir/etc/sudoers.d/ubuntu"
-  cp --preserve "$data_dir/etc/sudoers.d/ubuntu" /etc/sudoers.d/ubuntu
+  sudo chown root:root "$data_dir/etc/sudoers.d/ubuntu"
+  sudo chmod u=r,g=,o= "$data_dir/etc/sudoers.d/ubuntu"
+  sudo cp --preserve "$data_dir/etc/sudoers.d/ubuntu" /etc/sudoers.d/ubuntu
 fi
 
 # Update authorized keys
