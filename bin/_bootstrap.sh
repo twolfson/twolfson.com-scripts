@@ -35,7 +35,7 @@ if ! id ubuntu &> /dev/null; then
   # Add ubuntu user to sudo group and sudoers
   gpasswd -a ubuntu sudo
   chown root:root "$data_dir/etc/sudoers.d/ubuntu"
-  chmod u=rw,g=,o= "$data_dir/etc/sudoers.d/ubuntu"
+  chmod u=r,g=,o= "$data_dir/etc/sudoers.d/ubuntu"
   cp --preserve "$data_dir/etc/sudoers.d/ubuntu" /etc/sudoers.d/ubuntu
 
   # Create a folder for SSH configuration
