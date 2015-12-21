@@ -69,6 +69,17 @@ if ! which node &> /dev/null; then
   sudo apt-get install -y "nodejs=0.10.41-1nodesource1~trusty1"
 fi
 
+# If pip isn't installed, then install it
+if ! which pip &> /dev/null; then
+  sudo apt-get install -y "python-setuptools=3.3-1ubuntu2" "python-pip=1.5.4-1ubuntu3"
+fi
+
+# If pip is out of date, then upgrade it
+if ! pip --version | grep "pip 7.1.2" &> /dev/null; then
+  sudo pip install pip --upgrade
+  source ~/.bashrc
+fi
+
 # If NGINX isn't installed, then set it up
 # TODO: Thinking about `apt-get` function to handle installs/updates
 if ! which nginx &> /dev/null; then
