@@ -50,9 +50,14 @@ ssh "$target_host" <<EOF
 # Exit upon first error and echo commands
 set -e
 set -x
-chown root:root twolfson.com.crt twolfson.com.key
+
+# Install our new certificates
+sudo chown root:root twolfson.com.crt twolfson.com.key
 sudo chmod u=rwx,g=rwx,o=rwx twolfson.com.crt
 sudo chmod u=rw,g=,o= twolfson.com.key
 sudo mv twolfson.com.crt /etc/ssl/certs/twolfson.com.crt
 sudo mv twolfson.com.key /etc/ssl/private/twolfson.com.key
+
+# Reload NGINX with them
+sudo /etc/init.d/nginx reload
 EOF
