@@ -2,16 +2,37 @@
 # Exit on first error
 set -e
 
+# Define a usage function
+echo_usage() {
+  echo "Usage: $0 \"name-of-host-in-ssh-config\" <branch> --secret \"path/to/secret.js\"" 1>&2
+}
+
 # If there is no remote server to bootstrap on, then complain and leave
 target_host="$1"
-if test "$target_host" = ""; then
+shift
+if test "$target_host" = "" || test "${target_host:0:1}" = "-"; then
   echo "Target host was not set. Please pass it as an argument to \`$0\`" 1>&2
-  echo "Usage: $0 \"name-of-host-in-ssh-config\" <branch>" 1>&2
+  echo_usage
   exit 1
 fi
-branch="$2"
-if test "$branch" = ""; then
+branch="$1"
+if test "$branch" = "" || test "${branch:0:1}" = "-"; then
   branch="master"
+fi
+
+# Parse remaining arguments
+while true; do
+  case "$1" in
+    --secret) shift; export secret_path="$1"; shift || break;;
+    *) break;;
+  esac
+done
+
+# If we don't have a secret file, then complain and leave
+if test "$secret_path" = ""; then
+  echo "Path to secret config was not set. Please pass it as an argument (\`--secret\`) to \`$0\`" 1>&2
+  echo_usage
+  exit 1
 fi
 
 # Output future commands
@@ -50,11 +71,15 @@ ssh "mkdir $base_target_dir"
 # Expanded -havz is `--human-readable --archive --verbose --compress`
 rsync --human-readable --archive --verbose --compress "twolfson.com" "$target_host":"$target_dir"
 
+# Upload our secret config
+rsync --human-readable --archive --verbose --compress "$secret_path" "$target_host":"$target_dir/config/secret.js"
+
+exit 1
+
 # On the remote server, install our dependencies
 # DEV: We perform this on the server to prevent inconsistencies between development and production
 # TODO: Move to `bin/deploy-install.sh`
 ssh -A "$target_host" "cd $target_dir && npm install"
-# TODO: Add missing key file
 
 # Replace our existing `main` server with the new one
 # DEV: We use `--no-dereference` to prevent creating a symlink in the existing `main` directory
