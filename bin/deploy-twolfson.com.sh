@@ -57,14 +57,14 @@ git checkout "$branch"
 cd ../
 
 # Find a timestamp to use for our deploy
-timestamp="$(ssh "date --utc +%Y%m%d.%H%M%S.%N")"
+timestamp="$(ssh "$target_host" "date --utc +%Y%m%d.%H%M%S.%N")"
 # TODO: Consider tagging repository
 base_target_dir="/home/ubuntu/twolfson.com"
 target_dir="$base_target_dir/$timestamp"
 main_target_dir="$base_target_dir/main"
 
 # Generate a folder to upload our server to
-ssh "mkdir $base_target_dir"
+ssh "$target_host" "mkdir $base_target_dir"
 
 # Upload our server files
 # TODO: Consider deleting `.git`
