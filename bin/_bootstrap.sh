@@ -164,7 +164,10 @@ if test "$(cat /etc/supervisord.conf 2> /dev/null)" != "$(cat "$data_dir/etc/sup
   install_supervisord_conf
 
   # Load supervisor config changes
-  supervisorctl update
+  # DEV: We need to access socket as root user
+  # DEV: This command might fail if we change anything with `supervisor.d's` config
+  #   Be sure to use `/etc/init.d/supervisord restart` in that case
+  sudo supervisorctl update
 fi
 
 # Update sshd config
