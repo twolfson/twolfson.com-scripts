@@ -24,7 +24,7 @@ describe "Supervisor" do
   end
 
   it "has expected permissions for supervisor config" do
-    supervisor_conf_file = file("/etc/supervisor.conf")
+    supervisor_conf_file = file("/etc/supervisord.conf")
     expect(supervisor_conf_file.mode).to(eq((USER_RW | GROUP_R | OTHER_R).to_s(8)))
     expect(supervisor_conf_file.owner).to(eq(ROOT_USER))
     expect(supervisor_conf_file.group).to(eq(ROOT_GROUP))
@@ -34,7 +34,7 @@ describe "Supervisor" do
     supervisor_init_d_file = file("/etc/init.d/supervisord")
     expect(supervisor_init_d_file.content).to(include("NAME=supervisord"))
     expect(supervisor_init_d_file.content).to(include("PIDFILE=/var/run/$NAME.pid"))
-    supervisor_conf_file = file("/etc/supervisor.conf")
+    supervisor_conf_file = file("/etc/supervisord.conf")
     expect(supervisor_conf_file.content).to(include("pidfile=/var/run/supervisord.pid"))
   end
 end
