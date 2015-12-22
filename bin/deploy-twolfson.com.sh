@@ -38,7 +38,7 @@ if test "$secret_path" = ""; then
 fi
 
 # Resolve the full path for secret
-secret_path="$(cd "$(dirname "$secret_path")" && pwd)"
+secret_path="$(readlink -f "$secret_path")"
 
 # Output future commands
 set -x
