@@ -9,6 +9,16 @@ describe "Supervisor" do
     expect(supervisor_version_result.stdout.strip()).to(eq("3.2.0"))
   end
 
+  it "has automatic start setup for supervisord" do
+    expect(file("/etc/rc0.d/K20supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc1.d/K20supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc2.d/S20supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc3.d/S20supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc4.d/S20supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc5.d/S20supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc6.d/K20supervisord").link_target).to(eq("../init.d/supervisord"))
+  end
+
   it "has expected permissions for log directory" do
     supervisor_log_dir = file("/var/log/supervisor")
     expect(supervisor_log_dir.mode).to(eq((USER_RWX | GROUP_RX | OTHER_RX).to_s(8)))
