@@ -126,7 +126,7 @@ if test "$(getent passwd sync | cut -f 7 -d ":")" != "/usr/sbin/nologin"; then
 fi
 
 # If supervisor is not installed, then install it
-if ! which supervisor &> /dev/null; then
+if ! which supervisorctl &> /dev/null; then
   # Install supervisor
   # TODO: Test me (which, version)
   sudo pip install "supervisor==3.2.0"
