@@ -143,11 +143,17 @@ if ! which supervisor &> /dev/null; then
 fi
 
 # If we have a new config for supervisor, then update ourselves
-# https://github.com/Supervisor/initscripts/blob/master/ubuntu#L39
-# http://serverfault.com/a/96500
-# http://supervisord.org/running.html?highlight=startup#running-supervisord-automatically-on-startup
-# https://github.com/Supervisor/initscripts
-if test "$(cat /etc/supervisor.conf)"
+if test "$(cat /etc/supervisor.conf 2> /dev/null)" != "$(cat "$data_dir/etc/supervisor.conf")"; then
+  # Copy over the new config file
+  # TODO: Test me (permissions)
+  sudo chown root:root "$data_dir/etc/supervisor.conf"
+  sudo chmod u=rw,g=r,o=r "$data_dir/etc/supervisor.conf"
+  # TODO: Make sure `pidfile` lines up with `/etc/init.d`
+  sudo cp --preserve "$data_dir/etc/supervisor.conf" /etc/supervisor.conf
+
+  # Load supervisor config changes
+  supervisorctl update
+fi
 
 # Update sshd config
 # WARNING: THIS WILL LOCK OUT THE ROOT USER
