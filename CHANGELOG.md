@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.6.0 - Added `twolfson.com` deploy script
+
 1.5.0 - Added `twolfson.com` to Supervisor
 
 1.4.0 - Added Supervisor for process management
