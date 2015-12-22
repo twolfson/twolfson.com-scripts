@@ -49,3 +49,30 @@ ssh "mkdir $base_target_dir"
 # TODO: Consider deleting `.git`
 # Expanded -havz is `--human-readable --archive --verbose --compress`
 rsync --human-readable --archive --verbose --compress "twolfson.com" "$target_host":"$target_dir"
+
+# On the remote server, install our dependencies
+# DEV: We perform this on the server to prevent inconsistencies between development and production
+# TODO: Move to `bin/deploy-install.sh`
+ssh -A "$target_host" "cd $target_dir && npm install"
+# TODO: Add missing key file
+
+# Replace our existing `main` server with the new one
+# DEV: We use `--no-dereference` to prevent creating a symlink in the existing `main` directory
+# DEV: We use a local relative target to make the symlink portable
+#   ln --symbolic 20151222.073547.761299235 twolfson.com/main
+#   twolfson.com/main -> 20151222.073547.761299235
+# TODO: Add health check (verify server is running) and load balance before swap
+ssh "$target_host" <<EOF
+# Exit upon first error and echo commands
+set -e
+set -x
+
+# Swap directories
+ln --symbolic --force --no-dereference "$target_dir" "$main_target_dir"
+
+# Restart our server
+sudo supervisorctl restart twolfson.com-server
+EOF
+
+# Notify the user of success
+echo "Server restarted. Please manually verify the server is running at http://twolfson.com/"
