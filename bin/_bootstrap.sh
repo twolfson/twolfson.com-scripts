@@ -87,7 +87,7 @@ if ! which nginx &> /dev/null; then
 fi
 
 # If there are no NGINX configuration files, then install them
-if test "$(cat /etc/nginx/conf.d/twolfson.com.conf 2> /dev/null)" != "$(cat "$data_dir/etc/nginx/conf.d/twolfson.com.conf")") ||
+if test "$(cat /etc/nginx/conf.d/twolfson.com.conf 2> /dev/null)" != "$(cat "$data_dir/etc/nginx/conf.d/twolfson.com.conf")" ||
     test "$(cat /etc/nginx/nginx.conf 2> /dev/null)" != "$(cat "$data_dir/etc/nginx/nginx.conf")"; then
   # Install our configurations
   sudo chown root:root "$data_dir/etc/nginx/conf.d/twolfson.com.conf"
