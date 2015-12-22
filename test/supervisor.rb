@@ -6,7 +6,7 @@ describe "Supervisor" do
   it "is installed" do
     supervisor_version_result = command("supervisorctl version")
     expect(supervisor_version_result.exit_status).to(eq(0))
-    expect(supervisor_version_result.stdout.strip()).to(eq("3.2.0")
+    expect(supervisor_version_result.stdout.strip()).to(eq("3.2.0"))
   end
 
   it "has expected permissions for log directory" do
