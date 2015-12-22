@@ -143,13 +143,13 @@ if ! which supervisorctl &> /dev/null; then
 fi
 
 # If we have a new config for supervisor, then update ourselves
-if test "$(cat /etc/supervisor.conf 2> /dev/null)" != "$(cat "$data_dir/etc/supervisor.conf")"; then
+if test "$(cat /etc/supervisord.conf 2> /dev/null)" != "$(cat "$data_dir/etc/supervisord.conf")"; then
   # Copy over the new config file
   # TODO: Test me (permissions)
-  sudo chown root:root "$data_dir/etc/supervisor.conf"
-  sudo chmod u=rw,g=r,o=r "$data_dir/etc/supervisor.conf"
+  sudo chown root:root "$data_dir/etc/supervisord.conf"
+  sudo chmod u=rw,g=r,o=r "$data_dir/etc/supervisord.conf"
   # TODO: Make sure `pidfile` lines up with `/etc/init.d`
-  sudo cp --preserve "$data_dir/etc/supervisor.conf" /etc/supervisor.conf
+  sudo cp --preserve "$data_dir/etc/supervisord.conf" /etc/supervisord.conf
 
   # Load supervisor config changes
   supervisorctl update
