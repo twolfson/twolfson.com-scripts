@@ -127,7 +127,19 @@ fi
 
 # If supervisor is not installed, then install it
 if ! which supervisor &> /dev/null; then
+  # Install supervisor
+  # TODO: Test me (which, version)
   sudo pip install "supervisor==3.2.0"
+
+  # Add `init` script
+  # http://supervisord.org/running.html#running-supervisord-automatically-on-startup
+  # http://serverfault.com/a/96500
+  # TODO: Test me (permissions)
+  sudo chown root:root "$data_dir/etc/init.d/supervisord"
+  sudo chmod u=rwx,g=rx,o=rx "$data_dir/etc/init.d/supervisord"
+  sudo cp --preserve "$data_dir/etc/init.d/supervisord" /etc/init.d/supervisord
+  sudo /etc/init.d/supervisord start
+  sudo update-rc.d supervisord defaults
 fi
 
 # If we have a new config for supervisor, then update ourselves
