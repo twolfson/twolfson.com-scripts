@@ -75,12 +75,11 @@ ssh "$target_host" "mkdir -p $base_target_dir"
 # Upload our server files
 # TODO: Consider deleting `.git`
 # Expanded -havz is `--human-readable --archive --verbose --compress`
-rsync --human-readable --archive --verbose --compress "twolfson.com" "$target_host":"$target_dir"
+# DEV: We use trailing slashes to force uploading into non-nested directories
+rsync --human-readable --archive --verbose --compress "twolfson.com/" "$target_host":"$target_dir/"
 
 # Upload our secret config
 rsync --human-readable --archive --verbose --compress "$secret_path" "$target_host":"$target_dir/config/secret.js"
-
-exit 1
 
 # On the remote server, install our dependencies
 # DEV: We perform this on the server to prevent inconsistencies between development and production
