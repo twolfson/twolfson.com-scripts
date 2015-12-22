@@ -37,6 +37,9 @@ if test "$secret_path" = ""; then
   exit 1
 fi
 
+# Resolve the full path for secret
+secret_path="$(cd "$(dirname "$secret_path")" && pwd)"
+
 # Output future commands
 set -x
 
@@ -66,7 +69,8 @@ target_dir="$base_target_dir/$timestamp"
 main_target_dir="$base_target_dir/main"
 
 # Generate a folder to upload our server to
-ssh "$target_host" "mkdir $base_target_dir"
+# DEV: We use `-p` to avoid "File exists" issues
+ssh "$target_host" "mkdir -p $base_target_dir"
 
 # Upload our server files
 # TODO: Consider deleting `.git`
