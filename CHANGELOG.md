@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.7.0 - Consolidated and repaired SSL configuration for twolfson.com
+
 1.6.0 - Added `twolfson.com` deploy script
 
 1.5.0 - Added `twolfson.com` to Supervisor
