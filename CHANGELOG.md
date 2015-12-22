@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.4.0 - Added Supervisor for process management
+
 1.3.3 - Repaired chown's not sticking during Vagrant bootstrap
 
 1.3.2 - Repaired `bootstrap-remote.sh` for non-root user
