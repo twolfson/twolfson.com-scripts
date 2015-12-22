@@ -134,11 +134,9 @@ install_supervisord_conf () {
 # If supervisor is not installed, then install it
 if ! which supervisorctl &> /dev/null; then
   # Install supervisor
-  # TODO: Test me (which, version)
   sudo pip install "supervisor==3.2.0"
 
   # Create folder for log files
-  # TODO: Test me (permissions)
   sudo mkdir --mode u=rwx,g=rx,o=rx /var/log/supervisor
   sudo chown root:root /var/log/supervisor
   sudo chmod u=rwx,g=rx,o=rx /var/log/supervisor
@@ -149,7 +147,6 @@ if ! which supervisorctl &> /dev/null; then
   # Add `init` script
   # http://supervisord.org/running.html#running-supervisord-automatically-on-startup
   # http://serverfault.com/a/96500
-  # TODO: Test me (permissions)
   sudo chown root:root "$data_dir/etc/init.d/supervisord"
   sudo chmod u=rwx,g=rx,o=rx "$data_dir/etc/init.d/supervisord"
   sudo cp --preserve "$data_dir/etc/init.d/supervisord" /etc/init.d/supervisord
@@ -160,7 +157,6 @@ fi
 # If we have a new config for supervisor, then update ourselves
 if test "$(cat /etc/supervisord.conf 2> /dev/null)" != "$(cat "$data_dir/etc/supervisord.conf")"; then
   # Copy over the new config file
-  # TODO: Test me (permissions)
   install_supervisord_conf
 
   # Load supervisor config changes
