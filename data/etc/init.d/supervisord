@@ -30,7 +30,8 @@
 . /lib/lsb/init-functions
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=/usr/bin/supervisord
+# Updated to `pip` installed `supervisord` path (`which supervisord`)
+DAEMON=/usr/local/bin/supervisord
 SUPERVISORCTL=/usr/bin/supervisorctl
 NAME=supervisord
 DESC=supervisor
@@ -48,7 +49,8 @@ DODTIME=5                   # Time to wait for the server to die, in seconds
 if [ -f /etc/default/supervisor ] ; then
     . /etc/default/supervisor
 fi
-DAEMON_OPTS="-c /etc/supervisor/supervisord.conf $DAEMON_OPTS"
+# Use supervisord.conf as document
+DAEMON_OPTS="-c /etc/supervisord.conf $DAEMON_OPTS"
 
 set -e
 

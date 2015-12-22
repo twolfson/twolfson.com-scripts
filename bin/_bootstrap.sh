@@ -125,11 +125,26 @@ if test "$(getent passwd sync | cut -f 7 -d ":")" != "/usr/sbin/nologin"; then
   sudo usermod --shell /usr/sbin/nologin sync
 fi
 
+install_supervisord_conf () {
+  sudo chown root:root "$data_dir/etc/supervisord.conf"
+  sudo chmod u=rw,g=r,o=r "$data_dir/etc/supervisord.conf"
+  sudo cp --preserve "$data_dir/etc/supervisord.conf" /etc/supervisord.conf
+}
+
 # If supervisor is not installed, then install it
 if ! which supervisorctl &> /dev/null; then
   # Install supervisor
   # TODO: Test me (which, version)
   sudo pip install "supervisor==3.2.0"
+
+  # Create folder for log files
+  # TODO: Test me (permissions)
+  sudo mkdir --mode u=rwx,g=rx,o=rx /var/log/supervisor
+  sudo chown root:root /var/log/supervisor
+  sudo chmod u=rwx,g=rx,o=rx /var/log/supervisor
+
+  # Copy over supervisord conf
+  install_supervisord_conf
 
   # Add `init` script
   # http://supervisord.org/running.html#running-supervisord-automatically-on-startup
@@ -146,10 +161,7 @@ fi
 if test "$(cat /etc/supervisord.conf 2> /dev/null)" != "$(cat "$data_dir/etc/supervisord.conf")"; then
   # Copy over the new config file
   # TODO: Test me (permissions)
-  sudo chown root:root "$data_dir/etc/supervisord.conf"
-  sudo chmod u=rw,g=r,o=r "$data_dir/etc/supervisord.conf"
-  # TODO: Make sure `pidfile` lines up with `/etc/init.d`
-  sudo cp --preserve "$data_dir/etc/supervisord.conf" /etc/supervisord.conf
+  install_supervisord_conf
 
   # Load supervisor config changes
   supervisorctl update
