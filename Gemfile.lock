@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/twolfson/serverspec.git
-  revision: 1533623971c5d55cccea9991f60c4317cdc2ce61
-  ref: 1533623
+  revision: 11a834c7bbf8709917aea2fff18b27b43b7769fb
+  ref: 11a834c
   specs:
     serverspec (2.24.3)
       multi_json
