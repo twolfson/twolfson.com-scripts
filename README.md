@@ -104,6 +104,27 @@ Host digital-my-server
 
 [data/home/ubuntu/.ssh/authorized_keys]: data/home/ubuntu/.ssh/authorized_keys
 
+### Updating a server configuration
+We reuse our provisioning script for managing server state. As a result, we can reuse it for updates:
+
+```bash
+bin/bootstrap-remote.sh digital-my-server
+
+# If we need to use a non-master ref, then pass it as a second parameter
+# bin/deploy-twolfson.com.sh digital-my-server dev/new.feature
+
+```
+
+### Deploying a service
+To deploy a service, use its respective `bin/deploy-*.sh` script. Here's an example with `twolfson.com`:
+
+```bash
+bin/deploy-twolfson.com.sh digital-my-server
+
+# If we need to deploy a non-master ref, then pass as a second parameter
+# bin/deploy-twolfson.com.sh digital-my-server dev/new.feature
+```
+
 ### Testing
 As mentioned in the high level overview, we use [Serverspec][] for testing. This is a [Ruby][] gem so you will need it installed to run our tests:
 
