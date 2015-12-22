@@ -32,6 +32,7 @@ As a high level overview of our setup, we use the following:
 - [Digital Ocean][] for hosting our servers
 - [AWS][] for DNS management via [Route 53][]
 - [Google Apps][] for email management
+- [Supervisor][] for process management
 - Metrics
     - Currently, we only have Digital Ocean for metrics
 - Monitoring
@@ -42,6 +43,7 @@ As a high level overview of our setup, we use the following:
 [AWS]: https://aws.amazon.com/
 [Route 53]: https://aws.amazon.com/route53/
 [Google Apps]: https://apps.google.com/
+[Supervisor]: https://github.com/Supervisor/supervisor
 [UptimeRobot]: https://uptimerobot.com/
 [VisualPing]: https://visualping.io/
 
