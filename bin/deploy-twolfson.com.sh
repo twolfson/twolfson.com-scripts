@@ -16,8 +16,10 @@ if test "$target_host" = "" || test "${target_host:0:1}" = "-"; then
   exit 1
 fi
 branch="$1"
+git_depth_flag=""
 if test "$branch" = "" || test "${branch:0:1}" = "-"; then
   branch="master"
+  git_depth_flag="--depth 1"
 fi
 
 # Parse remaining arguments
@@ -47,7 +49,7 @@ cd tmp/build/
 
 # Clone our repository for a fresh start
 # DEV: This is to prevent using accidentally dirty `data/`
-git clone git@github.com:twolfson/twolfson.com.git
+git clone $git_depth_flag git@github.com:twolfson/twolfson.com.git
 cd twolfson.com/
 
 # Checkout the requested branch
