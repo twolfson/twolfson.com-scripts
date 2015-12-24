@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.10.0 - Repaired timezone issue on Digital Ocean
+
 1.9.0 - Patched Logjam vulnerability
 
 1.8.1 - Enabled gzip compression for all files on `drive.twolfson.com`
