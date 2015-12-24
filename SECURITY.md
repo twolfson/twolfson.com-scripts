@@ -15,3 +15,12 @@ We have gone out of our way to patch the following CVE's:
 - [x] POODLE - Patched by restricting SSL methods used by NGINX
     - https://access.redhat.com/articles/1232123
     - https://cipherli.st/
+- [x] Logjam - Patched by using new Diffie-Hellman group
+    - https://weakdh.org/sysadmin.html
+
+## Tools
+We rely on the following tools to keep up to date with new vulnerabilities:
+
+- [PatrolServer][] - Monitors server externally
+
+[PatrolServer]: http://patrolserver.com/
