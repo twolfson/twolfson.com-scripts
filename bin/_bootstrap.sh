@@ -88,11 +88,15 @@ fi
 
 # If there are no NGINX configuration files, then install them
 if test "$(cat /etc/nginx/conf.d/twolfson.com.conf 2> /dev/null)" != "$(cat "$data_dir/etc/nginx/conf.d/twolfson.com.conf")" ||
+    test "$(cat /etc/nginx/conf.d/drive.twolfson.com.conf 2> /dev/null)" != "$(cat "$data_dir/etc/nginx/conf.d/drive.twolfson.com.conf")" ||
     test "$(cat /etc/nginx/nginx.conf 2> /dev/null)" != "$(cat "$data_dir/etc/nginx/nginx.conf")"; then
   # Install our configurations
   sudo chown root:root "$data_dir/etc/nginx/conf.d/twolfson.com.conf"
   sudo chmod u=rw,g=r,o=r "$data_dir/etc/nginx/conf.d/twolfson.com.conf"
   sudo cp --preserve "$data_dir/etc/nginx/conf.d/twolfson.com.conf" /etc/nginx/conf.d/twolfson.com.conf
+  sudo chown root:root "$data_dir/etc/nginx/conf.d/drive.twolfson.com.conf"
+  sudo chmod u=rw,g=r,o=r "$data_dir/etc/nginx/conf.d/drive.twolfson.com.conf"
+  sudo cp --preserve "$data_dir/etc/nginx/conf.d/drive.twolfson.com.conf" /etc/nginx/conf.d/drive.twolfson.com.conf
   sudo chown root:root "$data_dir/etc/nginx/nginx.conf"
   sudo chmod u=rw,g=r,o=r "$data_dir/etc/nginx/nginx.conf"
   sudo cp --preserve "$data_dir/etc/nginx/nginx.conf" /etc/nginx/nginx.conf
