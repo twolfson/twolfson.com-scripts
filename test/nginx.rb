@@ -69,4 +69,18 @@ describe "NGINX" do
       "twolfson.com.conf",
     ].join("\n") + "\n"))
   end
+
+  it "has a locked down folder for www static files" do
+    www_dir = file("/var/www")
+    expect(www_dir.mode).to(eq((USER_RWX | GROUP_RX | OTHER_RX).to_s(8)))
+    expect(www_dir.owner).to(eq(ROOT_USER))
+    expect(www_dir.group).to(eq(ROOT_GROUP))
+  end
+
+  it "has a folder for drive.twolfson.com" do
+    drive_twolfson_com_dir = file("/var/www/drive.twolfson.com")
+    expect(drive_twolfson_com_dir.mode).to(eq((USER_RWX | GROUP_RX | OTHER_RX).to_s(8)))
+    expect(drive_twolfson_com_dir.owner).to(eq(UBUNTU_USER))
+    expect(drive_twolfson_com_dir.group).to(eq(UBUNTU_GROUP))
+  end
 end

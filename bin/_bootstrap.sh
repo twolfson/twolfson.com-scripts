@@ -114,6 +114,18 @@ if test "$(ls /etc/nginx/sites-enabled)" != ""; then
   sudo /etc/init.d/nginx reload
 fi
 
+# If there is no folder for drive.twolfson.com, then create one
+if ! test -d /var/www; then
+  sudo mkdir --mode u=rwx,g=rx,o=rx /var/www
+  sudo chown root:root /var/www
+  sudo chmod u=rwx,g=rx,o=rx /var/www
+fi
+if ! test -d /var/www/drive.twolfson.com; then
+  sudo mkdir --mode u=rwx,g=rx,o=rx /var/www/drive.twolfson.com
+  sudo chown ubuntu:ubuntu /var/www/drive.twolfson.com
+  sudo chmod u=rwx,g=rx,o=rx /var/www/drive.twolfson.com
+fi
+
 # If the root user has a non-nologin login shell, update it
 # https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L53-L55
 # https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L61-L63
