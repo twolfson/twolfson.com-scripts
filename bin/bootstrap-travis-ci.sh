@@ -41,6 +41,7 @@ if ! test -f /etc/ssl/certs/twolfson.com.crt; then
 fi
 
 # If we haven't set up a Diffie-Hellman group, then create and install it
+# https://weakdh.org/sysadmin.html
 if ! test -f /etc/ssl/private/dhparam.pem; then
   openssl dhparam -out dhparam.pem 2048
   sudo mv dhparam.pem /etc/ssl/private/dhparam.pem
