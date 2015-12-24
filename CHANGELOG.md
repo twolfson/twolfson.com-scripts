@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.8.0 - Added `drive.twolfson.com` to NGINX
+
 1.7.0 - Consolidated and repaired SSL configuration for twolfson.com
 
 1.6.0 - Added `twolfson.com` deploy script
