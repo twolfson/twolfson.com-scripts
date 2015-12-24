@@ -4,7 +4,7 @@ set -e
 
 # If there is no remote server to build to, then complain and leave
 # DEV: We support `TARGET_HOST="my-user@127.0.0.1"` as well but that's inconsistent with `test-remote.sh`
-usage_str="Usage: $0 \"name-of-host-in-ssh-config\" --crt \"path/to/domain.crt\" --key \"path/to/domain.key\""
+usage_str="Usage: $0 \"name-of-host-in-ssh-config\" --crt \"path/to/domain.crt\" --key \"path/to/domain.key\" --dhparam \"path/to/dhparam.pem\""
 target_host="$1"
 shift
 if test "$target_host" = "" || test "${target_host:0:1}" = "-"; then
@@ -21,6 +21,7 @@ while true; do
     # DEV: We can dodge `&&` since we are using `set -e`
     --crt) shift; export crt_path="$1"; shift || break;;
     --key) shift; export key_path="$1"; shift || break;;
+    --dhparam) shift; export dhparam_path="$1"; shift || break;;
     *) break;;
   esac
 done
@@ -36,6 +37,11 @@ if test "$crt_path" = ""; then
   echo "$usage_str" 1>&2
   exit 1
 fi
+if test "$dhparam_path" = ""; then
+  echo "Diffie-Hellman group was not set. Please pass it as an argument (\`--dhparam\`) to \`$0\`" 1>&2
+  echo "$usage_str" 1>&2
+  exit 1
+fi
 
 # Output all future commands
 set -x
@@ -44,6 +50,7 @@ set -x
 # DEV: We use 0000 to prevent our own user from reading its contents
 rsync -havz --chmod=0000 "$crt_path" "$target_host":"twolfson.com.crt"
 rsync -havz --chmod=0000 "$key_path" "$target_host":"twolfson.com.key"
+rsync -havz --chmod=0000 "$dhparam_path" "$target_host":"dhparam.pem"
 
 # Correct permissions and relocate our files
 ssh "$target_host" <<EOF
@@ -52,11 +59,12 @@ set -e
 set -x
 
 # Install our new certificates
-sudo chown root:root twolfson.com.crt twolfson.com.key
+sudo chown root:root twolfson.com.crt twolfson.com.key dhparam.pem
 sudo chmod u=rwx,g=rwx,o=rwx twolfson.com.crt
-sudo chmod u=r,g=,o= twolfson.com.key
+sudo chmod u=r,g=,o= twolfson.com.key dhparam.pem
 sudo mv twolfson.com.crt /etc/ssl/certs/twolfson.com.crt
 sudo mv twolfson.com.key /etc/ssl/private/twolfson.com.key
+sudo mv dhparam.pem /etc/ssl/private/dhparam.pem
 
 # Reload NGINX with them
 sudo /etc/init.d/nginx reload
