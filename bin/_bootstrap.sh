@@ -23,6 +23,12 @@ if ! test -f .updated-apt-get; then
   touch .updated-apt-get
 fi
 
+# If the timezone isn't as we expect, then update it now
+# https://www.digitalocean.com/community/questions/how-to-change-the-timezone-on-ubuntu-14
+if test "$(date +"%z")" != "+0000"; then
+  sudo dpkg-reconfigure tzdata
+fi
+
 # If there is no ubuntu user, then create them
 # DEV: Digital Ocean's Ubuntu images provision us as the root user so we must create an ubuntu user
 # https://github.com/mizzy/specinfra/blob/v2.47.0/lib/specinfra/command/base/user.rb#L3-L5
