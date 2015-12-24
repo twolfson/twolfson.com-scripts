@@ -92,9 +92,9 @@ Host digital-my-server
     HostName 127.0.0.1
 ```
 
-- Install our SSL certificates to the server
-    - `bin/install-ssl-certificates-remote.sh digital-my-server --crt path/to/my-domain.crt --key path/to/my-domain.key`
-    - If you are trying to get a replica working (e.g. don't have these certificates), then self-signed ones can be generated via the `openssl` command in `bin/bootstrap-vagrant.sh`
+- Install our SSL certificates and Diffie-Hellman group to the server
+    - `bin/install-ssl-certificates-remote.sh digital-my-server --crt path/to/my-domain.crt --key path/to/my-domain.key --dhparam path/to/dhparam.pem`
+    - If you are trying to get a replica working (e.g. don't have these certificates), then self-signed certificates and a `dhparam.pem` can be generated via the `openssl` commands in `bin/bootstrap-vagrant.sh`
 - Bootstrap our server
     - `bin/bootstrap-remote.sh digital-my-server`
 - Update `~/.ssh/config` to use `User ubuntu` instead of `User root`
