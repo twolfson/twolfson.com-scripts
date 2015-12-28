@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.11.0 - Added NGINX configuration for `twolfsn.com`
+
 1.10.0 - Repaired timezone issue on Digital Ocean
 
 1.9.0 - Patched Logjam vulnerability
