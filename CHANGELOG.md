@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.12.0 - Moved `deploy-twolfson.com.sh` from `npm install` to `deploy-install.sh`
+
 1.11.0 - Added NGINX configuration for `twolfsn.com`
 
 1.10.0 - Repaired timezone issue on Digital Ocean
