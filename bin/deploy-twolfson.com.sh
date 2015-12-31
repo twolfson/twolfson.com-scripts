@@ -20,6 +20,8 @@ git_depth_flag=""
 if test "$branch" = "" || test "${branch:0:1}" = "-"; then
   branch="master"
   git_depth_flag="--depth 1"
+else
+  shift
 fi
 
 # Parse remaining arguments
