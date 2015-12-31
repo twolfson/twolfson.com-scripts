@@ -83,8 +83,7 @@ rsync --human-readable --archive --verbose --compress "$secret_path" "$target_ho
 
 # On the remote server, install our dependencies
 # DEV: We perform this on the server to prevent inconsistencies between development and production
-# TODO: Move to `bin/deploy-install.sh`
-ssh -A "$target_host" "cd $target_dir && npm install"
+ssh -A "$target_host" "cd $target_dir && bin/deploy-install.sh"
 
 # Replace our existing `main` server with the new one
 # DEV: We use `--no-dereference` to prevent creating a symlink in the existing `main` directory
