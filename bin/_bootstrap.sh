@@ -24,6 +24,8 @@ if ! which ruby-install &> /dev/null; then
 fi
 
 # If we haven't updated apt-get, then update it now
+# TODO: Consider a CLI flag to install external Ruby or not
+#   http://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.2.4
 # DEV: Required for `ruby-install`
 if ! test -f .updated-apt-get; then
   sudo apt-get update
