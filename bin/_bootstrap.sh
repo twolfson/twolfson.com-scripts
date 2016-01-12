@@ -17,6 +17,8 @@ fi
 # If chef-zero isn't installed, then install it
 # TODO: Handle misaligned versions
 if ! which chef-zero &> /dev/null; then
+  # TODO: Due to Ruby version mismatch, maybe we should switch to `apt` install?
+  #   or maybe use a `chruby`
   sudo gem install chef-zero --version 4.4.0
 fi
 
