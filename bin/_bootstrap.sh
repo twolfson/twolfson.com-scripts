@@ -32,17 +32,14 @@ fi
 
 # If we haven't installed ruby@2.x.x, then install it
 # DEV: Required for `chef-zero` due to `ruby>=2.0.0` dependency
-# TODO: Figure out `if`
-if true; then
+if ! test -d /home/vagrant/.rubies/ruby-2.2.4; then
   ruby-install ruby 2.2.4
 fi
 
 # If chef-zero isn't installed, then install it
 # TODO: Handle misaligned versions
-if ! which chef-zero &> /dev/null; then
-  # TODO: Due to Ruby version mismatch, maybe we should switch to `apt` install?
-  #   or maybe use a `chruby`
-  sudo gem install chef-zero --version 4.4.0
+if ! test -f ~/.rubies/ruby-2.2.4/bin/chef-zero; then
+  ~/.rubies/ruby-2.2.4/bin/gem install chef-zero --version 4.4.0
 fi
 
 # TODO: Remove me when Chef dev is over
