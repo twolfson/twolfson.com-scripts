@@ -14,6 +14,29 @@ if test "$data_dir" = ""; then
   exit 1
 fi
 
+# If ruby-install isn't installed, then install it
+# DEV: Required for `chef-zero` due to `ruby>=2.0.0` dependency
+if ! which ruby-install &> /dev/null; then
+  wget -O ruby-install-0.6.0.tar.gz https://github.com/postmodern/ruby-install/archive/v0.6.0.tar.gz
+  tar -xzvf ruby-install-0.6.0.tar.gz
+  cd ruby-install-0.6.0/
+  sudo make install
+fi
+
+# If we haven't updated apt-get, then update it now
+# DEV: Required for `ruby-install`
+if ! test -f .updated-apt-get; then
+  sudo apt-get update
+  touch .updated-apt-get
+fi
+
+# If we haven't installed ruby@2.x.x, then install it
+# DEV: Required for `chef-zero` due to `ruby>=2.0.0` dependency
+# TODO: Figure out `if`
+if true; then
+  ruby-install ruby 2.2.4
+fi
+
 # If chef-zero isn't installed, then install it
 # TODO: Handle misaligned versions
 if ! which chef-zero &> /dev/null; then
