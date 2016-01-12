@@ -14,6 +14,12 @@ if test "$data_dir" = ""; then
   exit 1
 fi
 
+# If chef-zero isn't installed, then install it
+# TODO: Handle misaligned versions
+if ! which chef-zero &> /dev/null; then
+  sudo gem install chef-zero --version 4.4.0
+fi
+
 # TODO: Remove me when Chef dev is over
 echo "Development for Chef going on" 1>&2
 exit 0
