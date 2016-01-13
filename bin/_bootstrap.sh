@@ -15,33 +15,24 @@ if test "$data_dir" = ""; then
 fi
 
 # If `ruby@2.x.x` isn't installed, then install it
-# DEV: Required for `chef-zero` due to `ruby>=2.0.0` dependency
-# DEV: We have used the same layout as `ruby-install` but chosen to avoid it
-#   to minimize dependencies outside of Chef
-ruby2_dir="/opt/rubies/ruby-2.2.4"
-if ! test -d "$ruby2_dir"; then
-  # Download `ruby@2.2.4` prebuilt for Ubuntu@14.04 by Travis CI
-  # http://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.2.4
-  cd /tmp
-  wget https://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.2.4.tar.bz2
+if ! which ruby2.2.4 &> /dev/null; then
+  # https://www.brightbox.com/docs/ruby/ubuntu/
+  # Install tool for adding `apt` repositories
+  sudo apt-get install -y software-properties-common
 
-  # Verify SHA256 checksum
-  sha256_sum="0d79567bb6e8c5856ef64dc7847b0adb4fda7eab0a8c5ff210fa32717a25f775"
-  echo "$sha256_sum ruby-2.2.4.tar.bz2" | sha256sum --check -
-  tar xf ruby-2.2.4.tar.bz2
+  # Add our Ruby repository and update our sources
+  sudo apt-add-repository -y ppa:brightbox/ruby-ng
+  sudo apt-get update
 
-  # Install to `/opt/rubies` for consistency with `ruby-install`
-  # https://github.com/postmodern/ruby-install/blob/v0.6.0/share/ruby-install/ruby-install.sh
-  sudo chown -R root:root ruby-2.2.4
-  sudo -u root mkdir /opt/rubies
-  sudo mv ruby-2.2.4 /opt/rubies
+  # Install `ruby@2.x.x`
+  sudo apt-get install -y ruby2.2.4
 fi
 
-# If chef-zero isn't installed, then install it
-# TODO: Handle misaligned versions
-if ! test -f "$ruby2_dir/bin/chef-zero"; then
-  "$ruby2_dir/bin/gem" install chef-zero --version 4.4.0
-fi
+# # If chef-zero isn't installed, then install it
+# # TODO: Handle misaligned versions
+# if ! test -f "$ruby2_dir/bin/chef-zero"; then
+#   "$ruby2_dir/bin/gem" install chef-zero --version 4.4.0
+# fi
 
 # TODO: Remove me when Chef dev is over
 echo "Development for Chef going on" 1>&2
