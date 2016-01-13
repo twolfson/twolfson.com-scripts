@@ -18,14 +18,15 @@ fi
 if ! which ruby2.2.4 &> /dev/null; then
   # https://www.brightbox.com/docs/ruby/ubuntu/
   # Install tool for adding `apt` repositories
-  sudo apt-get install -y software-properties-common
+  sudo apt-get install -y "software-properties-common=0.92.37.2"
 
   # Add our Ruby repository and update our sources
   sudo apt-add-repository -y ppa:brightbox/ruby-ng
   sudo apt-get update
 
   # Install `ruby@2.x.x`
-  sudo apt-get install -y ruby2.2.4
+  # TODO: Assert Ruby version installed and chef-zero installed in tests?
+  sudo apt-get install -y "ruby2.2=2.2.4-1bbox1~trusty1"
 fi
 
 # # If chef-zero isn't installed, then install it
