@@ -8,6 +8,7 @@ base_dir="/vagrant"
 src_dir="/vagrant/data"
 target_dir="$HOME/data"
 data_dir="$target_dir"
+src_dir="/vagrant/src"
 
 # Copy our data to a non-shared directory to prevent permissions from getting messed up
 if test -d "$target_dir"; then

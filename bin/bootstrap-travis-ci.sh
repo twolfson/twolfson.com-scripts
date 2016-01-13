@@ -11,6 +11,7 @@ if test "$TRAVIS_BUILD_DIR" = ""; then
 fi
 base_dir="$TRAVIS_BUILD_DIR"
 data_dir="$base_dir/data"
+src_dir="$base_dir/src"
 
 # If we haven't set up SSL certificates, then generate and install them
 if ! test -f /etc/ssl/certs/twolfson.com.crt; then
