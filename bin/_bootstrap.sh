@@ -30,9 +30,9 @@ if ! which ruby2.2 &> /dev/null; then
   sudo apt-get install -y "ruby2.2-dev=2.2.4-1bbox1~trusty1"
 fi
 
-# If chef-zero isn't installed, then install it
-# TODO: Handle misaligned versions
-if ! test -f "$ruby2_dir/bin/chef-zero"; then
+# If chef-zero isn't installed or is on an older version, then install it
+if ! which chef-zero &> /dev/null ||
+    test "$(chef-zero --verison)" != "4.4.0"; then
   sudo gem2.2 install chef-zero --version 4.4.0
 fi
 
