@@ -22,9 +22,11 @@ if false; then
   # http://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.2.4
   cd /tmp
   wget https://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.2.4.tar.bz2
-  tar xzf ruby-2.2.4.tar.bz2
 
-  # TODO: Verify SHA1 checksum
+  # Verify SHA256 checksum
+  sha256_sum="0d79567bb6e8c5856ef64dc7847b0adb4fda7eab0a8c5ff210fa32717a25f775"
+  echo "$sha256_sum ruby-2.2.4.tar.bz2" | sha256sum --check -
+  tar xf ruby-2.2.4.tar.bz2
 
   # TODO: Install to `$PATH`?
 fi
