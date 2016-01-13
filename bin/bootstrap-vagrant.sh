@@ -5,16 +5,14 @@ set -x
 
 # Set up our data directory
 base_dir="/vagrant"
-src_dir="/vagrant/data"
-target_dir="$HOME/data"
-data_dir="$target_dir"
-src_dir="/vagrant/src"
+src_data_dir="/vagrant/data"
+target_data_dir="$HOME/data"
 
 # Copy our data to a non-shared directory to prevent permissions from getting messed up
-if test -d "$target_dir"; then
-  rm -r "$target_dir"
+if test -d "$target_data_dir"; then
+  rm -r "$target_data_dir"
 fi
-cp --preserve --recursive "$src_dir" "$target_dir"
+cp --preserve --recursive "$src_data_dir" "$target_data_dir"
 
 # If we haven't set up SSL certificates, then generate and install them
 if ! test -f /etc/ssl/certs/twolfson.com.crt; then
@@ -61,4 +59,6 @@ fi
 
 # Invoke bootstrap.sh in our context
 cd "$base_dir"
+data_dir="$target_data_dir"
+src_dir="/vagrant/src"
 . bin/_bootstrap.sh
