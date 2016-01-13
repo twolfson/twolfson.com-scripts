@@ -26,6 +26,9 @@ fi
 
 # Load and run our provisioners
 # TODO: Add missing tests for apt's update timestamp
+# TODO: It feels like we overly broke down our provisioner into too pedantic pieces
+#   Reconsider doing something like a `normalize.sh` (which sets up apt, users, supervisor, timezone)
+#   Then, maybe one for our node (e.g. require node, custom supervisorctl config, custom nginx configs)
 . src/apt.sh; apt_provisioner
 . src/system.sh; system_provisioner
 # TODO: Add missing tests for users provisioner
