@@ -16,8 +16,10 @@ fi
 
 # If `ruby@2.x.x` isn't installed, then install it
 # DEV: Required for `chef-zero` due to `ruby>=2.0.0` dependency
-# TODO: Figure out location -- prob keep it consistent with system `ruby-install`
-if false; then
+# DEV: We have used the same layout as `ruby-install` but chosen to avoid it
+#   to minimize dependencies outside of Chef
+ruby2_dir="/opt/rubies/ruby-2.2.4"
+if ! test -d "$ruby2_dir"; then
   # Download `ruby@2.2.4` prebuilt for Ubuntu@14.04 by Travis CI
   # http://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.2.4
   cd /tmp
@@ -28,14 +30,18 @@ if false; then
   echo "$sha256_sum ruby-2.2.4.tar.bz2" | sha256sum --check -
   tar xf ruby-2.2.4.tar.bz2
 
-  # TODO: Install to `$PATH`?
+  # Install to `/opt/rubies` for consistency with `ruby-install`
+  # https://github.com/postmodern/ruby-install/blob/v0.6.0/share/ruby-install/ruby-install.sh
+  sudo chown -R root:root ruby-2.2.4
+  sudo -u root mkdir /opt/rubies
+  sudo mv ruby-2.2.4 /opt/rubies
 fi
 
 # If chef-zero isn't installed, then install it
 # TODO: Handle misaligned versions
-# if ! test -f ~/.rubies/ruby-2.2.4/bin/chef-zero; then
-#   ~/.rubies/ruby-2.2.4/bin/gem install chef-zero --version 4.4.0
-# fi
+if ! test -f "$ruby2_dir/bin/chef-zero"; then
+  "$ruby2_dir/bin/gem" install chef-zero --version 4.4.0
+fi
 
 # TODO: Remove me when Chef dev is over
 echo "Development for Chef going on" 1>&2
