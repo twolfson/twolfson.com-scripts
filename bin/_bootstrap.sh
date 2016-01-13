@@ -33,7 +33,8 @@ fi
 # If chef-zero isn't installed or is on an older version, then install it
 if ! which chef-zero &> /dev/null ||
     test "$(chef-zero --verison)" != "4.4.0"; then
-  sudo gem2.2 install chef-zero --version 4.4.0
+  # sudo gem2.2 install chef-zero --version 4.4.0
+   sudo gem2.2 install chef-client --version 4.3.2
 fi
 
 # TODO: Remove me when Chef dev is over
