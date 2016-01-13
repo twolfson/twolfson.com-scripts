@@ -14,36 +14,26 @@ if test "$data_dir" = ""; then
   exit 1
 fi
 
-# If ruby-install isn't installed, then install it
+# If `ruby@2.x.x` isn't installed, then install it
 # DEV: Required for `chef-zero` due to `ruby>=2.0.0` dependency
-if ! which ruby-install &> /dev/null; then
-  wget -O ruby-install-0.6.0.tar.gz https://github.com/postmodern/ruby-install/archive/v0.6.0.tar.gz
-  tar -xzvf ruby-install-0.6.0.tar.gz
-  cd ruby-install-0.6.0/
-  sudo make install
-fi
+# TODO: Figure out location -- prob keep it consistent with system `ruby-install`
+if false; then
+  # Download `ruby@2.2.4` prebuilt for Ubuntu@14.04 by Travis CI
+  # http://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.2.4
+  cd /tmp
+  wget https://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.2.4.tar.bz2
+  tar xzf ruby-2.2.4.tar.bz2
 
-# If we haven't updated apt-get, then update it now
-# TODO: Consider a CLI flag to install external Ruby or not
-#   http://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.2.4
-# TODO: Also explore apt option -- seems dead. might be able to with another box but would prefer dodging system level
-# DEV: Required for `ruby-install`
-if ! test -f .updated-apt-get; then
-  sudo apt-get update
-  touch .updated-apt-get
-fi
+  # TODO: Verify SHA1 checksum
 
-# If we haven't installed ruby@2.x.x, then install it
-# DEV: Required for `chef-zero` due to `ruby>=2.0.0` dependency
-if ! test -d /home/vagrant/.rubies/ruby-2.2.4; then
-  ruby-install ruby 2.2.4
+  # TODO: Install to `$PATH`?
 fi
 
 # If chef-zero isn't installed, then install it
 # TODO: Handle misaligned versions
-if ! test -f ~/.rubies/ruby-2.2.4/bin/chef-zero; then
-  ~/.rubies/ruby-2.2.4/bin/gem install chef-zero --version 4.4.0
-fi
+# if ! test -f ~/.rubies/ruby-2.2.4/bin/chef-zero; then
+#   ~/.rubies/ruby-2.2.4/bin/gem install chef-zero --version 4.4.0
+# fi
 
 # TODO: Remove me when Chef dev is over
 echo "Development for Chef going on" 1>&2
