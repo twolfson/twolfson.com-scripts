@@ -15,40 +15,15 @@ if test "$data_dir" = ""; then
 fi
 
 # Load and run our provisioners
+# TODO: Add missing tests for apt's update timestamp
 . src/apt.sh; apt_provisioner
 . src/system.sh; system_provisioner
+# TODO: Add missing tests for users provisioner
 . src/users.sh; users_provisioner
-
-# Update authorized keys
-# DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
-sudo chown ubuntu:ubuntu "$data_dir/home/ubuntu/.ssh/authorized_keys"
-sudo chmod u=rw,g=,o= "$data_dir/home/ubuntu/.ssh/authorized_keys"
-sudo cp --preserve "$data_dir/home/ubuntu/.ssh/authorized_keys" /home/ubuntu/.ssh/authorized_keys
-# WARNING: THIS WILL LOCK OUT THE ROOT USER
-sudo chmod u=rwx,g=,o= "/root/.ssh"
-sudo chown root:root "$data_dir/root/.ssh/authorized_keys"
-sudo chmod u=rw,g=,o= "$data_dir/root/.ssh/authorized_keys"
-sudo cp --preserve "$data_dir/root/.ssh/authorized_keys" /root/.ssh/authorized_keys
-
-# If we haven't installed node, then set it up
-# https://github.com/nodesource/distributions/tree/96e9b7d40b6aff7ade7bc130d9e18fd140e9f4f8#installation-instructions
-# TODO: Handle out of date scenario
-#   https://github.com/twolfson/twolfson.com-scripts/blob/150de4af2778e577ca3d57dab74b6dd7a0e1a55f/bin/bootstrap.sh#L18-L24
-if ! which node &> /dev/null; then
-  curl -sL https://deb.nodesource.com/setup_0.10 | sudo -E bash -
-  sudo apt-get install -y "nodejs=0.10.41-1nodesource1~trusty1"
-fi
-
-# If pip isn't installed, then install it
-if ! which pip &> /dev/null; then
-  sudo apt-get install -y "python-setuptools=3.3-1ubuntu2" "python-pip=1.5.4-1ubuntu3"
-fi
-
-# If pip is out of date, then upgrade it
-if ! pip --version | grep "pip 7.1.2" &> /dev/null; then
-  sudo pip install "pip==7.1.2"
-  source ~/.bashrc
-fi
+# TODO: Relocate `ssh_provisioner` to bottom of our queue
+. src/ssh.sh; ssh_provisioner
+. src/node.sh; node_provisioner
+. src/python.sh; python_provisioner
 
 # If NGINX isn't installed, then set it up
 # TODO: Thinking about `apt-get` function to handle installs/updates
