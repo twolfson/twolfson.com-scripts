@@ -15,7 +15,8 @@ if test "$data_dir" = ""; then
 fi
 
 # If `ruby@2.x.x` isn't installed, then install it
-if ! which ruby2.2.4 &> /dev/null; then
+# # TODO: Handle misaligned versions
+if ! which ruby2.2 &> /dev/null; then
   # https://www.brightbox.com/docs/ruby/ubuntu/
   # Install tool for adding `apt` repositories
   sudo apt-get install -y "software-properties-common=0.92.37.2"
@@ -26,14 +27,14 @@ if ! which ruby2.2.4 &> /dev/null; then
 
   # Install `ruby@2.x.x`
   # TODO: Assert Ruby version installed and chef-zero installed in tests?
-  sudo apt-get install -y "ruby2.2=2.2.4-1bbox1~trusty1"
+  sudo apt-get install -y "ruby2.2-dev=2.2.4-1bbox1~trusty1"
 fi
 
-# # If chef-zero isn't installed, then install it
-# # TODO: Handle misaligned versions
-# if ! test -f "$ruby2_dir/bin/chef-zero"; then
-#   "$ruby2_dir/bin/gem" install chef-zero --version 4.4.0
-# fi
+# If chef-zero isn't installed, then install it
+# TODO: Handle misaligned versions
+if ! test -f "$ruby2_dir/bin/chef-zero"; then
+  sudo gem2.2 install chef-zero --version 4.4.0
+fi
 
 # TODO: Remove me when Chef dev is over
 echo "Development for Chef going on" 1>&2
