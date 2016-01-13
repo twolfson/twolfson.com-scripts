@@ -14,50 +14,10 @@ if test "$data_dir" = ""; then
   exit 1
 fi
 
-# If we haven't updated apt-get, then update it now
-# TODO: Use timestamp to update it on a schedule (e.g. 1 day)
-#   https://github.com/twolfson/twolfson.com-scripts/blob/150de4af2778e577ca3d57dab74b6dd7a0e1a55f/bin/bootstrap.sh#L6-L14
-# TODO: Maybe build a function like `update_apt_get` used by other functions?
-if ! test -f .updated-apt-get; then
-  sudo apt-get update
-  touch .updated-apt-get
-fi
-
-# If the timezone isn't as we expect, then update it now
-# https://www.digitalocean.com/community/questions/how-to-change-the-timezone-on-ubuntu-14
-# http://serverfault.com/a/84528
-if test "$(date +"%z")" != "+0000"; then
-  sudo chown root:root "$data_dir/etc/timezone"
-  sudo chmod u=rw,g=r,o=r "$data_dir/etc/timezone"
-  sudo cp --preserve "$data_dir/etc/timezone" /etc/timezone
-  sudo dpkg-reconfigure --frontend noninteractive tzdata
-fi
-
-# If there is no ubuntu user, then create them
-# DEV: Digital Ocean's Ubuntu images provision us as the root user so we must create an ubuntu user
-# https://github.com/mizzy/specinfra/blob/v2.47.0/lib/specinfra/command/base/user.rb#L3-L5
-# https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04
-# https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on-ubuntu-and-centos
-if ! id ubuntu &> /dev/null; then
-  # Create password-less `ubuntu` user with metadata "Ubuntu"
-  adduser ubuntu --disabled-password --gecos "Ubuntu"
-
-  # Add ubuntu user to sudo group (sudoers will be performed later)
-  gpasswd -a ubuntu sudo
-
-  # Create a folder for SSH configuration
-  mkdir --mode u=rwx,g=,o= /home/ubuntu/.ssh
-  chown ubuntu:ubuntu /home/ubuntu/.ssh
-  chmod u=rwx,g=,o= /home/ubuntu/.ssh
-fi
-
-# if there is no sudoers set up for the `ubuntu` user, then set it up
-# DEV: We keep this separate from `gpasswd` to run this for Travis CI
-if ! test -f /etc/sudoers.d/ubuntu; then
-  sudo chown root:root "$data_dir/etc/sudoers.d/ubuntu"
-  sudo chmod u=r,g=,o= "$data_dir/etc/sudoers.d/ubuntu"
-  sudo cp --preserve "$data_dir/etc/sudoers.d/ubuntu" /etc/sudoers.d/ubuntu
-fi
+# Load and run our provisioners
+. src/apt.sh; apt_provisioner
+. src/system.sh; system_provisioner
+. src/users.sh; users_provisioner
 
 # Update authorized keys
 # DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
