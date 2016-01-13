@@ -14,27 +14,19 @@ if test "$data_dir" = ""; then
   exit 1
 fi
 
-# If `ruby@2.x.x` isn't installed, then install it
-# TODO: Handle misaligned versions
-if ! which ruby2.2 &> /dev/null; then
-  # https://www.brightbox.com/docs/ruby/ubuntu/
-  # Install tool for adding `apt` repositories
-  sudo apt-get install -y "software-properties-common=0.92.37.2"
+exit 0
 
-  # Add our Ruby repository and update our sources
-  sudo apt-add-repository -y ppa:brightbox/ruby-ng
-  sudo apt-get update
-
-  # Install `ruby@2.x.x`
-  # TODO: Assert Ruby version installed and chef-zero installed in tests?
-  sudo apt-get install -y "ruby2.2-dev=2.2.4-1bbox1~trusty1"
-fi
-
-# If chef-zero isn't installed or is on an older version, then install it
-# TODO: Consider switching to Debian package https://downloads.chef.io/chef-client/ubuntu/
+# Install a precompiled Chef for Ubuntu
+# https://downloads.chef.io/chef-client/ubuntu/
 if ! which chef-zero &> /dev/null ||
     test "$(chef-zero --verison)" != "4.4.0"; then
-  sudo gem2.2 install chef --version 12.6.0
+  # Navigate to our tmp directory and download the Debian package
+  cd /tmp
+  wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/10.04/x86_64/chef_12.6.0-1_amd64.deb
+
+  # Verify our SHA256 checksum and install our pacakge
+  echo "" | sha256sum --check -
+  dpkg --install chef_12.6.0-1_amd64.deb
 fi
 
 # TODO: Remove me when Chef dev is over
