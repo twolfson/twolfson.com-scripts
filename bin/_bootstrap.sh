@@ -19,27 +19,13 @@ fi
 . src/apt.sh; apt_provisioner
 . src/system.sh; system_provisioner
 # TODO: Add missing tests for users provisioner
-. src/users.sh; users_provisioner
+. src/users.sh; users_provisioner_ubuntu
 # TODO: Relocate `ssh_provisioner` to bottom of our queue
-. src/ssh.sh; ssh_provisioner
+. src/ssh.sh; ssh_provisioner_authorized_keys
 . src/node.sh; node_provisioner
 . src/python.sh; python_provisioner
 . src/nginx.sh; nginx_provisioner
-
-# If the root user has a non-nologin login shell, update it
-# https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L53-L55
-# https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L61-L63
-if test "$(getent passwd root | cut -f 7 -d ":")" != "/usr/sbin/nologin"; then
-  sudo usermod --shell /usr/sbin/nologin root
-fi
-
-# If the sync user has a non-nologin login shell, update it
-# DEV: The sync user exists to run `sync` on a server without needing to use a shell
-#   However, we are going to be paranoid and remove it
-# http://www.unix.com/fedora/167621-user-sync-shutdown.html
-if test "$(getent passwd sync | cut -f 7 -d ":")" != "/usr/sbin/nologin"; then
-  sudo usermod --shell /usr/sbin/nologin sync
-fi
+users_provisioner_shells
 
 install_supervisord_conf () {
   sudo chown root:root "$data_dir/etc/supervisord.conf"

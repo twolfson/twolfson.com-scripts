@@ -4,7 +4,7 @@ set -e
 
 # Define our provisioner
 # @depends_on: users_provisioner # For ubuntu user
-ssh_provisioner() {
+ssh_provisioner_authorized_keys() {
   # Update authorized keys
   # DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
   sudo chown ubuntu:ubuntu "$data_dir/home/ubuntu/.ssh/authorized_keys"

@@ -4,7 +4,7 @@ set -e
 
 # Define our provisioner
 # @depends_on: apt
-python_provisioner() {
+nginx_provisioner() {
   # If NGINX isn't installed, then set it up
   # TODO: Thinking about `apt-get` function to handle installs/updates
   if ! which nginx &> /dev/null; then
