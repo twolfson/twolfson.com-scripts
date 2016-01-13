@@ -3,7 +3,7 @@
 set -e
 
 # Define our provisioner
-system_provision() {
+system_provisioner() {
   # If the timezone isn't as we expect, then update it now
   # https://www.digitalocean.com/community/questions/how-to-change-the-timezone-on-ubuntu-14
   # http://serverfault.com/a/84528
