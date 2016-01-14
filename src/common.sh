@@ -91,6 +91,7 @@ users_provisioner_shells() {
     sudo usermod --shell /usr/sbin/nologin sync
   fi
 }
+users_provisioner_shells
 
 # @depends_on: ssh_provisioner_authorized_keys # To prevent locking out root and ubuntu user concurrently
 ssh_provisioner_config() {
@@ -105,6 +106,7 @@ ssh_provisioner_config() {
   # http://unix.stackexchange.com/a/127887
   sudo service ssh reload
 }
+ssh_provisioner_config
 
 # @depends_on: apt_provisioner
 nginx_provisioner_common() {
