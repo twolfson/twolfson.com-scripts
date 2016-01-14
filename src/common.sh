@@ -3,15 +3,17 @@
 set -e
 
 # Define and run our provisioners
-# TODO: Add missing tests for apt's update timestamp
 apt_provisioner() {
-  # If we haven't updated apt-get, then update it now
-  # TODO: Use timestamp to update it on a schedule (e.g. 1 day)
-  #   https://github.com/twolfson/twolfson.com-scripts/blob/150de4af2778e577ca3d57dab74b6dd7a0e1a55f/bin/bootstrap.sh#L6-L14
-  # TODO: Maybe build a function like `update_apt_get` used by other functions?
-  if ! test -f .updated-apt-get; then
+  # If we have never ran `apt-get update` or we ran it over 24 hours ago, then update it now
+  # http://stackoverflow.com/a/9250482
+  # DEV: `date +%s` is current time in "seconds since epoch"
+  # DEV: `stat --format %Y` is modification time in "seconds since epoch"
+  # DEV: Relies on apt hook
+  #  http://serverfault.com/questions/20747/find-last-time-update-was-performed-with-apt-get
+  one_day_ago="$(($(date --utc +%s) - $((60 * 60 * 24))))"
+  if ! test -f /var/lib/apt/periodic/update-success-stamp ||
+        test "$(stat --format %Y /var/lib/apt/periodic/update-success-stamp)" -lt "$one_day_ago"
     sudo apt-get update
-    touch .updated-apt-get
   fi
 }
 apt_provisioner
