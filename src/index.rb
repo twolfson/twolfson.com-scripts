@@ -3,6 +3,9 @@
 require "rubygems"
 require "chef/application/apply"
 
+# TODO: Consider writing standalone `common` and `twolfson.com` files that are run via `chef-apply` individually
+# TODO: Also, verify that `chef-apply` can handle multiple actions as that might be the root cause
+
 # Run our recipes
 # DEV: We avoid the traditional Chef structure due to it
 #   being overly complex and unnecessary for 1 node ecosystem
