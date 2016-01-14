@@ -16,13 +16,12 @@ begin
   recipe_filename = "src/apt.rb"
   recipe_text, recipe_fh = app_apply.read_recipe_file(recipe_filename)
   recipe, run_context = app_apply.get_recipe_and_run_context()
-  # recipe.instance_eval(recipe_text, recipe_filename, 1)
+  # recipe.instance_eval(recipe_text, recipe_filename, 2)
 
   # Add more recipes
+  # https://github.com/chef/chef/blob/12.6.0/lib/chef/run_context.rb#L346-L355
   recipe_filename2 = "src/apt2.rb"
-  recipe2 = Chef::Recipe.new("(chef-apply cookbook2)", "(chef-apply recipe2)", run_context)
-  recipe_text2, recipe_fh2 = app_apply.read_recipe_file(recipe_filename2)
-  recipe2.instance_eval(recipe_text2, recipe_filename2, 2)
+  run_context.load_recipe_file(recipe_filename2)
 
   # Run our actions
   runner = Chef::Runner.new(run_context)
@@ -30,7 +29,6 @@ begin
     runner.converge()
   ensure
     recipe_fh.close()
-    recipe_fh2.close()
   end
   Chef::Platform::Rebooter.reboot_if_needed!(runner)
   Chef::Application.exit!("Exiting", 0)

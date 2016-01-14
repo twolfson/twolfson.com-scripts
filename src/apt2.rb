@@ -1,6 +1,6 @@
 # Based on http://stackoverflow.com/a/9250482
 execute "apt-get-update-periodic2" do
-  command("apt-get update2")
+  command("apt-get update")
   only_if do
     # If we have have ran `apt-get update` before
     if File.exists?('/var/lib/apt/periodic/update-success-stamp')
