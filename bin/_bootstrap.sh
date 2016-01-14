@@ -24,14 +24,5 @@ if test "$src_dir" = ""; then
   exit 1
 fi
 
-# Load and run our provisioners
-. src/apt.sh; apt_provisioner
-. src/system.sh; system_provisioner
-. src/users.sh; users_provisioner_ubuntu
-. src/ssh.sh; ssh_provisioner_authorized_keys
-. src/node.sh; node_provisioner
-. src/python.sh; python_provisioner
-. src/nginx.sh; nginx_provisioner
-users_provisioner_shells
-. src/supervisor.sh; supervisor_provisioner
-ssh_provisioner_config
+# Run our provisioner script
+. src/twolfson.com.sh

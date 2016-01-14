@@ -2,18 +2,26 @@
 # Exit on first error
 set -e
 
-# Define our provisioner
-# @depends_on: apt
-nginx_provisioner() {
-  # If NGINX isn't installed, then set it up
-  # TODO: Thinking about `apt-get` function to handle installs/updates
-  if ! which nginx &> /dev/null; then
-    sudo apt-get install -y "nginx=1.4.6-1ubuntu3.3"
-  fi
+# Run our common provisioners
+. src/common.sh
 
+# Define and run our provisioners
+# @depends_on: apt_provisioner
+node_provisioner() {
+  # If we haven't installed node, then set it up
+  # https://github.com/nodesource/distributions/tree/96e9b7d40b6aff7ade7bc130d9e18fd140e9f4f8#installation-instructions
+  # TODO: Handle out of date scenario
+  #   https://github.com/twolfson/twolfson.com-scripts/blob/150de4af2778e577ca3d57dab74b6dd7a0e1a55f/bin/bootstrap.sh#L18-L24
+  if ! which node &> /dev/null; then
+    curl -sL https://deb.nodesource.com/setup_0.10 | sudo -E bash -
+    sudo apt-get install -y "nodejs=0.10.41-1nodesource1~trusty1"
+  fi
+}
+node_provisioner
+
+# @depends_on: nginx_provisioner_common
+nginx_provisioner_twolfson_com() {
   # If there are no NGINX configuration files, then install them
-  # TODO: Consider breaking out to another location, like `twolfson.com.sh` and `drive.twolfson.com.sh`
-  #   but that might be overkill
   if test "$(cat /etc/nginx/conf.d/twolfson.com.conf 2> /dev/null)" != "$(cat "$data_dir/etc/nginx/conf.d/twolfson.com.conf")" ||
       test "$(cat /etc/nginx/conf.d/drive.twolfson.com.conf 2> /dev/null)" != "$(cat "$data_dir/etc/nginx/conf.d/drive.twolfson.com.conf")" ||
       test "$(cat /etc/nginx/conf.d/twolfsn.com.conf 2> /dev/null)" != "$(cat "$data_dir/etc/nginx/conf.d/twolfsn.com.conf")" ||
@@ -36,15 +44,6 @@ nginx_provisioner() {
     sudo /etc/init.d/nginx reload
   fi
 
-  # If there are default NGINX configuration files, then remove them
-  if test "$(ls /etc/nginx/sites-enabled)" != ""; then
-    # Remove the configurations
-    sudo rm /etc/nginx/sites-enabled/*
-
-    # Reload the NGINX server
-    sudo /etc/init.d/nginx reload
-  fi
-
   # If there is no folder for drive.twolfson.com, then create one
   if ! test -d /var/www; then
     sudo mkdir --mode u=rwx,g=rx,o=rx /var/www
@@ -57,3 +56,4 @@ nginx_provisioner() {
     sudo chmod u=rwx,g=rx,o=rx /var/www/drive.twolfson.com
   fi
 }
+nginx_provisioner_twolfson_com
