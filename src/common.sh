@@ -143,6 +143,8 @@ python_provisioner
 # @depends_on: python
 supervisor_provisioner() {
   # TODO: Relocate this to `twolfson.com.sh`
+  #   or more accurately: use a template for `supervisord.conf`
+  #   and don't run any `twolfson.com` services by default (e.g. use `if twolfson.com` for conf blocks)
   _install_supervisord_conf () {
     sudo chown root:root "$data_dir/etc/supervisord.conf"
     sudo chmod u=rw,g=r,o=r "$data_dir/etc/supervisord.conf"
