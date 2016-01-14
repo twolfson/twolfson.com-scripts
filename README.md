@@ -64,10 +64,11 @@ As a high level overview of our setup, we use the following:
 This repository has the following file structure:
 
 - `.bundle/` - Configuration for Bundler (used for managing Ruby gems)
-- `bin/` - Contains our executable files (e.g. bootstraping scripts)
+- `bin/` - Contains our executable files (e.g. deployment scripts)
 - `data/` - Contains static files used during provisioning
     - This starts at `/` as if it were the root of a file system
     - For multiple environment projects, it's good to have a `data/{{env}}` for each setup (e.g. `data/development`, `data/production`)
+- `src/` - Container for our bootstrapping scripts
 - `test/` - Container for our test files
 - `CHANGELOG.md` - CHANGELOG of what has changed during each release of this repository
 - `README.md` - Documentation for this repository
@@ -111,7 +112,7 @@ We reuse our provisioning script for managing server state. As a result, we can 
 bin/bootstrap-remote.sh digital-my-server
 
 # If we need to use a non-master ref, then pass it as a second parameter
-# bin/deploy-twolfson.com.sh digital-my-server dev/new.feature
+# bin/bootstrap-remote.com.sh digital-my-server dev/new.feature
 
 ```
 
