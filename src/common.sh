@@ -12,7 +12,7 @@ apt_provisioner() {
   #  http://serverfault.com/questions/20747/find-last-time-update-was-performed-with-apt-get
   one_day_ago="$(($(date --utc +%s) - $((60 * 60 * 24))))"
   if ! test -f /var/lib/apt/periodic/update-success-stamp ||
-        test "$(stat --format %Y /var/lib/apt/periodic/update-success-stamp)" -lt "$one_day_ago"
+        test "$(stat --format %Y /var/lib/apt/periodic/update-success-stamp)" -lt "$one_day_ago"; then
     sudo apt-get update
   fi
 }
