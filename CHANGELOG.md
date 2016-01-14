@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.14.1 - Added tests for user provisioning
+
 1.14.0 - Moved to periodic `apt-get update`
 
 1.13.1 - Upgraded to `serverspec@2.29.0` to remove custom fork
