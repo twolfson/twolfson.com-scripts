@@ -31,7 +31,6 @@ system_provisioner() {
 }
 system_provisioner
 
-# TODO: Add missing tests for users provisioner
 users_provisioner_ubuntu() {
   # If there is no ubuntu user, then create them
   # DEV: Digital Ocean's Ubuntu images provision us as the root user so we must create an ubuntu user
