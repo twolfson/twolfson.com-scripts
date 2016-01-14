@@ -3,6 +3,7 @@
 set -e
 
 # Define our provisioner
+# TODO: Add missing tests for apt's update timestamp
 apt_provisioner() {
   # If we haven't updated apt-get, then update it now
   # TODO: Use timestamp to update it on a schedule (e.g. 1 day)
