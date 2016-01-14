@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.14.0 - Moved to periodic `apt-get update`
+
 1.13.1 - Upgraded to `serverspec@2.29.0` to remove custom fork
 
 1.13.0 - Broke down `bin/_bootstrap.sh` into 2 halves for transition and reuse
