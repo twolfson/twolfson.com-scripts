@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+1.13.0 - Broke down `bin/_bootstrap.sh` into 2 halves for transition and reuse
+
 1.12.0 - Moved `deploy-twolfson.com.sh` from `npm install` to `deploy-install.sh`
 
 1.11.0 - Added NGINX configuration for `twolfsn.com`
