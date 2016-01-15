@@ -5,6 +5,8 @@ require "chef/application/apply"
 
 # TODO: Consider writing standalone `common` and `twolfson.com` files that are run via `chef-apply` individually
 # TODO: Also, verify that `chef-apply` can handle multiple actions as that might be the root cause
+# TODO: Another option (now that we are finally accepting it)
+#   is to create nested folders but `ln -s` them to `src's` root dir
 
 # Run our recipes
 # DEV: We avoid the traditional Chef structure due to it
