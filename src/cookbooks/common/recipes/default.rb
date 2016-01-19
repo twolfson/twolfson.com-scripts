@@ -116,12 +116,15 @@ user "sync" do
 end
 
 # Configure root for security (e.g. no direct `root` login, restrict SSL algorithms)
-# WARNING: THIS WILL LOCK OUT THE ROOT USER
 # @depends_on file[/home/ubuntu/.ssh/ubuntu/authorized_keys] (to prevent lock out)
+# WARNING: THIS WILL LOCK OUT THE ROOT USER
+# DEV: Equivalent to `sudo service ssh *`
 service "ssh" do
   # Always enable and run our SSH server
-  action(:enable)
-  action(:start)
+  # https://docs.chef.io/resource_service.html#examples
+  provider Chef::Provider::Service::Upstart
+  supports(:reload => true, :restart => true, :status => true)
+  action([:enable, :start])
 end
 file "/etc/ssh/sshd_config" do
   owner("root")
