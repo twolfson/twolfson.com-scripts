@@ -3,34 +3,6 @@
 set -e
 
 # Define and run our provisioners
-apt_provisioner() {
-  # If we have never ran `apt-get update` or we ran it over 24 hours ago, then update it now
-  # http://stackoverflow.com/a/9250482
-  # DEV: `date +%s` is current time in "seconds since epoch"
-  # DEV: `stat --format %Y` is modification time in "seconds since epoch"
-  # DEV: Relies on apt hook
-  #  http://serverfault.com/questions/20747/find-last-time-update-was-performed-with-apt-get
-  one_day_ago="$(($(date --utc +%s) - $((60 * 60 * 24))))"
-  if ! test -f /var/lib/apt/periodic/update-success-stamp ||
-        test "$(stat --format %Y /var/lib/apt/periodic/update-success-stamp)" -lt "$one_day_ago"; then
-    sudo apt-get update
-  fi
-}
-apt_provisioner
-
-system_provisioner() {
-  # If the timezone isn't as we expect, then update it now
-  # https://www.digitalocean.com/community/questions/how-to-change-the-timezone-on-ubuntu-14
-  # http://serverfault.com/a/84528
-  if test "$(date +"%z")" != "+0000"; then
-    sudo chown root:root "$data_dir/etc/timezone"
-    sudo chmod u=rw,g=r,o=r "$data_dir/etc/timezone"
-    sudo cp --preserve "$data_dir/etc/timezone" /etc/timezone
-    sudo dpkg-reconfigure --frontend noninteractive tzdata
-  fi
-}
-system_provisioner
-
 users_provisioner_ubuntu() {
   # If there is no ubuntu user, then create them
   # DEV: Digital Ocean's Ubuntu images provision us as the root user so we must create an ubuntu user

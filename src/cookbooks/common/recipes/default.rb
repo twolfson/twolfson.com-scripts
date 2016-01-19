@@ -15,3 +15,17 @@ execute "apt-get-update-periodic" do
     end
   end
 end
+
+# Guarantee timezone is as we expect it
+# https://www.digitalocean.com/community/questions/how-to-change-the-timezone-on-ubuntu-14
+# http://serverfault.com/a/84528
+file "/etc/timezone" do
+  content(File("#{ENV["data_dir"]}/etc/timezone").read())
+  group("root")
+  owner("root")
+  mode("644") # u=rw,g=r,o=r
+end
+# if test "$(date +"%z")" != "+0000"; then
+  # TODO: Handle this call...
+  # sudo dpkg-reconfigure --frontend noninteractive tzdata
+# fi
