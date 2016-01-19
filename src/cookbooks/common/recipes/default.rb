@@ -83,7 +83,7 @@ end
 file "/home/ubuntu/.ssh/authorized_keys" do
   owner("ubuntu")
   group("ubuntu")
-  mode("500") # u=rw,g=,o=
+  mode("600") # u=rw,g=,o=
 
   content(File.new("#{data_dir}/home/ubuntu/.ssh/authorized_keys").read())
 end
@@ -94,10 +94,10 @@ directory "/root/.ssh" do
   mode("700") # u=rwx,g=,o=
 end
 # @depends_on directory[/root/.ssh] (for directory creation)
-directory "/root/.ssh/authorized_keys" do
+file "/root/.ssh/authorized_keys" do
   owner("root")
   group("root")
-  mode("500") # u=rw,g=,o=
+  mode("600") # u=rw,g=,o=
 
   content(File.new("#{data_dir}/root/.ssh/authorized_keys").read())
 end
