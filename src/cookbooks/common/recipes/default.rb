@@ -8,10 +8,10 @@ execute "apt-get-update-periodic" do
     if File.exists?("/var/lib/apt/periodic/update-success-stamp")
       # Return if we ran it in the past 24 hours
       one_day_ago = Time.now().utc() - (60 * 60 * 24)
-      File.mtime("/var/lib/apt/periodic/update-success-stamp") < one_day_ago
+      next File.mtime("/var/lib/apt/periodic/update-success-stamp") < one_day_ago
     # Otherwise, tell it to run
     else
-      true
+      next true
     end
   end
 end
