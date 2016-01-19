@@ -75,3 +75,29 @@ file "/etc/sudoers.d/ubuntu" do
 
   content(File.new("#{data_dir}/etc/sudoers.d/ubuntu").read())
 end
+
+# Guarantee we have authorized keys synced
+# @depends_on user[ubuntu] (to prevent lock out)
+# @depends_on directory[/home/ubuntu/.ssh] (for directory creation)
+# DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
+file "/home/ubuntu/.ssh/authorized_keys" do
+  owner("ubuntu")
+  group("ubuntu")
+  mode("500") # u=rw,g=,o=
+
+  content(File.new("#{data_dir}/home/ubuntu/.ssh/authorized_keys").read())
+end
+# WARNING: THIS WILL LOCK OUT THE ROOT USER
+directory "/root/.ssh" do
+  owner("root")
+  group("root")
+  mode("700") # u=rwx,g=,o=
+end
+# @depends_on directory[/root/.ssh] (for directory creation)
+directory "/root/.ssh/authorized_keys" do
+  owner("root")
+  group("root")
+  mode("500") # u=rw,g=,o=
+
+  content(File.new("#{data_dir}/root/.ssh/authorized_keys").read())
+end
