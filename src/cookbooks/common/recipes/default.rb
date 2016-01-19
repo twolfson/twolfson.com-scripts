@@ -46,9 +46,8 @@ end
 #   https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04
 user "ubuntu" do
   # Create our user with a locked password
-  action(:create)
   # DEV: `action(:lock)` acts as as `adduser --disabled-password`
-  action(:lock)
+  action([:create, :lock])
 
   # Add a comment about their user info
   # DEV: `comment` acts as `adduser --gecos`
@@ -136,4 +135,17 @@ file "/etc/ssh/sshd_config" do
   # When we update, reload our ssh service
   # http://unix.stackexchange.com/a/127887
   notifies(:reload, "service[ssh]", :immediately)
+end
+
+# Guarantee `nginx` is installed
+# @depends_on exectue[apt-get-update-periodic] (to make sure apt is updated)
+# DEV: Equivalent to `sudo apt-get install -y "nginx=1.4.6-1ubuntu3.3"`
+apt_package "nginx" do
+  version "1.4.6-1ubuntu3.3"
+end
+# DEV: Equivalent to `sudo /etc/init.d/nginx *`
+service "nginx" do
+  provider Chef::Provider::Service::Init
+  supports(:reload => true, :restart => true, :status => true)
+  action([:enable, :start])
 end

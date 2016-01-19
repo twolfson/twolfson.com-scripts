@@ -4,12 +4,6 @@ set -e
 
 # @depends_on: apt_provisioner
 nginx_provisioner_common() {
-  # If NGINX isn't installed, then set it up
-  # TODO: Thinking about `apt-get` function to handle installs/updates
-  if ! which nginx &> /dev/null; then
-    sudo apt-get install -y "nginx=1.4.6-1ubuntu3.3"
-  fi
-
   # If there are default NGINX configuration files, then remove them
   if test "$(ls /etc/nginx/sites-enabled)" != ""; then
     # Remove the configurations
