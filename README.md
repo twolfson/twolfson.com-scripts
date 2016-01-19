@@ -49,13 +49,15 @@ As a high level overview of our setup, we use the following:
 
 **Development:**
 
-- Provisioning is currently done by [bash][]
-    - This is to maximize ease of approach for new developers
+- Provisioning is currently done by [Chef][]
+    - This is to maximize reuse of common setup
+    - For ease of approach to new developers, we typically prefer [bash][]
 - Services are currently all [Node.js][]/[JavaScript][] based
 - Tests are done via [Serverspec][]
     - These are both meant to cover sanity and security
 
 [bash]: https://www.gnu.org/software/bash/
+[Chef]: https://www.chef.io/
 [Node.js]: https://nodejs.org/
 [JavaScript]: https://en.wikipedia.org/wiki/JavaScript
 [Serverspec]: http://serverspec.org/
