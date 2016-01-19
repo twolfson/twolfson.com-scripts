@@ -29,8 +29,7 @@ As a high level overview of our setup, we use the following:
 
 **Operations:**
 
-- [Digital Ocean][] for hosting our servers
-- [AWS][] for DNS management via [Route 53][]
+- [Digital Ocean][] for hosting our servers and DNS management
 - [Google Apps][] for email management
 - [Supervisor][] for process management
 - Metrics
@@ -40,8 +39,6 @@ As a high level overview of our setup, we use the following:
     - In-service error reporting depends on the service
 
 [Digital Ocean]: http://digitalocean.com/
-[AWS]: https://aws.amazon.com/
-[Route 53]: https://aws.amazon.com/route53/
 [Google Apps]: https://apps.google.com/
 [Supervisor]: https://github.com/Supervisor/supervisor
 [UptimeRobot]: https://uptimerobot.com/
