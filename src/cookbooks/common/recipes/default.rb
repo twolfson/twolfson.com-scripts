@@ -1,3 +1,6 @@
+# Define our constants
+data_dir = ENV.fetch("data_dir")
+
 # If `apt-get update` has never run nor ran in the past 24 hours, then update it now
 # http://stackoverflow.com/a/9250482
 # DEV: Relies on apt hook
@@ -19,8 +22,9 @@ end
 # Guarantee timezone is as we expect it
 # https://www.digitalocean.com/community/questions/how-to-change-the-timezone-on-ubuntu-14
 # http://serverfault.com/a/84528
+timezone_content = File.new("#{data_dir}/etc/timezone").read()
 file "/etc/timezone" do
-  content(File("#{ENV["data_dir"]}/etc/timezone").read())
+  content(timezone_content)
   group("root")
   owner("root")
   mode("644") # u=rw,g=r,o=r
