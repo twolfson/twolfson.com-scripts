@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.0.2 - Updated DNS docs
+
 2.0.1 - Updated provisioner docs
 
 2.0.0 - Moved to Chef as our provisioner
