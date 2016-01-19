@@ -101,3 +101,16 @@ file "/root/.ssh/authorized_keys" do
 
   content(File.new("#{data_dir}/root/.ssh/authorized_keys").read())
 end
+
+# Lock out SSH shells for non-`ubuntu` users
+# @depends_on file[/home/ubuntu/.ssh/ubuntu/authorized_keys] (to prevent lock out)
+# DEV: Equivalent to `test "$(getent passwd root | cut -f 7 -d ":")" != "/usr/sbin/nologin"`
+#   and `sudo usermod --shell /usr/sbin/nologin root`
+# https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L53-L55
+# https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L61-L63
+user "root" do
+  shell("/usr/sbin/nologin")
+end
+user "sync" do
+  shell("/usr/sbin/nologin")
+end
