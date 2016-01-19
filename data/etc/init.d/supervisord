@@ -32,7 +32,7 @@
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # Updated to `pip` installed `supervisord` path (`which supervisord`)
 DAEMON=/usr/local/bin/supervisord
-SUPERVISORCTL=/usr/bin/supervisorctl
+SUPERVISORCTL=/usr/local/bin/supervisorctl
 NAME=supervisord
 DESC=supervisor
 

@@ -121,7 +121,7 @@ end
 service "ssh" do
   # Always enable and run our SSH server
   # https://docs.chef.io/resource_service.html#examples
-  provider Chef::Provider::Service::Upstart
+  provider(Chef::Provider::Service::Upstart)
   supports(:reload => true, :restart => true, :status => true)
   action([:enable, :start])
 end
@@ -176,9 +176,54 @@ execute "upgrade-pip" do
 end
 
 # Guarantee `supervisor` is installed and configured
+# @depends_on execute[upgrade-pip]
 execute "install-supervisor" do
   command("sudo pip install \"supervisor==3.2.0\"")
   # `pip --version`: `pip 7.1.2 from /usr/local/lib/python2.7/dist-packages (python 2.7)`
   # DEV: Equivalent to `! pip --version | grep "pip 7.1.2" &> /dev/null`
   only_if("test \"$(supervisord --version)\" != \"3.2.0\"")
+end
+# Create folder for log files
+directory "/var/log/supervisor" do
+  owner("root")
+  group("root")
+  mode ("755") # u=rwx,g=rx,o=rx
+end
+# Set up our supervisor configuration
+# TODO: Use a template for `supervisord.conf`
+#   and don't run any `twolfson.com` services by default (e.g. use `if twolfson.com` for conf blocks)
+file "/etc/supervisord.conf" do
+  owner("root")
+  group("root")
+  mode ("644") # u=rw,g=r,o=r
+
+  content(File.new("#{data_dir}/etc/supervisord.conf").read())
+
+  # When this file changes, update supervisor
+  # DEV: This comes before the `init.d` install due to the `init.d` service needing `/etc/supervisord.conf`
+  # TODO: Sort this out
+    # # Load supervisor config changes
+    # # DEV: We need to access socket as root user
+    # # DEV: This command might fail if we change anything with `supervisor.d's` config
+    # #   Be sure to use `/etc/init.d/supervisord restart` in that case
+    # sudo supervisorctl update
+end
+# Install our `init` script
+# http://supervisord.org/running.html#running-supervisord-automatically-on-startup
+# http://serverfault.com/a/96500
+file "/etc/init.d/supervisord" do
+  owner("root")
+  group("root")
+  mode("755") # u=rwx,g=rx,o=rx
+
+  content(File.new("#{data_dir}/etc/init.d/supervisord").read())
+end
+service "supervisord" do
+  provider(Chef::Provider::Service::Init)
+  supports(:reload => false, :restart => true, :status => true)
+  action([:start])
+end
+execute "autostart-supervisord" do
+  command("sudo update-rc.d supervisord defaults")
+  only_if("! ls /etc/rc0.d/K20supervisord")
 end

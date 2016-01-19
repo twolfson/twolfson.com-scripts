@@ -18,22 +18,22 @@ supervisor_provisioner() {
     # Install supervisor
     # sudo pip install "supervisor==3.2.0"
 
-    # Create folder for log files
-    sudo mkdir --mode u=rwx,g=rx,o=rx /var/log/supervisor
-    sudo chown root:root /var/log/supervisor
-    sudo chmod u=rwx,g=rx,o=rx /var/log/supervisor
+    # # Create folder for log files
+    # sudo mkdir --mode u=rwx,g=rx,o=rx /var/log/supervisor
+    # sudo chown root:root /var/log/supervisor
+    # sudo chmod u=rwx,g=rx,o=rx /var/log/supervisor
 
     # Copy over supervisord conf
-    _install_supervisord_conf
+    # _install_supervisord_conf
 
-    # Add `init` script
-    # http://supervisord.org/running.html#running-supervisord-automatically-on-startup
-    # http://serverfault.com/a/96500
-    sudo chown root:root "$data_dir/etc/init.d/supervisord"
-    sudo chmod u=rwx,g=rx,o=rx "$data_dir/etc/init.d/supervisord"
-    sudo cp --preserve "$data_dir/etc/init.d/supervisord" /etc/init.d/supervisord
-    sudo /etc/init.d/supervisord start
-    sudo update-rc.d supervisord defaults
+    # # Add `init` script
+    # # http://supervisord.org/running.html#running-supervisord-automatically-on-startup
+    # # http://serverfault.com/a/96500
+    # sudo chown root:root "$data_dir/etc/init.d/supervisord"
+    # sudo chmod u=rwx,g=rx,o=rx "$data_dir/etc/init.d/supervisord"
+    # sudo cp --preserve "$data_dir/etc/init.d/supervisord" /etc/init.d/supervisord
+    # sudo /etc/init.d/supervisord start
+    # sudo update-rc.d supervisord defaults
   fi
 
   # If we have a new config for supervisor, then update ourselves
