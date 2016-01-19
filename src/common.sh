@@ -2,19 +2,6 @@
 # Exit on first error
 set -e
 
-# @depends_on: apt_provisioner
-nginx_provisioner_common() {
-  # If there are default NGINX configuration files, then remove them
-  if test "$(ls /etc/nginx/sites-enabled)" != ""; then
-    # Remove the configurations
-    sudo rm /etc/nginx/sites-enabled/*
-
-    # Reload the NGINX server
-    sudo /etc/init.d/nginx reload
-  fi
-}
-nginx_provisioner_common
-
 # @depends_on: apt
 python_provisioner() {
   # If pip isn't installed, then install it

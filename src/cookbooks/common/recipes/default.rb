@@ -149,3 +149,11 @@ service "nginx" do
   supports(:reload => true, :restart => true, :status => true)
   action([:enable, :start])
 end
+# If there are default NGINX configuration files, then remove them
+# DEV: Equivalent to `test "$(ls /etc/nginx/sites-enabled)" != ""` -> `rm /etc/nginx/sites-enabled/*`
+file "/etc/nginx/sites-enabled/default" do
+  action(:delete)
+
+  # Upon deletion, reload NGINX
+  notifies(:reload, "service[nginx]", :immediately)
+end
