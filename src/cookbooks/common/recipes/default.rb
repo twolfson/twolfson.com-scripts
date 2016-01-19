@@ -4,6 +4,7 @@ data_dir = ENV.fetch("data_dir")
 # TODO: Define `data_file` and `data_template` resources
 #   which load `content` from `data_dir` with the same path as their name
 #   For example `/etc/timezone` <-> `$data_dir/etc/timezone`
+# TODO: Consider breaking down test suite into `common` and `twolfson.com` folders
 
 # Guarantee `apt-get update` has been run in past 24 hours
 # http://stackoverflow.com/a/9250482
