@@ -3,7 +3,9 @@
 set -e
 
 # Run our common provisioners
-. src/common.sh
+cd src
+sudo data_dir="$data_dir" chef-client --local-mode --override-runlist "recipe[twolfson.com]"
+cd -
 
 # Define and run our provisioners
 # @depends_on: apt_provisioner
