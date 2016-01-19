@@ -27,22 +27,45 @@ execute "dpkg-reconfigure-tzdata" do
   action(:nothing)
 end
 file "/etc/timezone" do
-  content(File.new("#{data_dir}/etc/timezone").read())
-  group("root")
   owner("root")
+  group("root")
   mode("644") # u=rw,g=r,o=r
+
+  content(File.new("#{data_dir}/etc/timezone").read())
 
   # When we update, re-run our dpkg-reconfigure
   notifies(:run, "execute[dpkg-reconfigure-tzdata]", :immediately)
 end
 
 # Guarantee we have a `ubuntu` user provisioned
+# DEV: Digital Ocean's Ubuntu images provision us as the root user so we must create an ubuntu user
 user "ubuntu" do
-  # DEV: `comment` acts as `adduser --gecos`
-  comment("Ubuntu")
-
   # Create our user with a locked password
   action(:create)
   # DEV: `action(:lock)` acts as as `adduser --disabled-password`
   action(:lock)
+
+  # Add a comment about their user info
+  # DEV: `comment` acts as `adduser --gecos`
+  comment("Ubuntu")
+
+  # Add them to the `sudo` group
+  group("sudo")
+end
+# Guarantee `.ssh` directory for authorized keys
+# @depends_on user[ubuntu] (for `/home/ubuntu` creation)
+directory "/home/ubuntu/.ssh" do
+  owner("ubuntu")
+  group("ubuntu")
+  mode("700") # u=rwx,g=,o=
+end
+# Guarantee `sudo` rights for `ubuntu` for developer sanity
+# https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on-ubuntu-and-centos
+# @depends_on user[ubuntu] (for `user` reference)
+file "/etc/sudoers.d/ubuntu" do
+  owner("root")
+  group("root")
+  mode("400") # u=r,g=,o=
+
+  content(File.new("#{data_dir}/etc/sudoers.d/ubuntu").read())
 end
