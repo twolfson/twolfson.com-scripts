@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.0.0 - Moved to Chef as our provisioner
+
 1.14.1 - Added tests for user provisioning
 
 1.14.0 - Moved to periodic `apt-get update`
