@@ -22,9 +22,8 @@ end
 # Guarantee timezone is as we expect it
 # https://www.digitalocean.com/community/questions/how-to-change-the-timezone-on-ubuntu-14
 # http://serverfault.com/a/84528
-timezone_content = File.new("#{data_dir}/etc/timezone").read()
 file "/etc/timezone" do
-  content(timezone_content)
+  content(File.new("#{data_dir}/etc/timezone").read())
   group("root")
   owner("root")
   mode("644") # u=rw,g=r,o=r
