@@ -1,5 +1,5 @@
 # Load in common dependencies
-require_relative "../../common/recipes/default.rb"
+include_recipe "common"
 
 # Run our provisioner
 file "/home/vagrant/hello.txt" do
