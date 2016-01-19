@@ -133,7 +133,7 @@ end
 file "/etc/ssh/sshd_config" do
   owner("root")
   group("root")
-  mode("600") # u=rw,g=,o=
+  mode("644") # u=rw,g=r,o=r
 
   content(File.new("#{data_dir}/etc/ssh/sshd_config").read())
 
