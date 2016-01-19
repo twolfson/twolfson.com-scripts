@@ -202,10 +202,6 @@ file "/etc/supervisord.conf" do
   mode ("644") # u=rw,g=r,o=r
 
   content(File.new("#{data_dir}/etc/supervisord.conf").read())
-
-  # When this file changes, update supervisor
-  # DEV: This comes before the `init.d` install due to the `init.d` service needing `/etc/supervisord.conf`
-  notifies(:run, "execute[update-supervisorctl]", :immediately)
 end
 # Install our `init` script
 # http://supervisord.org/running.html#running-supervisord-automatically-on-startup
