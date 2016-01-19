@@ -22,13 +22,16 @@ end
 # Guarantee timezone is as we expect it
 # https://www.digitalocean.com/community/questions/how-to-change-the-timezone-on-ubuntu-14
 # http://serverfault.com/a/84528
+execute "dpkg-reconfigure-tzdata" do
+  command("sudo dpkg-reconfigure --frontend noninteractive tzdata")
+  action(:nothing)
+end
 file "/etc/timezone" do
   content(File.new("#{data_dir}/etc/timezone").read())
   group("root")
   owner("root")
   mode("644") # u=rw,g=r,o=r
+
+  # When we update, re-run our dpkg-reconfigure
+  notifies(:run, "execute[dpkg-reconfigure-tzdata]", :immediately)
 end
-# if test "$(date +"%z")" != "+0000"; then
-  # TODO: Handle this call...
-  # sudo dpkg-reconfigure --frontend noninteractive tzdata
-# fi
