@@ -114,3 +114,23 @@ end
 user "sync" do
   shell("/usr/sbin/nologin")
 end
+
+# Configure root for security (e.g. no direct `root` login, restrict SSL algorithms)
+# WARNING: THIS WILL LOCK OUT THE ROOT USER
+# @depends_on file[/home/ubuntu/.ssh/ubuntu/authorized_keys] (to prevent lock out)
+service "ssh" do
+  # Always enable and run our SSH server
+  action(:enable)
+  action(:start)
+end
+file "/etc/ssh/sshd_config" do
+  owner("root")
+  group("root")
+  mode("600") # u=rw,g=,o=
+
+  content(File.new("#{data_dir}/etc/ssh/sshd_config").read())
+
+  # When we update, reload our ssh service
+  # http://unix.stackexchange.com/a/127887
+  notifies(:reload, "service[ssh]", :immediately)
+end
