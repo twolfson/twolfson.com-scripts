@@ -46,7 +46,7 @@ end
 
 # Guarantee we have a `ubuntu` user provisioned
 # DEV: Digital Ocean's Ubuntu images provision us as the root user so we must create an ubuntu user
-# DEV: Equivalent to `id ubuntu` then `adduser ubuntu --disabled-password --gecos "Ubuntu` and `gpasswd -a ubuntu sudo`
+# DEV: Equivalent to `id ubuntu` then `adduser ubuntu --disabled-password --gecos "Ubuntu`
 #   https://github.com/mizzy/specinfra/blob/v2.47.0/lib/specinfra/command/base/user.rb#L3-L5
 #   https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04
 user "ubuntu" do
@@ -57,9 +57,11 @@ user "ubuntu" do
   # Add a comment about their user info
   # DEV: `comment` acts as `adduser --gecos`
   comment("Ubuntu")
-
-  # Add them to the `sudo` group
-  group("sudo")
+end
+# Add `ubuntu` to `sudo` group
+# DEV: Equivalent to `gpasswd -a ubuntu sudo`
+group "sudo" do
+  members("ubuntu")
 end
 # Guarantee `.ssh` directory for authorized keys
 # @depends_on user[ubuntu] (for `/home/ubuntu` creation)
