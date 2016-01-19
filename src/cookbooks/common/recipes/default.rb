@@ -147,7 +147,7 @@ end
 service "nginx" do
   provider Chef::Provider::Service::Init
   supports(:reload => true, :restart => true, :status => true)
-  action([:enable, :start])
+  action([:start])
 end
 # If there are default NGINX configuration files, then remove them
 # DEV: Equivalent to `test "$(ls /etc/nginx/sites-enabled)" != ""` -> `rm /etc/nginx/sites-enabled/*`
