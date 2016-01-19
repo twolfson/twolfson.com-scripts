@@ -26,8 +26,8 @@ fi
 
 # Install a precompiled Chef for Ubuntu
 # https://downloads.chef.io/chef-client/ubuntu/
-if ! which chef-client &> /dev/null ||
-    test "$(chef-client --verison)" != "Chef: 12.6.0"; then
+if (! which chef-client &> /dev/null) ||
+    test "$(chef-client --version)" != "Chef: 12.6.0"; then
   # Navigate to our tmp directory and download the Debian package
   cd /tmp
   wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/10.04/x86_64/chef_12.6.0-1_amd64.deb

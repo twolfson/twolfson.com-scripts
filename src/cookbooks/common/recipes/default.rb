@@ -230,5 +230,6 @@ execute "update-supervisorctl" do
   action(:nothing)
 
   # When our configuration changes, update ourself
-  subscribes(:run, "file[/etc/supervisord.conf]", :immediately)
+  # DEV: We must wait until `/etc/init.d/supervisord` has launched
+  subscribes(:run, "file[/etc/supervisord.conf]", :delayed)
 end
