@@ -10,9 +10,6 @@ users_provisioner_ubuntu() {
   # https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04
   # https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on-ubuntu-and-centos
   if ! id ubuntu &> /dev/null; then
-    # Create password-less `ubuntu` user with metadata "Ubuntu"
-    adduser ubuntu --disabled-password --gecos "Ubuntu"
-
     # Add ubuntu user to sudo group (sudoers will be performed later)
     gpasswd -a ubuntu sudo
 

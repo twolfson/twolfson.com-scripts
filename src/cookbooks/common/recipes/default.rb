@@ -35,3 +35,14 @@ file "/etc/timezone" do
   # When we update, re-run our dpkg-reconfigure
   notifies(:run, "execute[dpkg-reconfigure-tzdata]", :immediately)
 end
+
+# Guarantee we have a `ubuntu` user provisioned
+user "ubuntu" do
+  # DEV: `comment` acts as `adduser --gecos`
+  comment("Ubuntu")
+
+  # Create our user with a locked password
+  action(:create)
+  # DEV: `action(:lock)` acts as as `adduser --disabled-password`
+  action(:lock)
+end
