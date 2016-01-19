@@ -157,3 +157,20 @@ file "/etc/nginx/sites-enabled/default" do
   # Upon deletion, reload NGINX
   notifies(:reload, "service[nginx]", :immediately)
 end
+
+# Guarantee `python` and `pip` are installed
+# @depends_on exectue[apt-get-update-periodic] (to make sure apt is updated)
+# DEV: Equivalent to `sudo apt-get install -y "python-setuptools=3.3-1ubuntu2" "python-pip=1.5.4-1ubuntu3"`
+apt_package "python-setuptools" do
+  version "3.3-1ubuntu2"
+end
+apt_package "python-pip" do
+  version "1.5.4-1ubuntu3"
+end
+# If pip is out of date, then upgrade it
+execute "upgrade-pip" do
+  command "sudo pip install \"pip==7.1.2\""
+  # `pip --version`: `pip 7.1.2 from /usr/local/lib/python2.7/dist-packages (python 2.7)`
+  # DEV: Equivalent to `! pip --version | grep "pip 7.1.2" &> /dev/null`
+  not_if "pip --version | grep \"pip 7.1.2\""
+end
