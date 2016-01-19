@@ -1,0 +1,1 @@
+cookbooks/common/recipes/default.rb
