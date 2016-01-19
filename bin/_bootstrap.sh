@@ -39,6 +39,7 @@ if ! which chef-client &> /dev/null ||
 fi
 
 # TODO: Remove me when Chef dev is over
+# TODO: Keep a `twolfson.com.sh` and make it do the `chef` invocation for us @_@
 # chef-client --local-mode --override-runlist "recipe['twolfson.com']"
 echo "Development for Chef going on" 1>&2
 exit 0

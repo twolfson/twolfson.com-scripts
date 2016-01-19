@@ -1,7 +1,4 @@
-# Load in common dependencies
+# Load in our dependencies
 include_recipe "common"
 
-# Run our provisioner
-file "/home/vagrant/hello.txt" do
-  content "hi"
-end
+# TODO: Define our twolfson.com specific requisites
