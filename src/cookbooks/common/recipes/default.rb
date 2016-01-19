@@ -192,6 +192,15 @@ end
 # Set up our supervisor configuration
 # TODO: Use a template for `supervisord.conf`
 #   and don't run any `twolfson.com` services by default (e.g. use `if twolfson.com` for conf blocks)
+execute "update-supervisorctl" do
+  # DEV: We need to access socket as root user
+  # DEV: This command might fail if we change anything with `supervisor.d's` config
+  #   Be sure to use `/etc/init.d/supervisord restart` in that case
+  command("sudo supervisorctl update")
+  action(:nothing)
+  # Prevent running this handler if `supervisorctl` isn't installed
+  only_if("sudo which supervisorctl")
+end
 file "/etc/supervisord.conf" do
   owner("root")
   group("root")
@@ -201,12 +210,7 @@ file "/etc/supervisord.conf" do
 
   # When this file changes, update supervisor
   # DEV: This comes before the `init.d` install due to the `init.d` service needing `/etc/supervisord.conf`
-  # TODO: Sort this out
-    # # Load supervisor config changes
-    # # DEV: We need to access socket as root user
-    # # DEV: This command might fail if we change anything with `supervisor.d's` config
-    # #   Be sure to use `/etc/init.d/supervisord restart` in that case
-    # sudo supervisorctl update
+  notifies(:run, "execute[update-supervisorctl]", :immediately)
 end
 # Install our `init` script
 # http://supervisord.org/running.html#running-supervisord-automatically-on-startup
