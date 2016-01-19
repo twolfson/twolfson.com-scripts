@@ -16,7 +16,7 @@ supervisor_provisioner() {
   # If supervisor is not installed, then install it
   if ! which supervisorctl &> /dev/null; then
     # Install supervisor
-    sudo pip install "supervisor==3.2.0"
+    # sudo pip install "supervisor==3.2.0"
 
     # Create folder for log files
     sudo mkdir --mode u=rwx,g=rx,o=rx /var/log/supervisor
