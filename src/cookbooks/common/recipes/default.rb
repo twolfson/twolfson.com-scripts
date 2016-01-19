@@ -1,7 +1,7 @@
 # Define our constants
 data_dir = ENV.fetch("data_dir")
 
-# If `apt-get update` has never run nor ran in the past 24 hours, then update it now
+# Guarantee `apt-get update` has been run in past 24 hours
 # http://stackoverflow.com/a/9250482
 # DEV: Relies on apt hook
 execute "apt-get-update-periodic" do
