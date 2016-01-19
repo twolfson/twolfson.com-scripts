@@ -4,12 +4,14 @@ data_dir = ENV.fetch("data_dir")
 # Guarantee `apt-get update` has been run in past 24 hours
 # http://stackoverflow.com/a/9250482
 # DEV: Relies on apt hook
+#   http://serverfault.com/questions/20747/find-last-time-update-was-performed-with-apt-get
 execute "apt-get-update-periodic" do
   command("sudo apt-get update")
   only_if do
     # If we have have ran `apt-get update` before
     if File.exists?("/var/lib/apt/periodic/update-success-stamp")
       # Return if we ran it in the past 24 hours
+      # DEV: Equivalent to `date +%s` compared to `stat --format %Y`
       one_day_ago = Time.now().utc() - (60 * 60 * 24)
       next File.mtime("/var/lib/apt/periodic/update-success-stamp") < one_day_ago
     # Otherwise, tell it to run
@@ -39,6 +41,9 @@ end
 
 # Guarantee we have a `ubuntu` user provisioned
 # DEV: Digital Ocean's Ubuntu images provision us as the root user so we must create an ubuntu user
+# DEV: Equivalent to `id ubuntu` then `adduser ubuntu --disabled-password --gecos "Ubuntu` and `gpasswd -a ubuntu sudo`
+#   https://github.com/mizzy/specinfra/blob/v2.47.0/lib/specinfra/command/base/user.rb#L3-L5
+#   https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04
 user "ubuntu" do
   # Create our user with a locked password
   action(:create)
@@ -54,6 +59,7 @@ user "ubuntu" do
 end
 # Guarantee `.ssh` directory for authorized keys
 # @depends_on user[ubuntu] (for `/home/ubuntu` creation)
+# DEV: Equivalent to `mkdir ubuntu:ubuntu --mode u=rwx,g=,o= /home/ubuntu/.ssh`
 directory "/home/ubuntu/.ssh" do
   owner("ubuntu")
   group("ubuntu")
