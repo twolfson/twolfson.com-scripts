@@ -89,19 +89,19 @@ end
 # @depends_on user[ubuntu] (to prevent lock out)
 # @depends_on directory[/home/ubuntu/.ssh] (for directory creation)
 # DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
-# file "/home/ubuntu/.ssh/authorized_keys" do
-#   owner("ubuntu")
-#   group("ubuntu")
-#   mode("600") # u=rw,g=,o=
+file "/home/ubuntu/.ssh/authorized_keys" do
+  owner("ubuntu")
+  group("ubuntu")
+  mode("600") # u=rw,g=,o=
 
-#   content(File.new("#{data_dir}/home/ubuntu/.ssh/authorized_keys").read())
-# end
-# # WARNING: THIS WILL LOCK OUT THE ROOT USER
-# directory "/root/.ssh" do
-#   owner("root")
-#   group("root")
-#   mode("700") # u=rwx,g=,o=
-# end
+  content(File.new("#{data_dir}/home/ubuntu/.ssh/authorized_keys").read())
+end
+# WARNING: THIS WILL LOCK OUT THE ROOT USER
+directory "/root/.ssh" do
+  owner("root")
+  group("root")
+  mode("700") # u=rwx,g=,o=
+end
 # # @depends_on directory[/root/.ssh] (for directory creation)
 # file "/root/.ssh/authorized_keys" do
 #   owner("root")
