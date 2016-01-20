@@ -49,7 +49,10 @@ user "ubuntu" do
   # DEV: `action(:lock)` acts as as `adduser --disabled-password`
   action([:create, :lock])
 
-  # Add a comment about their user info
+  # Define common user info
+  group("ubuntu")
+  home("/home/ubuntu")
+  shell("/bin/bash")
   # DEV: `comment` acts as `adduser --gecos`
   comment("Ubuntu")
 end
