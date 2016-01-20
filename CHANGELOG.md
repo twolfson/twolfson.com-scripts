@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.1.0 - Repaired broken user provisioning for `ubuntu`
+
 2.0.2 - Updated DNS docs
 
 2.0.1 - Updated provisioner docs
