@@ -81,27 +81,27 @@ end
 # @depends_on user[ubuntu] (to prevent lock out)
 # @depends_on directory[/home/ubuntu/.ssh] (for directory creation)
 # DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
-file "/home/ubuntu/.ssh/authorized_keys" do
-  owner("ubuntu")
-  group("ubuntu")
-  mode("600") # u=rw,g=,o=
+# file "/home/ubuntu/.ssh/authorized_keys" do
+#   owner("ubuntu")
+#   group("ubuntu")
+#   mode("600") # u=rw,g=,o=
 
-  content(File.new("#{data_dir}/home/ubuntu/.ssh/authorized_keys").read())
-end
-# WARNING: THIS WILL LOCK OUT THE ROOT USER
-directory "/root/.ssh" do
-  owner("root")
-  group("root")
-  mode("700") # u=rwx,g=,o=
-end
-# @depends_on directory[/root/.ssh] (for directory creation)
-file "/root/.ssh/authorized_keys" do
-  owner("root")
-  group("root")
-  mode("600") # u=rw,g=,o=
+#   content(File.new("#{data_dir}/home/ubuntu/.ssh/authorized_keys").read())
+# end
+# # WARNING: THIS WILL LOCK OUT THE ROOT USER
+# directory "/root/.ssh" do
+#   owner("root")
+#   group("root")
+#   mode("700") # u=rwx,g=,o=
+# end
+# # @depends_on directory[/root/.ssh] (for directory creation)
+# file "/root/.ssh/authorized_keys" do
+#   owner("root")
+#   group("root")
+#   mode("600") # u=rw,g=,o=
 
-  content(File.new("#{data_dir}/root/.ssh/authorized_keys").read())
-end
+#   content(File.new("#{data_dir}/root/.ssh/authorized_keys").read())
+# end
 
 # Lock out SSH shells for non-`ubuntu` users
 # @depends_on file[/home/ubuntu/.ssh/ubuntu/authorized_keys] (to prevent lock out)
@@ -109,9 +109,9 @@ end
 #   and `sudo usermod --shell /usr/sbin/nologin root`
 # https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L53-L55
 # https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L61-L63
-user "root" do
-  shell("/usr/sbin/nologin")
-end
+# user "root" do
+#   shell("/usr/sbin/nologin")
+# end
 user "sync" do
   shell("/usr/sbin/nologin")
 end
@@ -120,24 +120,24 @@ end
 # @depends_on file[/home/ubuntu/.ssh/ubuntu/authorized_keys] (to prevent lock out)
 # WARNING: THIS WILL LOCK OUT THE ROOT USER
 # DEV: Equivalent to `sudo service ssh *`
-service "ssh" do
-  # Always enable and run our SSH server
-  # https://docs.chef.io/resource_service.html#examples
-  provider(Chef::Provider::Service::Upstart)
-  supports(:reload => true, :restart => true, :status => true)
-  action([:enable, :start])
-end
-file "/etc/ssh/sshd_config" do
-  owner("root")
-  group("root")
-  mode("644") # u=rw,g=r,o=r
+# service "ssh" do
+#   # Always enable and run our SSH server
+#   # https://docs.chef.io/resource_service.html#examples
+#   provider(Chef::Provider::Service::Upstart)
+#   supports(:reload => true, :restart => true, :status => true)
+#   action([:enable, :start])
+# end
+# file "/etc/ssh/sshd_config" do
+#   owner("root")
+#   group("root")
+#   mode("644") # u=rw,g=r,o=r
 
-  content(File.new("#{data_dir}/etc/ssh/sshd_config").read())
+#   content(File.new("#{data_dir}/etc/ssh/sshd_config").read())
 
-  # When we update, reload our ssh service
-  # http://unix.stackexchange.com/a/127887
-  notifies(:reload, "service[ssh]", :immediately)
-end
+#   # When we update, reload our ssh service
+#   # http://unix.stackexchange.com/a/127887
+#   notifies(:reload, "service[ssh]", :immediately)
+# end
 
 # Guarantee `nginx` is installed
 # @depends_on exectue[apt-get-update-periodic] (to make sure apt is updated)
