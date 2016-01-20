@@ -52,6 +52,9 @@ user "ubuntu" do
   # Add a comment about their user info
   # DEV: `comment` acts as `adduser --gecos`
   comment("Ubuntu")
+
+  # Guarantee home directory is created
+  manage_home(true)
 end
 # Add `ubuntu` to `sudo` group
 # DEV: Equivalent to `gpasswd -a ubuntu sudo`
