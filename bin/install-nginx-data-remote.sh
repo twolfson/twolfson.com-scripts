@@ -19,8 +19,10 @@ fi
 while true; do
   case "$1" in
     # DEV: We can dodge `&&` since we are using `set -e`
+    # DEV: `.crt` and `.key` are generated via an SSL authority
     --crt) shift; export crt_path="$1"; shift || break;;
     --key) shift; export key_path="$1"; shift || break;;
+    # DEV: `dhparam` is generated via `openssl`, see `bootstrap-travis-ci.sh` for details
     --dhparam) shift; export dhparam_path="$1"; shift || break;;
     *) break;;
   esac
