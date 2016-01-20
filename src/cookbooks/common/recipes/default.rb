@@ -52,17 +52,22 @@ user "ubuntu" do
   # Add a comment about their user info
   # DEV: `comment` acts as `adduser --gecos`
   comment("Ubuntu")
-
-  # Guarantee home directory is created
-  manage_home(true)
 end
 # Add `ubuntu` to `sudo` group
 # DEV: Equivalent to `gpasswd -a ubuntu sudo`
 group "sudo" do
   members("ubuntu")
 end
+# Guarantee home directory for ubuntu user
+# @depends_on user[ubuntu] (for owner/group reference)
+directory "/home/ubuntu" do
+  owner("ubuntu")
+  group("ubuntu")
+  mode("755") # u=rwx,g=rx,o=rx
+end
 # Guarantee `.ssh` directory for authorized keys
-# @depends_on user[ubuntu] (for `/home/ubuntu` creation)
+# @depends_on user[ubuntu] (for owner/group reference)
+# @depends_on directory[/home/ubuntu] (for parent directory creation)
 # DEV: Equivalent to `mkdir ubuntu:ubuntu --mode u=rwx,g=,o= /home/ubuntu/.ssh`
 directory "/home/ubuntu/.ssh" do
   owner("ubuntu")
