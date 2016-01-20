@@ -45,9 +45,11 @@ end
 #   https://github.com/mizzy/specinfra/blob/v2.47.0/lib/specinfra/command/base/user.rb#L3-L5
 #   https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04
 user "ubuntu" do
-  # Create our user with a locked password
-  # DEV: `action(:lock)` acts as as `adduser --disabled-password`
-  action([:create, :lock])
+  # Create our user with a non-crypt password
+  # DEV: `*` allows for non-password SSH login whereas `!` prevents it
+  #   http://linux.die.net/man/5/shadow
+  action([:create])
+  password("*")
 
   # Define common user info
   home("/home/ubuntu")
