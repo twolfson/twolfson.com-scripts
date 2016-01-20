@@ -50,7 +50,6 @@ user "ubuntu" do
   action([:create, :lock])
 
   # Define common user info
-  group("ubuntu")
   home("/home/ubuntu")
   shell("/bin/bash")
   # DEV: `comment` acts as `adduser --gecos`
