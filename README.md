@@ -139,10 +139,11 @@ bundle install
 ./test.sh
 ```
 
-To make iterating on our test suite faster, we have set up a `SKIP_PROVISION` environment variable. This skips running `vagrant provision` in our tests:
+To make iterating on our test suite faster, we have set up `SKIP_LINT` and `SKIP_PROVISION` environment variables. This skips running linting and `vagrant provision` in our tests:
 
 ```bash
-SKIP_PROVISION=TRUE ./test.sh
+# Skip both linting and provisioning
+SKIP_LINT=TRUE SKIP_PROVISION=TRUE ./test.sh
 ```
 
 [Ruby]: https://www.ruby-lang.org/en/
