@@ -5,7 +5,9 @@ require_relative "utils/serverspec"
 describe "Open ports" do
   it "only have SSH, HTTP, and HTTPS listening to the world" do
     # Define our allowed ports
+    # rubocop:disable Style/MutableConstant
     ALLOWED_PORTS = [22, 80, 443]
+    # rubocop:enable Style/MutableConstant
 
     # Pluck the listening ports (IPv4/IPv6 on TCP/UDP)
     # https://github.com/mizzy/serverspec/blob/v2.24.3/lib/serverspec/type/port.rb#L33
@@ -38,7 +40,7 @@ describe "Open ports" do
       # tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN
       # into:
       # 80 (int)
-      port_num = %r{(0\.0\.0\.0|::):([0-9]+) }.match(open_port)[2].to_i
+      port_num = /(0\.0\.0\.0|::):([0-9]+)/.match(open_port)[2].to_i
       expect(ALLOWED_PORTS).to(include(port_num),
         "Did not expect \"#{port_num}\" to be listening to everything\n  \"#{open_port}\"")
     end
@@ -50,8 +52,10 @@ describe "Login shells" do
   #   We can still access other users via `sudo -u <user> bash`
   it "only `ubuntu` has a login shell" do
     # Define our constants
+    # rubocop:disable Style/MutableConstant
     ALLOWED_USERS = ["ubuntu"]
     EMPTY_SHELLS = ["/usr/sbin/nologin", "/bin/false", nil]
+    # rubocop:enable Style/MutableConstant
 
     # If we are on Vagrant, allow a Vagrant user to use ssh
     if `which vagrant` != ""

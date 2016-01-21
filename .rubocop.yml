@@ -12,15 +12,23 @@ AllCops:
     - tmp/**/*
     - vendor/**/*
 
+# Don't require parameters to line up on same line
+# DEV: Sometimes we are nested and don't want to hit line limit easily
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/align_parameters.rb
+Style/AlignParameters:
+  Enabled: false
+
 # Use hash rockets to prevent confusion when using symbols as values
 # Example: `:action => :create`, not `action: :create`
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/hash_syntax.rb
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/config/enabled.yml#L313
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
 
 # Allow (and lean towards using) parenthenses
 # Example: `package('bash').to(be_installed())`, not `to(be_installed)`
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/method_call_parentheses.rb
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/config/enabled.yml#L392
 Style/MethodCallParentheses:
   Enabled: false
 
@@ -29,8 +37,21 @@ Style/MethodCallParentheses:
 # DEV: There is no performance loss as the compiler/interpreter will optimize hot code
 #   https://viget.com/extend/just-use-double-quoted-ruby-strings
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/string_literals.rb
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/config/enabled.yml#L758
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+# Perform similar enhancement for interpolated quotes
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/string_literals_in_interpolation.rb
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+# Allow (and lean towards using) trailing commas in literals
+# Example: `[1,\n2,\n3,\n]`, not `[1,\n2,\n3\n]`
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/trailing_comma_in_literal.rb
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/config/enabled.yml#L797
+Style/TrailingCommaInLiteral:
+  Enabled: false
 
 Metrics/LineLength:
   Max: 120
