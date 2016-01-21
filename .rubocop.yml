@@ -1,3 +1,23 @@
+# Ignore third party and temporary files
+AllCops:
+  Exclude:
+    - bin/htmldiff
+    - bin/ldiff
+    - bin/rspec
+    - bin/rubocop
+    - bin/ruby-parse
+    - bin/ruby-rewrite
+    - bin/serverspec-init
+    - node_modules/**/*
+    - tmp/**/*
+    - vendor/**/*
+
+# Use hash rockets to prevent confusion when using symbols as values
+# Example: `:action => :create`, not `action: :create`
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/hash_syntax.rb
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
+
 # Allow (and lean towards using) parenthenses
 # Example: `package('bash').to(be_installed())`, not `to(be_installed)`
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/method_call_parentheses.rb

@@ -208,7 +208,7 @@ end
 directory "/var/log/supervisor" do
   owner("root")
   group("root")
-  mode ("755") # u=rwx,g=rx,o=rx
+  mode("755") # u=rwx,g=rx,o=rx
 end
 # Set up our supervisor configuration
 # TODO: Use a template for `supervisord.conf`
@@ -216,7 +216,7 @@ end
 file "/etc/supervisord.conf" do
   owner("root")
   group("root")
-  mode ("644") # u=rw,g=r,o=r
+  mode("644") # u=rw,g=r,o=r
 
   content(File.new("#{data_dir}/etc/supervisord.conf").read())
 end

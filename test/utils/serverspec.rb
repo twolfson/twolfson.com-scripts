@@ -32,10 +32,10 @@ OTHER_WX = OTHER_W | OTHER_X
 OTHER_RWX = OTHER_R | OTHER_W | OTHER_X
 
 # Define user/group constants
-ROOT_USER = "root"
-ROOT_GROUP = "root"
-UBUNTU_USER = "ubuntu"
-UBUNTU_GROUP = "ubuntu"
+ROOT_USER = "root".freeze()
+ROOT_GROUP = "root".freeze()
+UBUNTU_USER = "ubuntu".freeze()
+UBUNTU_GROUP = "ubuntu".freeze()
 
 # If we are using a SSH backend, then configure it
 if ENV["SERVERSPEC_BACKEND"] == "ssh"
