@@ -1,0 +1,16 @@
+# Allow (and lean towards using) parenthenses
+# Example: `package('bash').to(be_installed())`, not `to(be_installed)`
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/method_call_parentheses.rb
+Style/MethodCallParentheses:
+  Enabled: false
+
+# Require double quotes to always be used for consistency
+# Example: "hello", not 'hello'
+# DEV: There is no performance loss as the compiler/interpreter will optimize hot code
+#   https://viget.com/extend/just-use-double-quoted-ruby-strings
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/string_literals.rb
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Metrics/LineLength:
+  Max: 120

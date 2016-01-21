@@ -12,6 +12,9 @@ node_modules/
 bin/htmldiff
 bin/ldiff
 bin/rspec
+bin/rubocop
+bin/ruby-parse
+bin/ruby-rewrite
 bin/serverspec-init
 
 # Ignore temporary files
