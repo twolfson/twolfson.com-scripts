@@ -2,6 +2,7 @@
 # http://stackoverflow.com/a/20732016
 class Chef
   class Provider::DataFile < Provider::File
+    provides(:data_file)
   end
 end
 
