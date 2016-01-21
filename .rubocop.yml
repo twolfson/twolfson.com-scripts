@@ -18,12 +18,10 @@ AllCops:
 Style/AlignParameters:
   Enabled: false
 
-# Use hash rockets to prevent confusion when using symbols as values
-# Example: `:action => :create`, not `action: :create`
-# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/hash_syntax.rb
-# https://github.com/bbatsov/rubocop/blob/v0.36.0/config/enabled.yml#L313
-Style/HashSyntax:
-  EnforcedStyle: hash_rockets
+# Don't require documentation for every class/module
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/documentation.rb
+Style/Documentation:
+  Enabled: false
 
 # Prefer imperative logic rather than 1 liner `return + if`
 # Example: `if a; return 1; else; return 2; end`, not `return 1 if a; return 2`
@@ -32,11 +30,12 @@ Style/HashSyntax:
 Style/GuardClause:
   Enabled: false
 
-# Prefer concatenation rather than trailing slash hacks
-# DEV: Skipping concatenation is a micro-optimization. The compiler/interpreter will optimize it out if necessary
-# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/line_end_concatenation.rb
-Style/LineEndConcatenation:
-  Enabled: false
+# Use hash rockets to prevent confusion when using symbols as values
+# Example: `:action => :create`, not `action: :create`
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/hash_syntax.rb
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/config/enabled.yml#L313
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
 
 # Prefer imperative logic rather than 1 liner `return + if`
 # Example: `if a; return 1; end`, not `return 1 if a`
@@ -45,12 +44,29 @@ Style/LineEndConcatenation:
 Style/IfUnlessModifier:
   Enabled: false
 
+# Prefer concatenation rather than trailing slash hacks
+# DEV: Skipping concatenation is a micro-optimization. The compiler/interpreter will optimize it out if necessary
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/line_end_concatenation.rb
+Style/LineEndConcatenation:
+  Enabled: false
+
 # Allow (and lean towards using) parenthenses
 # Example: `package('bash').to(be_installed())`, not `to(be_installed)`
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/method_call_parentheses.rb
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/config/enabled.yml#L392
 Style/MethodCallParentheses:
   Enabled: false
+
+# Allow `self` to be used for clarity
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/redundant_self.rb
+Style/RedundantSelf:
+  Enabled: false
+
+# Require no whitespace for default values in parametes
+# Example: `def hello(a=1)`, not `def hello(a = 1)`
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/space_around_equals_in_parameter_default.rb
+Style/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
 
 # Require double quotes to always be used for consistency
 # Example: "hello", not 'hello'
