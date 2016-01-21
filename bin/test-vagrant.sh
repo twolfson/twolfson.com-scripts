@@ -8,11 +8,6 @@ if ! vagrant status | grep -E "default\s+running" &> /dev/null; then
   exit 1
 fi
 
-# If we should lint our files, then run our linter
-if test "$SKIP_LINT" != "TRUE"; then
-  bundle exec rubocop
-fi
-
 # If we should provision our Vagrant box, then provision it
 if test "$SKIP_PROVISION" != "TRUE"; then
   vagrant provision
