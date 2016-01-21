@@ -19,4 +19,10 @@ describe "`ubuntu` user" do
     expect(ubuntu_sudoers_file.group).to(eq(ROOT_GROUP))
     expect(ubuntu_sudoers_file.content).to(include("ubuntu ALL=(ALL) NOPASSWD:ALL"))
   end
+
+  it "has no password yet can log in via SSH" do
+    # DEV: `!` and `*` are non-crypt passwords but only `*` allows SSH access
+    ubuntu_user = user("ubuntu")
+    expect(ubuntu_user.encrypted_password).to(eq("*"))
+  end
 end
