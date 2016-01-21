@@ -25,6 +25,26 @@ Style/AlignParameters:
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
 
+# Prefer imperative logic rather than 1 liner `return + if`
+# Example: `if a; return 1; else; return 2; end`, not `return 1 if a; return 2`
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/guard_clause.rb
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/config/enabled.yml#L306
+Style/GuardClause:
+  Enabled: false
+
+# Prefer concatenation rather than trailing slash hacks
+# DEV: Skipping concatenation is a micro-optimization. The compiler/interpreter will optimize it out if necessary
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/line_end_concatenation.rb
+Style/LineEndConcatenation:
+  Enabled: false
+
+# Prefer imperative logic rather than 1 liner `return + if`
+# Example: `if a; return 1; end`, not `return 1 if a`
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/spec/rubocop/cop/style/if_unless_modifier_spec.rb
+# https://github.com/bbatsov/rubocop/blob/v0.36.0/config/enabled.yml#L324
+Style/IfUnlessModifier:
+  Enabled: false
+
 # Allow (and lean towards using) parenthenses
 # Example: `package('bash').to(be_installed())`, not `to(be_installed)`
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/method_call_parentheses.rb
