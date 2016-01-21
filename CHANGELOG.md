@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.3.1 - Added test for provisioning last tag to prevent missing deletions
+
 2.3.0 - Added linting via RuboCop. Fixes #7
 
 2.2.0 - Added upgrade for `openssh-server` to patch vulnerability
