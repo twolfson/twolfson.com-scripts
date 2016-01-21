@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.1.2 - Added assertion to prevent future SSH lockouts
+
 2.1.1 - Added notes for origins of sensitive remote data
 
 2.1.0 - Repaired broken user provisioning for `ubuntu`
