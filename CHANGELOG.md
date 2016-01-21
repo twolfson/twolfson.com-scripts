@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.2.0 - Added upgrade for `openssh-server` to patch vulnerability
+
 2.1.2 - Added assertion to prevent future SSH lockouts
 
 2.1.1 - Added notes for origins of sensitive remote data
