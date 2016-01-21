@@ -28,12 +28,10 @@ execute "dpkg-reconfigure-tzdata" do
   command("sudo dpkg-reconfigure --frontend noninteractive tzdata")
   action(:nothing)
 end
-file "/etc/timezone" do
+data_file "/etc/timezone" do
   owner("root")
   group("root")
   mode("644") # u=rw,g=r,o=r
-
-  content(File.new("#{data_dir}/etc/timezone").read())
 
   # When we update, re-run our dpkg-reconfigure
   notifies(:run, "execute[dpkg-reconfigure-tzdata]", :immediately)
