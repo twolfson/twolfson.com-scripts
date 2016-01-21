@@ -1,6 +1,3 @@
-# Define our constants
-data_dir = ENV.fetch("data_dir")
-
 # Guarantee `apt-get update` has been run in past 24 hours
 # http://stackoverflow.com/a/9250482
 # DEV: Relies on apt hook
@@ -79,24 +76,20 @@ end
 # Guarantee `sudo` rights for `ubuntu` for developer sanity
 # https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on-ubuntu-and-centos
 # @depends_on user[ubuntu] (for `user` reference)
-file "/etc/sudoers.d/ubuntu" do
+data_file "/etc/sudoers.d/ubuntu" do
   owner("root")
   group("root")
   mode("400") # u=r,g=,o=
-
-  content(File.new("#{data_dir}/etc/sudoers.d/ubuntu").read())
 end
 
 # Guarantee we have authorized keys synced
 # @depends_on user[ubuntu] (to prevent lock out)
 # @depends_on directory[/home/ubuntu/.ssh] (for directory creation)
 # DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
-file "/home/ubuntu/.ssh/authorized_keys" do
+data_file "/home/ubuntu/.ssh/authorized_keys" do
   owner("ubuntu")
   group("ubuntu")
   mode("600") # u=rw,g=,o=
-
-  content(File.new("#{data_dir}/home/ubuntu/.ssh/authorized_keys").read())
 end
 # WARNING: THIS WILL LOCK OUT THE ROOT USER
 directory "/root/.ssh" do
@@ -105,16 +98,14 @@ directory "/root/.ssh" do
   mode("700") # u=rwx,g=,o=
 end
 # @depends_on directory[/root/.ssh] (for directory creation)
-file "/root/.ssh/authorized_keys" do
+data_file "/root/.ssh/authorized_keys" do
   owner("root")
   group("root")
   mode("600") # u=rw,g=,o=
-
-  content(File.new("#{data_dir}/root/.ssh/authorized_keys").read())
 end
 
 # Lock out SSH shells for non-`ubuntu` users
-# @depends_on file[/home/ubuntu/.ssh/ubuntu/authorized_keys] (to prevent lock out)
+# @depends_on data_file[/home/ubuntu/.ssh/ubuntu/authorized_keys] (to prevent lock out)
 # DEV: Equivalent to `test "$(getent passwd root | cut -f 7 -d ":")" != "/usr/sbin/nologin"`
 #   and `sudo usermod --shell /usr/sbin/nologin root`
 # https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L53-L55
@@ -128,7 +119,7 @@ end
 
 # Configure root for security (e.g. no direct `root` login, restrict SSL algorithms)
 # @depends_on exectue[apt-get-update-periodic] (to make sure apt is updated)
-# @depends_on file[/home/ubuntu/.ssh/ubuntu/authorized_keys] (to prevent lock out)
+# @depends_on data_file[/home/ubuntu/.ssh/ubuntu/authorized_keys] (to prevent lock out)
 # WARNING: SSHD_CONFIG UPDATE WILL LOCK OUT THE ROOT USER
 # Update `openssh-server` for security
 #   https://lobste.rs/s/mzodhj/openssh_client_bug_can_leak_keys_to_malicious_servers
@@ -144,12 +135,10 @@ service "ssh" do
   supports(:reload => true, :restart => true, :status => true)
   action([:enable, :start])
 end
-file "/etc/ssh/sshd_config" do
+data_file "/etc/ssh/sshd_config" do
   owner("root")
   group("root")
   mode("644") # u=rw,g=r,o=r
-
-  content(File.new("#{data_dir}/etc/ssh/sshd_config").read())
 
   # When we update, reload our ssh service
   # http://unix.stackexchange.com/a/127887
@@ -211,22 +200,18 @@ end
 # Set up our supervisor configuration
 # TODO: Use a template for `supervisord.conf`
 #   and don't run any `twolfson.com` services by default (e.g. use `if twolfson.com` for conf blocks)
-file "/etc/supervisord.conf" do
+data_file "/etc/supervisord.conf" do
   owner("root")
   group("root")
   mode("644") # u=rw,g=r,o=r
-
-  content(File.new("#{data_dir}/etc/supervisord.conf").read())
 end
 # Install our `init` script
 # http://supervisord.org/running.html#running-supervisord-automatically-on-startup
 # http://serverfault.com/a/96500
-file "/etc/init.d/supervisord" do
+data_file "/etc/init.d/supervisord" do
   owner("root")
   group("root")
   mode("755") # u=rwx,g=rx,o=rx
-
-  content(File.new("#{data_dir}/etc/init.d/supervisord").read())
 end
 service "supervisord" do
   provider(Chef::Provider::Service::Init)
@@ -246,5 +231,5 @@ execute "update-supervisorctl" do
 
   # When our configuration changes, update ourself
   # DEV: We must wait until `/etc/init.d/supervisord` has launched
-  subscribes(:run, "file[/etc/supervisord.conf]", :delayed)
+  subscribes(:run, "data_file[/etc/supervisord.conf]", :delayed)
 end
