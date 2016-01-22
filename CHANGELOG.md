@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.4.0 - Added `data_file` resource. Fixes #8
+
 2.3.1 - Added test for provisioning last tag to prevent missing deletions
 
 2.3.0 - Added linting via RuboCop. Fixes #7
