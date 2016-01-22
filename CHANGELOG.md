@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.4.1 - Repaired diff test in Travis CI for `git tag` releases
+
 2.4.0 - Added `data_file` resource. Fixes #8
 
 2.3.1 - Added test for provisioning last tag to prevent missing deletions
