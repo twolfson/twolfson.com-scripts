@@ -233,3 +233,8 @@ execute "update-supervisorctl" do
   # DEV: We must wait until `/etc/init.d/supervisord` has launched
   subscribes(:run, "data_file[/etc/supervisord.conf]", :delayed)
 end
+
+# TODO: Guarante SOPS is installed
+# TODO: Consider locking down versions
+# sudo apt-get install gcc git libffi-dev libssl-dev libyaml-dev make openssl python-dev
+# pip install "sops==1.3"
