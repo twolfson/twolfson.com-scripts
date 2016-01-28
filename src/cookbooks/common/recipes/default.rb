@@ -234,6 +234,7 @@ execute "update-supervisorctl" do
   subscribes(:run, "data_file[/etc/supervisord.conf]", :delayed)
 end
 
+# https://gist.github.com/twolfson/01d515258eef8bdbda4f
 # TODO: Guarantee SOPS is installed
 # TODO: Consider locking down versions
 # sudo apt-get install gcc git libffi-dev libssl-dev libyaml-dev make openssl python-dev
