@@ -237,4 +237,5 @@ end
 # TODO: Guarante SOPS is installed
 # TODO: Consider locking down versions
 # sudo apt-get install gcc git libffi-dev libssl-dev libyaml-dev make openssl python-dev
-# pip install "sops==1.3"
+# sudo pip install "sops==1.3"
+# TODO: Handle rsync + install of `gpg` keys (prob done via a bash script, not Chef)
