@@ -234,8 +234,9 @@ execute "update-supervisorctl" do
   subscribes(:run, "data_file[/etc/supervisord.conf]", :delayed)
 end
 
-# TODO: Guarante SOPS is installed
+# TODO: Guarantee SOPS is installed
 # TODO: Consider locking down versions
 # sudo apt-get install gcc git libffi-dev libssl-dev libyaml-dev make openssl python-dev
 # sudo pip install "sops==1.3"
 # TODO: Handle rsync + install of `gpg` keys (prob done via a bash script, not Chef)
+# TODO: Want to explore other file signatures for SOPS; this isn't too compatible with our common/dev/test/prod setup nor the `static_*.json` breakdown
