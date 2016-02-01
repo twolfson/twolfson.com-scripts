@@ -4,7 +4,7 @@ set -e
 
 # Define a usage function
 echo_usage() {
-  echo "Usage: $0 \"name-of-host-in-ssh-config\" <branch> --secret \"path/to/secret.js\"" 1>&2
+  echo "Usage: $0 \"name-of-host-in-ssh-config\" <branch>" 1>&2
 }
 
 # If there is no remote server to bootstrap on, then complain and leave
@@ -23,24 +23,6 @@ if test "$branch" = "" || test "${branch:0:1}" = "-"; then
 else
   shift
 fi
-
-# Parse remaining arguments
-while true; do
-  case "$1" in
-    --secret) shift; export secret_path="$1"; shift || break;;
-    *) break;;
-  esac
-done
-
-# If we don't have a secret file, then complain and leave
-if test "$secret_path" = ""; then
-  echo "Path to secret config was not set. Please pass it as an argument (\`--secret\`) to \`$0\`" 1>&2
-  echo_usage
-  exit 1
-fi
-
-# Resolve the full path for secret
-secret_path="$(readlink -f "$secret_path")"
 
 # Output future commands
 set -x
@@ -79,9 +61,6 @@ ssh "$target_host" "mkdir -p $base_target_dir"
 # Expanded -havz is `--human-readable --archive --verbose --compress`
 # DEV: We use trailing slashes to force uploading into non-nested directories
 rsync --human-readable --archive --verbose --compress "twolfson.com/" "$target_host":"$target_dir/"
-
-# Upload our secret config
-rsync --human-readable --archive --verbose --compress "$secret_path" "$target_host":"$target_dir/config/secret.js"
 
 # On the remote server, install our dependencies
 # DEV: We perform this on the server to prevent inconsistencies between development and production
