@@ -104,6 +104,21 @@ Host digital-my-server
 
 [data/home/ubuntu/.ssh/authorized_keys]: data/home/ubuntu/.ssh/authorized_keys
 
+### Managing PGP data
+We use [PGP][] and [SOPS][] for storing our secrets. To add a new PGP key, follow the steps below:
+
+- Find full fingerprint of key we want to export
+    - `gpg --fingerprint`
+    - Fingerprint will be `740D DBFA...` in `Key fingerprint = 740D DBFA...`
+- Extract private key to file
+    - `gpg --export-secret-keys --armor {{fingerprint}} > private.rsa`
+    - `--armor` exports a human-friendly ASCII format instead of binary
+- Upload/import private key to our server
+    - `bin/install-pgp-data-remote.sh my-digital-server --secret-key private.rsa`
+
+[PGP]: https://en.wikipedia.org/wiki/Pretty_Good_Privacy
+[SOPS]: https://github.com/mozilla/sops
+
 ### Updating a server configuration
 We reuse our provisioning script for managing server state. As a result, we can reuse it for updates:
 
@@ -112,7 +127,6 @@ bin/bootstrap-remote.sh digital-my-server
 
 # If we need to use a non-master ref, then pass it as a second parameter
 # bin/bootstrap-remote.com.sh digital-my-server dev/new.feature
-
 ```
 
 ### Deploying a service
