@@ -234,10 +234,18 @@ execute "update-supervisorctl" do
   subscribes(:run, "data_file[/etc/supervisord.conf]", :delayed)
 end
 
-# https://gist.github.com/twolfson/01d515258eef8bdbda4f
-# TODO: Guarantee SOPS is installed
-# TODO: Consider locking down versions
-# sudo apt-get install gcc git libffi-dev libssl-dev libyaml-dev make openssl python-dev
-# sudo pip install "sops==1.3"
+# Guarantee SOPS is installed
+# https://github.com/mozilla/sops/tree/0494bc41911bc6e050ddd8a5da2bbb071a79a5b7#up-and-running-in-60-seconds
+# @depends_on execute[upgrade-pip]
+apt_package("gcc")
+apt_package("libffi-dev")
+apt_package("libssl-dev")
+apt_package("libyaml-dev")
+apt_package("make")
+apt_package("openssl")
+apt_package("python-dev")
+execute "install-sops" do
+  command("sudo pip install \"sops==1.3\"")
+  only_if("! pip freeze | grep \"sops==1.3\"")
+end
 # TODO: Handle rsync + install of `gpg` keys (prob done via a bash script, not Chef)
-# TODO: Want to explore other file signatures for SOPS; this isn't too compatible with our common/dev/test/prod setup nor the `static_*.json` breakdown
