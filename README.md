@@ -49,12 +49,14 @@ As a high level overview of our setup, we use the following:
 - Provisioning is currently done by [Chef][]
     - This is to maximize reuse of common setup
     - For ease of approach to new developers, we typically prefer [bash][]
+- Secrets are managed via [SOPS][]
 - Services are currently all [Node.js][]/[JavaScript][] based
 - Tests are done via [Serverspec][]
     - These are both meant to cover sanity and security
 
-[bash]: https://www.gnu.org/software/bash/
 [Chef]: https://www.chef.io/
+[bash]: https://www.gnu.org/software/bash/
+[SOPS]: https://github.com/mozilla/sops
 [Node.js]: https://nodejs.org/
 [JavaScript]: https://en.wikipedia.org/wiki/JavaScript
 [Serverspec]: http://serverspec.org/
@@ -117,7 +119,6 @@ We use [PGP][] and [SOPS][] for storing our secrets. To add a new PGP key, follo
     - `bin/install-pgp-data-remote.sh my-digital-server --secret-key private.rsa`
 
 [PGP]: https://en.wikipedia.org/wiki/Pretty_Good_Privacy
-[SOPS]: https://github.com/mozilla/sops
 
 ### Updating a server configuration
 We reuse our provisioning script for managing server state. As a result, we can reuse it for updates:
