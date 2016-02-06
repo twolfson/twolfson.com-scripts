@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.6.0 - Upgraded to OpenSSH@2.6 to patch PatrolServer errors
+
 2.5.0 - Moved to SOPS for managing secrets for twolfson.com
 
 2.4.1 - Repaired diff test in Travis CI for `git tag` releases
