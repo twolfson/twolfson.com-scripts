@@ -125,7 +125,7 @@ end
 #   https://lobste.rs/s/mzodhj/openssh_client_bug_can_leak_keys_to_malicious_servers
 #   http://undeadly.org/cgi?action=article&sid=20160114142733
 apt_package "openssh-server" do
-  version("1:6.6p1-2ubuntu2.4")
+  version("1:6.6p1-2ubuntu2.6")
 end
 # DEV: Equivalent to `sudo service ssh *`
 service "ssh" do
