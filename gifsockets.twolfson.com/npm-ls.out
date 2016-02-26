@@ -1,0 +1,420 @@
+root@gifsockets:~# npm ls -g
+/usr/lib
+├─┬ forever@0.11.1
+│ ├─┬ cliff@0.1.8
+│ │ ├── eyes@0.1.8
+│ │ └─┬ winston@0.6.2
+│ │   ├── async@0.1.22
+│ │   ├── cycle@1.0.3
+│ │   ├── pkginfo@0.2.3
+│ │   ├── request@2.9.203
+│ │   └── stack-trace@0.0.9
+│ ├── colors@0.6.2
+│ ├─┬ flatiron@0.3.11
+│ │ ├─┬ broadway@0.2.9
+│ │ │ ├── eventemitter2@0.4.12
+│ │ │ └─┬ winston@0.7.2
+│ │ │   ├── async@0.2.10
+│ │ │   ├── cycle@1.0.3
+│ │ │   ├── eyes@0.1.8
+│ │ │   ├─┬ request@2.16.6
+│ │ │   │ ├── aws-sign@0.2.0
+│ │ │   │ ├── cookie-jar@0.2.0
+│ │ │   │ ├── forever-agent@0.2.0
+│ │ │   │ ├─┬ form-data@0.0.10
+│ │ │   │ │ └─┬ combined-stream@0.0.5
+│ │ │   │ │   └── delayed-stream@0.0.5
+│ │ │   │ ├─┬ hawk@0.10.2
+│ │ │   │ │ ├── boom@0.3.8
+│ │ │   │ │ ├── cryptiles@0.1.3
+│ │ │   │ │ ├── hoek@0.7.6
+│ │ │   │ │ └── sntp@0.1.4
+│ │ │   │ ├── json-stringify-safe@3.0.0
+│ │ │   │ ├── mime@1.2.11
+│ │ │   │ ├── node-uuid@1.4.1
+│ │ │   │ ├── oauth-sign@0.2.0
+│ │ │   │ ├── qs@0.5.6
+│ │ │   │ └── tunnel-agent@0.2.0
+│ │ │   └── stack-trace@0.0.9
+│ │ ├── director@1.1.10
+│ │ ├─┬ optimist@0.6.0
+│ │ │ ├── minimist@0.0.10
+│ │ │ └── wordwrap@0.0.2
+│ │ └─┬ prompt@0.2.11
+│ │   ├─┬ read@1.0.5
+│ │   │ └── mute-stream@0.0.4
+│ │   ├── revalidator@0.1.8
+│ │   └─┬ winston@0.6.2
+│ │     ├── async@0.1.22
+│ │     ├── cycle@1.0.3
+│ │     ├── eyes@0.1.8
+│ │     ├── pkginfo@0.2.3
+│ │     ├── request@2.9.203
+│ │     └── stack-trace@0.0.9
+│ ├─┬ forever-monitor@1.2.3
+│ │ ├─┬ broadway@0.2.10
+│ │ │ ├── eventemitter2@0.4.14
+│ │ │ ├─┬ utile@0.2.1
+│ │ │ │ ├── async@0.2.10
+│ │ │ │ ├── deep-equal@0.2.1
+│ │ │ │ ├── i@0.3.2
+│ │ │ │ ├─┬ mkdirp@0.5.0
+│ │ │ │ │ └── minimist@0.0.8
+│ │ │ │ ├── ncp@0.4.2
+│ │ │ │ └── rimraf@2.2.8
+│ │ │ └─┬ winston@0.7.2
+│ │ │   ├── async@0.2.10
+│ │ │   ├── cycle@1.0.3
+│ │ │   ├── eyes@0.1.8
+│ │ │   ├─┬ request@2.16.6
+│ │ │   │ ├── aws-sign@0.2.0
+│ │ │   │ ├── cookie-jar@0.2.0
+│ │ │   │ ├── forever-agent@0.2.0
+│ │ │   │ ├─┬ form-data@0.0.10
+│ │ │   │ │ └─┬ combined-stream@0.0.5
+│ │ │   │ │   └── delayed-stream@0.0.5
+│ │ │   │ ├─┬ hawk@0.10.2
+│ │ │   │ │ ├── boom@0.3.8
+│ │ │   │ │ ├── cryptiles@0.1.3
+│ │ │   │ │ ├── hoek@0.7.6
+│ │ │   │ │ └── sntp@0.1.4
+│ │ │   │ ├── json-stringify-safe@3.0.0
+│ │ │   │ ├── mime@1.2.11
+│ │ │   │ ├── node-uuid@1.4.1
+│ │ │   │ ├── oauth-sign@0.2.0
+│ │ │   │ ├── qs@0.5.6
+│ │ │   │ └── tunnel-agent@0.2.0
+│ │ │   └── stack-trace@0.0.9
+│ │ ├─┬ minimatch@0.2.14
+│ │ │ ├── lru-cache@2.5.0
+│ │ │ └── sigmund@1.0.0
+│ │ ├─┬ ps-tree@0.0.3
+│ │ │ └─┬ event-stream@0.5.3
+│ │ │   └─┬ optimist@0.2.8
+│ │ │     └── wordwrap@0.0.2
+│ │ ├─┬ utile@0.1.7
+│ │ │ ├── async@0.1.22
+│ │ │ ├── deep-equal@0.2.1
+│ │ │ ├── i@0.3.2
+│ │ │ ├─┬ mkdirp@0.5.0
+│ │ │ │ └── minimist@0.0.8
+│ │ │ ├── ncp@0.2.7
+│ │ │ └── rimraf@1.0.9
+│ │ └── watch@0.5.1
+│ ├─┬ nconf@0.6.9
+│ │ ├── async@0.2.9
+│ │ ├── ini@1.3.0
+│ │ └─┬ optimist@0.6.0
+│ │   ├── minimist@0.0.10
+│ │   └── wordwrap@0.0.2
+│ ├─┬ nssocket@0.5.1
+│ │ ├── eventemitter2@0.4.14
+│ │ └── lazy@1.0.11
+│ ├─┬ optimist@0.6.1
+│ │ ├── minimist@0.0.10
+│ │ └── wordwrap@0.0.2
+│ ├── pkginfo@0.3.0
+│ ├── timespan@2.3.0
+│ ├─┬ utile@0.2.1
+│ │ ├── async@0.2.10
+│ │ ├── deep-equal@0.2.1
+│ │ ├── i@0.3.2
+│ │ ├─┬ mkdirp@0.5.0
+│ │ │ └── minimist@0.0.8
+│ │ ├── ncp@0.4.2
+│ │ └── rimraf@2.2.8
+│ ├── watch@0.8.0
+│ └─┬ winston@0.7.3
+│   ├── async@0.2.10
+│   ├── cycle@1.0.3
+│   ├── eyes@0.1.8
+│   ├─┬ request@2.16.6
+│   │ ├── aws-sign@0.2.0
+│   │ ├── cookie-jar@0.2.0
+│   │ ├── forever-agent@0.2.0
+│   │ ├─┬ form-data@0.0.10
+│   │ │ └─┬ combined-stream@0.0.5
+│   │ │   └── delayed-stream@0.0.5
+│   │ ├─┬ hawk@0.10.2
+│   │ │ ├── boom@0.3.8
+│   │ │ ├── cryptiles@0.1.3
+│   │ │ ├── hoek@0.7.6
+│   │ │ └── sntp@0.1.4
+│   │ ├── json-stringify-safe@3.0.0
+│   │ ├── mime@1.2.11
+│   │ ├── node-uuid@1.4.1
+│   │ ├── oauth-sign@0.2.0
+│   │ ├── qs@0.5.6
+│   │ └── tunnel-agent@0.2.0
+│   └── stack-trace@0.0.9
+├─┬ gifsockets-server@0.38.0
+│ ├── commander@2.0.0
+│ ├─┬ express@3.4.8
+│ │ ├── buffer-crc32@0.2.1
+│ │ ├─┬ commander@1.3.2
+│ │ │ └── keypress@0.1.0
+│ │ ├─┬ connect@2.12.0
+│ │ │ ├── batch@0.5.0
+│ │ │ ├── bytes@0.2.1
+│ │ │ ├─┬ multiparty@2.2.0
+│ │ │ │ ├─┬ readable-stream@1.1.13
+│ │ │ │ │ ├── core-util-is@1.0.1
+│ │ │ │ │ ├── inherits@2.0.1
+│ │ │ │ │ ├── isarray@0.0.1
+│ │ │ │ │ └── string_decoder@0.10.31
+│ │ │ │ └── stream-counter@0.2.0
+│ │ │ ├── negotiator@0.3.0
+│ │ │ ├── pause@0.0.1
+│ │ │ ├── qs@0.6.6
+│ │ │ ├── raw-body@1.1.2
+│ │ │ └── uid2@0.0.3
+│ │ ├── cookie@0.1.0
+│ │ ├── cookie-signature@1.0.1
+│ │ ├── debug@0.8.1
+│ │ ├── fresh@0.2.0
+│ │ ├── merge-descriptors@0.0.1
+│ │ ├── methods@0.1.0
+│ │ ├── mkdirp@0.3.5
+│ │ ├── range-parser@0.0.4
+│ │ └─┬ send@0.1.4
+│ │   └── mime@1.2.11
+│ ├─┬ function-to-string@0.2.0
+│ │ └── esprima@1.0.4
+│ ├─┬ gif-encoder@0.4.1
+│ │ └─┬ readable-stream@1.1.13
+│ │   ├── core-util-is@1.0.1
+│ │   ├── inherits@2.0.1
+│ │   ├── isarray@0.0.1
+│ │   └── string_decoder@0.10.31
+│ ├── gifsockets@0.1.0
+│ ├── gifsockets-middleware@0.1.0
+│ ├─┬ jade@0.35.0
+│ │ ├── character-parser@1.2.0
+│ │ ├─┬ constantinople@1.0.2
+│ │ │ └─┬ uglify-js@2.4.15
+│ │ │   ├── async@0.2.10
+│ │ │   ├─┬ optimist@0.3.7
+│ │ │   │ └── wordwrap@0.0.2
+│ │ │   ├─┬ source-map@0.1.34
+│ │ │   │ └── amdefine@0.1.0
+│ │ │   └── uglify-to-browserify@1.0.2
+│ │ ├── mkdirp@0.3.5
+│ │ ├─┬ monocle@1.1.50
+│ │ │ └─┬ readdirp@0.2.5
+│ │ │   └─┬ minimatch@1.0.0
+│ │ │     ├── lru-cache@2.5.0
+│ │ │     └── sigmund@1.0.0
+│ │ ├─┬ transformers@2.1.0
+│ │ │ ├─┬ css@1.0.8
+│ │ │ │ ├── css-parse@1.0.4
+│ │ │ │ └── css-stringify@1.0.5
+│ │ │ ├─┬ promise@2.0.0
+│ │ │ │ └── is-promise@1.0.1
+│ │ │ └─┬ uglify-js@2.2.5
+│ │ │   ├─┬ optimist@0.3.7
+│ │ │   │ └── wordwrap@0.0.2
+│ │ │   └─┬ source-map@0.1.40
+│ │ │     └── amdefine@0.1.0
+│ │ └─┬ with@1.1.1
+│ │   └─┬ uglify-js@2.4.0
+│ │     ├── async@0.2.10
+│ │     ├─┬ optimist@0.3.7
+│ │     │ └── wordwrap@0.0.2
+│ │     ├─┬ source-map@0.1.40
+│ │     │ └── amdefine@0.1.0
+│ │     └── uglify-to-browserify@1.0.2
+│ ├── marked@0.2.10
+│ ├── obj-extend@0.1.0
+│ ├── raw-body@0.0.3
+│ └─┬ request@2.27.0
+│   ├── aws-sign@0.3.0
+│   ├── cookie-jar@0.3.0
+│   ├── forever-agent@0.5.2
+│   ├─┬ form-data@0.1.4
+│   │ ├── async@0.9.0
+│   │ └─┬ combined-stream@0.0.5
+│   │   └── delayed-stream@0.0.5
+│   ├─┬ hawk@1.0.0
+│   │ ├── boom@0.4.2
+│   │ ├── cryptiles@0.2.2
+│   │ ├── hoek@0.9.1
+│   │ └── sntp@0.2.4
+│   ├─┬ http-signature@0.10.0
+│   │ ├── asn1@0.1.11
+│   │ ├── assert-plus@0.1.2
+│   │ └── ctype@0.5.2
+│   ├── json-stringify-safe@5.0.0
+│   ├── mime@1.2.11
+│   ├── node-uuid@1.4.1
+│   ├── oauth-sign@0.3.0
+│   ├── qs@0.6.6
+│   └── tunnel-agent@0.3.0
+├─┬ npm@1.4.28
+│ ├── abbrev@1.0.5
+│ ├── ansi@0.3.0
+│ ├── ansicolors@0.3.2
+│ ├── ansistyles@0.1.3
+│ ├── archy@0.0.2
+│ ├── block-stream@0.0.7
+│ ├── char-spinner@1.0.1
+│ ├── child-process-close@0.1.1
+│ ├── chmodr@0.1.0
+│ ├── chownr@0.0.1
+│ ├── cmd-shim@2.0.0 (git://github.com/othiym23/cmd-shim#12de64ca97f45ac600910092f19afacc3d5376dd)
+│ ├─┬ columnify@1.2.1
+│ │ ├─┬ strip-ansi@1.0.0
+│ │ │ └── ansi-regex@0.2.1
+│ │ └─┬ wcwidth@1.0.0
+│ │   └─┬ defaults@1.0.0
+│ │     └── clone@0.1.18
+│ ├── editor@0.1.0
+│ ├── fstream@1.0.2
+│ ├─┬ fstream-npm@1.0.0
+│ │ └── fstream-ignore@1.0.1
+│ ├── github-url-from-git@1.4.0
+│ ├── github-url-from-username-repo@1.0.0
+│ ├── glob@4.0.5
+│ ├── graceful-fs@3.0.2
+│ ├── inflight@1.0.1
+│ ├── inherits@2.0.1
+│ ├── ini@1.2.1
+│ ├─┬ init-package-json@1.0.0
+│ │ └── promzard@0.2.2
+│ ├── lockfile@1.0.0
+│ ├── lru-cache@2.5.0
+│ ├─┬ minimatch@1.0.0
+│ │ └── sigmund@1.0.0
+│ ├─┬ mkdirp@0.5.0
+│ │ └── minimist@0.0.8
+│ ├── node-gyp@1.0.1
+│ ├── nopt@3.0.1
+│ ├── npm-cache-filename@1.0.1
+│ ├── npm-install-checks@1.0.2
+│ ├── npm-registry-client@2.0.7
+│ ├── npm-user-validate@0.1.0
+│ ├─┬ npmconf@1.1.8
+│ │ └─┬ config-chain@1.1.8
+│ │   └── proto-list@1.2.3
+│ ├── npmlog@0.1.1
+│ ├── once@1.3.0
+│ ├── opener@1.3.0
+│ ├── osenv@0.1.0
+│ ├── path-is-inside@1.0.1
+│ ├─┬ read@1.0.5
+│ │ └── mute-stream@0.0.4
+│ ├─┬ read-installed@2.0.5
+│ │ └── util-extend@1.0.1
+│ ├─┬ read-package-json@1.2.7
+│ │ └── normalize-package-data@1.0.1
+│ ├─┬ request@2.42.0
+│ │ ├── aws-sign2@0.5.0
+│ │ ├─┬ bl@0.9.1
+│ │ │ └─┬ readable-stream@1.0.31
+│ │ │   ├── core-util-is@1.0.1
+│ │ │   ├── isarray@0.0.1
+│ │ │   └── string_decoder@0.10.31
+│ │ ├── caseless@0.6.0
+│ │ ├── forever-agent@0.5.2
+│ │ ├─┬ form-data@0.1.4
+│ │ │ ├── async@0.9.0
+│ │ │ ├─┬ combined-stream@0.0.5
+│ │ │ │ └── delayed-stream@0.0.5
+│ │ │ └── mime@1.2.11
+│ │ ├─┬ hawk@1.1.1
+│ │ │ ├── boom@0.4.2
+│ │ │ ├── cryptiles@0.2.2
+│ │ │ ├── hoek@0.9.1
+│ │ │ └── sntp@0.2.4
+│ │ ├─┬ http-signature@0.10.0
+│ │ │ ├── asn1@0.1.11
+│ │ │ ├── assert-plus@0.1.2
+│ │ │ └── ctype@0.5.2
+│ │ ├── json-stringify-safe@5.0.0
+│ │ ├── mime-types@1.0.2
+│ │ ├── node-uuid@1.4.1
+│ │ ├── oauth-sign@0.4.0
+│ │ ├── qs@1.2.2
+│ │ ├── stringstream@0.0.4
+│ │ ├─┬ tough-cookie@0.12.1
+│ │ │ └── punycode@1.3.1
+│ │ └── tunnel-agent@0.4.0
+│ ├── retry@0.6.0
+│ ├── rimraf@2.2.8
+│ ├── semver@2.3.0
+│ ├─┬ sha@1.2.4
+│ │ └─┬ readable-stream@1.0.27-1
+│ │   ├── core-util-is@1.0.1
+│ │   ├── isarray@0.0.1
+│ │   └── string_decoder@0.10.25-1
+│ ├── slide@1.1.6
+│ ├── sorted-object@1.0.0
+│ ├── tar@1.0.1
+│ ├── text-table@0.2.0
+│ ├── uid-number@0.0.5
+│ └── which@1.0.5
+├── phantomjs-pixel-server@0.1.0
+└─┬ pm2@0.10.8
+  ├── async@0.9.0
+  ├── axm@0.1.7
+  ├─┬ chalk@0.5.1
+  │ ├── ansi-styles@1.1.0
+  │ ├── escape-string-regexp@1.0.2
+  │ ├─┬ has-ansi@0.1.0
+  │ │ └── ansi-regex@0.2.1
+  │ ├─┬ strip-ansi@0.3.0
+  │ │ └── ansi-regex@0.2.1
+  │ └── supports-color@0.2.0
+  ├─┬ chokidar@0.8.4
+  │ └── recursive-readdir@0.0.2
+  ├── cli-table@0.3.0
+  ├─┬ coffee-script@1.8.0
+  │ └── mkdirp@0.3.5
+  ├── colors@0.6.2
+  ├── commander@2.3.0
+  ├── cron@1.0.5
+  ├─┬ debug@2.0.0
+  │ └── ms@0.6.2
+  ├── eventemitter2@0.4.14
+  ├── ikt@0.0.0 (git+http://ikt.pm2.io/ikt.git#3325a3e39a502418dc2e2e4bf21529cbbde96228)
+  ├── json-stringify-safe@5.0.0
+  ├── moment@2.8.3
+  ├─┬ nssocket@0.5.1
+  │ └── lazy@1.0.11
+  ├── pidusage@0.1.0
+  ├─┬ pm2-axon@2.0.1
+  │ ├── amp@0.3.1
+  │ ├── amp-message@0.1.2
+  │ ├── configurable@0.0.1
+  │ └── escape-regexp@0.0.1
+  ├─┬ pm2-axon-rpc@0.3.1
+  │ └─┬ commander@1.0.5
+  │   └── keypress@0.1.0
+  ├─┬ pm2-deploy@0.1.0
+  │ └── tv4@1.0.18
+  ├─┬ pm2-interface@1.1.0
+  │ ├─┬ axon@2.0.0
+  │ │ ├── amp@0.3.1
+  │ │ ├── amp-message@0.1.2
+  │ │ ├── configurable@0.0.1
+  │ │ └── escape-regexp@0.0.1
+  │ └─┬ pm2-axon-rpc@0.2.1
+  │   └─┬ commander@1.0.5
+  │     └── keypress@0.1.0
+  ├─┬ pm2-logs@0.1.1
+  │ ├── blessed@0.0.36
+  │ └─┬ chalk@0.4.0
+  │   ├── ansi-styles@1.0.0
+  │   ├── has-color@0.1.7
+  │   └── strip-ansi@0.1.1
+  ├─┬ pm2-multimeter@0.1.2
+  │ └── charm@0.1.2
+  ├─┬ pm2-rpc-fallback@2.8.2
+  │ ├─┬ axon@1.0.0
+  │ │ ├── configurable@0.0.1
+  │ │ └── escape-regexp@0.0.1
+  │ └─┬ commander@1.0.5
+  │   └── keypress@0.1.0
+  ├─┬ punt@2.2.0
+  │ └─┬ amp-message@0.1.2
+  │   └── amp@0.3.1
+  └── uid-number@0.0.5
