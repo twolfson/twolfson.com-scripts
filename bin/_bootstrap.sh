@@ -9,7 +9,7 @@ set -x
 
 # Verify we have a data_dir and src_dir variable set
 usage() {
-  echo "Example: \`data_dir=\"/vagrant/data\"; src_dir=\"/vagrant/src\"; . bin/bootstrap.sh\`" 1>&2
+  echo "Example: \`data_dir=\"/vagrant/data\"; src_dir=\"/vagrant/src\"; NODE_TYPE=\"twolfson.com\";. bin/bootstrap.sh\`" 1>&2
 }
 if test "$data_dir" = ""; then
   echo "Environment variable \`data_dir\` wasn't set when calling \`bootstrap.sh\`." 1>&2
@@ -19,6 +19,12 @@ if test "$data_dir" = ""; then
 fi
 if test "$src_dir" = ""; then
   echo "Environment variable \`src_dir\` wasn't set when calling \`bootstrap.sh\`." 1>&2
+  echo "Please verify it is set before running it." 1>&2
+  usage
+  exit 1
+fi
+if test "$NODE_TYPE" = ""; then
+  echo "Environment variable \`NODE_TYPE\` wasn't set when calling \`bootstrap.sh\`." 1>&2
   echo "Please verify it is set before running it." 1>&2
   usage
   exit 1
@@ -39,5 +45,14 @@ if ! which chef-client &> /dev/null ||
   cd -
 fi
 
-# Run our provisioner script
-. src/twolfson.com.sh
+# Run our corresponding provisioner script for its node
+if test "$NODE_TYPE" = "twolfson.com"; then
+  # TODO: This should likely be relocated to `twolfson.com/bin/_bootstrap.sh`
+  . src/twolfson.com.sh
+elif test "$NODE_TYPE" = "gifsockets.twolfson.com"; then
+  . gifsockets.twolfson.com/bin/_bootstrap.sh
+else
+  echo "Unrecognized node type \"$NODE_TYPE\"." 1>&2
+  echo "Please use \"twolfson.com\" or \"gifsockets.twolfson.com\"." 1>&2
+  exit 1
+fi
