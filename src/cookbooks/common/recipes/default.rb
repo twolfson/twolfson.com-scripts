@@ -248,4 +248,3 @@ execute "install-sops" do
   command("sudo pip install \"sops==1.3\"")
   only_if("! pip freeze | grep \"sops==1.3\"")
 end
-# TODO: Handle rsync + install of `gpg` keys (prob done via a bash script, not Chef)
