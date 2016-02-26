@@ -15,3 +15,4 @@ The folder structure and scripts are similar to its parent folder
 - [ ] Document new files
 - [ ] Break down tests into common, twolfson.com (in `twolfson.com/test`), and `gifsockets.twolfson.com/test`
     - Maybe define a `test.sh` for each and have the main `test.sh` call them all
+    - Be sure to assert against template output (e.g. `assert 'twolfson.com.conf'.contents == 'twolfson.com.conf'.contents`)
