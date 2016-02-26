@@ -1,0 +1,3 @@
+sudo apt-get install git make phantomjs
+sudo apt-get install nginx
+curl http://localhost:9000/health
