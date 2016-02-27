@@ -14,5 +14,7 @@ Vagrant.configure(2) do |config|
   end
 
   # Provision our box with a script
-  config.vm.provision("shell", :path => "bin/bootstrap-vagrant.sh")
+  config.vm.provision("shell", :env => {
+    :NODE_TYPE => "twolfson.com",
+  }, :path => "../bin/bootstrap-vagrant.sh")
 end
