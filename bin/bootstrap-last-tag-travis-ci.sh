@@ -23,8 +23,11 @@ fi
 # Checkout our last tag
 git checkout "$last_git_tag"
 
+# Always return to the previous revision, even when the past Bootstrap fails
+trap "{ git checkout -; }" EXIT
+
 # Run our provisioner
 bin/bootstrap-travis-ci.sh
 
 # Return to the past commit
-git checkout -
+# DEV: We will return to the past commit via `trap`

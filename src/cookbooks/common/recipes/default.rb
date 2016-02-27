@@ -147,9 +147,9 @@ end
 
 # Guarantee `nginx` is installed
 # @depends_on exectue[apt-get-update-periodic] (to make sure apt is updated)
-# DEV: Equivalent to `sudo apt-get install -y "nginx=1.4.6-1ubuntu3.3"`
+# DEV: Equivalent to `sudo apt-get install -y "nginx=1.4.6-1ubuntu3.4"`
 apt_package "nginx" do
-  version("1.4.6-1ubuntu3.3")
+  version("1.4.6-1ubuntu3.4")
 end
 # DEV: Equivalent to `sudo /etc/init.d/nginx *`
 service "nginx" do
@@ -248,4 +248,3 @@ execute "install-sops" do
   command("sudo pip install \"sops==1.3\"")
   only_if("! pip freeze | grep \"sops==1.3\"")
 end
-# TODO: Handle rsync + install of `gpg` keys (prob done via a bash script, not Chef)

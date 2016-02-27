@@ -60,9 +60,9 @@ describe "Login shells" do
     # If we are on Vagrant, allow a Vagrant user to use ssh
     if `which vagrant` != ""
       ALLOWED_USERS.push("vagrant")
-    # Otherise, if we are on Travis CI, allow "travis" and "me" users
+    # Otherise, if we are on Travis CI, allow "maria", "me", "solarce", and "travis" users
     elsif ENV["TRAVIS"] == "true"
-      ALLOWED_USERS.push("travis", "me")
+      ALLOWED_USERS.push("maria", "me", "solarce", "travis")
     end
 
     # Collect the passwd entries for our users
