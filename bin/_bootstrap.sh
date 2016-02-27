@@ -47,8 +47,7 @@ fi
 
 # Run our corresponding provisioner script for its node
 if test "$NODE_TYPE" = "twolfson.com"; then
-  # TODO: This should likely be relocated to `twolfson.com/bin/_bootstrap.sh`
-  . src/twolfson.com.sh
+  . twolfson.com/bin/_bootstrap.sh
 elif test "$NODE_TYPE" = "gifsockets.twolfson.com"; then
   . gifsockets.twolfson.com/bin/_bootstrap.sh
 else
