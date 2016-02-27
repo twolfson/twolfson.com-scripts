@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.6.2 - Allow failure during bootstrap of last tag in Travis CI since it's not the test's focus
+
 2.6.1 - Updated apt versions and Travis CI users
 
 2.6.0 - Upgraded to OpenSSH@2.6 to patch PatrolServer errors
