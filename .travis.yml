@@ -31,7 +31,9 @@ install:
 
 script:
   # If we want to provision the last tag, then provision it
-  - if test "$BOOTSTRAP_LAST_TAG" = "TRUE"; then bin/bootstrap-last-tag-travis-ci.sh; fi
+  # DEV: We allow this step to fail since we could have stale dependencies in past revisions
+  #   The real test is about files and their states
+  - if test "$BOOTSTRAP_LAST_TAG" = "TRUE"; then bin/bootstrap-last-tag-travis-ci.sh || true; fi
 
   # Run our provisioner
   # DEV: Avoid using `sudo` for this line
