@@ -15,8 +15,13 @@ Vagrant.configure(2) do |config|
 
   # Provision our box with a script
   # TODO: When Vagrant@1.8 is on `apt`, then move back to `path` and `env`
-  config.vm.define("twolfson.com", :primary => true) do |twolfson_com_config|
-    twolfson_com_config.vm.provision("shell",
-      :inline => "cd /vagrant && NODE_TYPE=\"twolfson.com\" bin/bootstrap-vagrant.sh")
+  config.vm.define("twolfson.com", :primary => true) do |subconfig|
+    node_type = "twolfson.com"
+    subconfig.vm.provision("shell", :inline => "cd /vagrant && NODE_TYPE=\"#{node_type}\" bin/bootstrap-vagrant.sh")
+  end
+
+  config.vm.define("gifsockets.twolfson.com", :autostart => false) do |subconfig|
+    node_type = "gifsockets.twolfson.com"
+    subconfig.vm.provision("shell", :inline => "cd /vagrant && NODE_TYPE=\"#{node_type}\" bin/bootstrap-vagrant.sh")
   end
 end
