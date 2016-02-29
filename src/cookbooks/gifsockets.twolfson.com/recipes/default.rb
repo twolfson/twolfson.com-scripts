@@ -86,3 +86,9 @@ data_file "/etc/nginx/nginx.conf" do
   mode("644")
   notifies(:reload, "service[nginx]", :delayed)
 end
+
+# Guarantee PhantomJS is installed
+apt_package "phantomjs" do
+  version("1.9.0-1")
+  only_if("test \"$(phantomjs --version)\" != \"1.9.0\"")
+end
