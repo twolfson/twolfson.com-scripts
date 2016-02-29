@@ -1,6 +1,9 @@
 # Load in our dependencies
 include_recipe "common"
 
+# Load our constants
+data_dir = ENV.fetch("data_dir")
+
 # Guarantee `supervisor` is installed and configured
 # @depends_on execute[upgrade-pip]
 execute "install-supervisor" do
@@ -18,10 +21,11 @@ end
 # Set up our supervisor configuration
 # TODO: Use a template for `supervisord.conf`
 #   and don't run any `twolfson.com` services by default (e.g. use `if twolfson.com` for conf blocks)
-data_file "/etc/supervisord.conf" do
+file "/etc/supervisord.conf" do
   owner("root")
   group("root")
   mode("644") # u=rw,g=r,o=r
+  content(::File.new("#{data_dir}/etc/supervisord.twolfson.com.conf").read())
 end
 # Install our `init` script
 # http://supervisord.org/running.html#running-supervisord-automatically-on-startup
@@ -49,7 +53,7 @@ execute "update-supervisorctl" do
 
   # When our configuration changes, update ourself
   # DEV: We must wait until `/etc/init.d/supervisord` has launched
-  subscribes(:run, "data_file[/etc/supervisord.conf]", :delayed)
+  subscribes(:run, "file[/etc/supervisord.conf]", :delayed)
 end
 
 # Guarantee `node` is installed
