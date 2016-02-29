@@ -14,10 +14,12 @@ Vagrant.configure(2) do |config|
   end
 
   # Set up our different node types with a common provisioner
-  # DEV: An alternative to this would be `VAGRANT_VAGRANTFILE` environment variable overrides
-  #   which are set up via a script like Python's virtualenv and can be deactivated via `deactivate`
-  #   `source bin/vagrant/gifsockets.twolfson.com.sh` (use specific `gifsockets.twolfson.com.Vagrantfile`)
-  #   `deactivate` (remove `VAGRANT_VAGRANTFILE` override)
+  # DEV: If we find using `vagrant ssh gifsockets.twolfson.com` to be tedious
+  #   then we can set up environment variables which are managed on shells via scripts like Python's virtualenv
+  #   `source bin/vagrant/gifsockets.twolfson.com.sh` (set a `NODE_TYPE` variable)
+  #      In this file, we would look for `NODE_TYPE` and if not set then assume `twolfson.com`
+  #      Otherwise, use `NODE_TYPE` for setting `primary`
+  #   `deactivate` (remove `NODE_TYPE` override, defined by the source)
   config.vm.define("twolfson.com", :primary => true) do |subconfig|
     # TODO: When Vagrant@1.8 is on `apt`, then move back to `path` and `env`
     node_type = "twolfson.com"
