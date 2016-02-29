@@ -17,5 +17,8 @@ The folder structure and scripts are similar to its parent folder
 
 # Stage 2
 - [ ] Set up templating for NGINX
+- [ ] Consolidate supervisor setup into `common.rb`
+- [ ] Consolidate `/etc/nginx/nginx.conf` setup into `common.rb`
 - [ ] Set up templating for supervisor
     - Rename some files like `twolfson.com` to `reverse-proxy.conf.erb`
+- [ ] Create a `node` recipe
