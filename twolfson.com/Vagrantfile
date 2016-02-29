@@ -13,14 +13,15 @@ Vagrant.configure(2) do |config|
     vb.cpus = 2
   end
 
-  # Provision our box with a script
-  # TODO: When Vagrant@1.8 is on `apt`, then move back to `path` and `env`
+  # Set up our different node types with a common provisioner
   config.vm.define("twolfson.com", :primary => true) do |subconfig|
+    # TODO: When Vagrant@1.8 is on `apt`, then move back to `path` and `env`
     node_type = "twolfson.com"
     subconfig.vm.provision("shell", :inline => "cd /vagrant && NODE_TYPE=\"#{node_type}\" bin/bootstrap-vagrant.sh")
   end
 
   config.vm.define("gifsockets.twolfson.com", :autostart => false) do |subconfig|
+    # TODO: When Vagrant@1.8 is on `apt`, then move back to `path` and `env`
     node_type = "gifsockets.twolfson.com"
     subconfig.vm.provision("shell", :inline => "cd /vagrant && NODE_TYPE=\"#{node_type}\" bin/bootstrap-vagrant.sh")
   end
