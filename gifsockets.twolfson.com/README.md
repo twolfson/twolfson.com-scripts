@@ -6,6 +6,11 @@ The folder structure and scripts are similar to its parent folder
 # Stage 1
 - [x] Set up multi-machine Vagrant
 - [ ] Don't set up templates in first stage, only set up linking files
+    - [x] NGINX
+    - [ ] npm installs for scripts (see `.out` files)
+    - [ ] Supervisor
+    - [ ] Run Vagrant
+    - [ ] Configure tests
 - [ ] Need to figure out how to handle scripts...
     - I'm thinking make them all the same and make things like `twolfson.com` a parameter or use callbacks? (e.g. call `restart_command`)
 
