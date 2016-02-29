@@ -47,9 +47,11 @@ fi
 
 # Run our corresponding provisioner script for its node
 if test "$NODE_TYPE" = "twolfson.com"; then
-  . twolfson.com/bin/_bootstrap.sh
+  cd src
+  sudo data_dir="$data_dir" chef-client --local-mode --override-runlist "recipe[twolfson.com]"
 elif test "$NODE_TYPE" = "gifsockets.twolfson.com"; then
-  . gifsockets.twolfson.com/bin/_bootstrap.sh
+  cd src
+  sudo data_dir="$data_dir" chef-client --local-mode --override-runlist "recipe[gifsockets.twolfson.com]"
 else
   echo "Unrecognized node type \"$NODE_TYPE\"." 1>&2
   echo "Please use \"twolfson.com\" or \"gifsockets.twolfson.com\"." 1>&2
