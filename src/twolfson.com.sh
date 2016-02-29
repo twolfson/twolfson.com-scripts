@@ -3,5 +3,5 @@
 set -e
 
 # Run our Chef provisioner
-cd twolfson.com
+cd src
 sudo data_dir="$data_dir" chef-client --local-mode --override-runlist "recipe[twolfson.com]"
