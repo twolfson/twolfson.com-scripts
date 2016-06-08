@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.6.4 - Upgraded to `nginx=1.4.6-1ubuntu3.5` and added Travis CI user to fix provisioning
+
 2.6.3 - Upgraded to OpenSSH@1:6.6p1-2ubuntu2.7 and Node.js@0.10.45 for security
 
 2.6.2 - Allow failure during bootstrap of last tag in Travis CI since it's not the test's focus
