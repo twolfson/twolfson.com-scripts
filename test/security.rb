@@ -61,8 +61,12 @@ describe "Login shells" do
     if `which vagrant` != ""
       ALLOWED_USERS.push("vagrant")
     # Otherise, if we are on Travis CI, allow their users
+    # Most recent good lists:
+    #   https://travis-ci.org/twolfson/twolfson.com-scripts/jobs/170069010#L1096
+    #   https://travis-ci.org/twolfson/twolfson.com-scripts/jobs/170039391#L1109
     elsif ENV["TRAVIS"] == "true"
-      ALLOWED_USERS.push("carmen", "emma", "henrik", "konstantinhaase", "maria", "me", "solarce", "travis")
+      ALLOWED_USERS.push("carmen", "emma", "henrik", "konstantin", "konstantinhaase",
+        "maria", "me", "solarce", "travis")
     end
 
     # Collect the passwd entries for our users
