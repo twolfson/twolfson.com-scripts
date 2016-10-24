@@ -19,15 +19,15 @@ env:
 #   https://github.com/mizzy/specinfra/pull/509
 before_install:
   # Install bundler for the root user
-  - sudo gem install bundler
+  - gem install bundler
 
   # Output OS information
-  - sudo ruby --version
-  - sudo bundle --version
+  - ruby --version
+  - bundle --version
 
 install:
   # Install repo specific dependencies
-  - sudo bundle install
+  - bundle install
 
 script:
   # If we want to provision the last tag, then provision it
@@ -41,7 +41,7 @@ script:
   - bin/bootstrap-travis-ci.sh
 
   # Run Travis tests
-  - sudo bin/test-travis-ci.sh
+  - bin/test-travis-ci.sh
 
 # Only receive notifications on the start of a new branch and when it changes status
 notifications:
