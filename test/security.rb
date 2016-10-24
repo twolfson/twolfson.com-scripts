@@ -62,7 +62,7 @@ describe "Login shells" do
       ALLOWED_USERS.push("vagrant")
     # Otherise, if we are on Travis CI, allow their users
     elsif ENV["TRAVIS"] == "true"
-      ALLOWED_USERS.push("carmen", "emma", "henrik", "maria", "me", "solarce", "travis")
+      ALLOWED_USERS.push("carmen", "emma", "henrik", "konstantinhaase", "maria", "me", "solarce", "travis")
     end
 
     # Collect the passwd entries for our users
