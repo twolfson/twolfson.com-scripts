@@ -23,6 +23,9 @@ before_install:
 
   # Output OS information
   - sudo ruby --version
+  - which $PATH
+  - which bundle
+  - sudo which bundle
   - sudo bundle --version
 
 install:
