@@ -19,13 +19,13 @@ env:
 #   https://github.com/mizzy/specinfra/pull/509
 before_install:
   # Install bundler for the root user
-  - sudo gem install bundler
+  - sudo su root -c "gem install bundler"
 
   # Output OS information
   - sudo ruby --version
   - echo $PATH
-  - which bundle
-  - sudo which bundle
+  - which bundle || true
+  - sudo which bundle || true
   - sudo bundle --version
 
 install:
