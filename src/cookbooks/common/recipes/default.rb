@@ -173,7 +173,7 @@ apt_package "python-setuptools" do
   version("3.3-1ubuntu2")
 end
 apt_package "python-pip" do
-  version("1.5.4-1ubuntu3")
+  version("1.5.4-1ubuntu4")
 end
 # If pip is out of date, then upgrade it
 execute "upgrade-pip" do
