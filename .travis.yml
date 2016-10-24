@@ -19,26 +19,26 @@ env:
 #   https://github.com/mizzy/specinfra/pull/509
 before_install:
   # Install bundler for the root user
-  - gem install bundler
+  - sudo gem install bundler
 
   # Output OS information
-  - ruby --version
-  - bundle --version
+  - sudo ruby --version
+  - sudo bundle --version
 
 install:
   # Install repo specific dependencies
-  - bundle install
+  - sudo bundle install
 
 script:
-  # If we want to provision the last tag, then provision it
-  # DEV: We allow this step to fail since we could have stale dependencies in past revisions
-  #   The real test is about files and their states
-  - if test "$BOOTSTRAP_LAST_TAG" = "TRUE"; then bin/bootstrap-last-tag-travis-ci.sh || true; fi
+  # # If we want to provision the last tag, then provision it
+  # # DEV: We allow this step to fail since we could have stale dependencies in past revisions
+  # #   The real test is about files and their states
+  # - if test "$BOOTSTRAP_LAST_TAG" = "TRUE"; then bin/bootstrap-last-tag-travis-ci.sh || true; fi
 
-  # Run our provisioner
-  # DEV: Avoid using `sudo` for this line
-  #   to guarantee provisioning can be done by a non-root user
-  - bin/bootstrap-travis-ci.sh
+  # # Run our provisioner
+  # # DEV: Avoid using `sudo` for this line
+  # #   to guarantee provisioning can be done by a non-root user
+  # - bin/bootstrap-travis-ci.sh
 
   # Run Travis tests
   - sudo bin/test-travis-ci.sh
