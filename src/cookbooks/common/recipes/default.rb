@@ -245,6 +245,6 @@ apt_package("make")
 apt_package("openssl")
 apt_package("python-dev")
 execute "install-sops" do
-  command("sudo pip install \"sops==1.3\"")
-  only_if("! pip freeze | grep \"sops==1.3\"")
+  command("sudo pip install \"sops==1.14\"")
+  only_if("! pip freeze | grep \"sops==1.14\"")
 end
