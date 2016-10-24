@@ -10,7 +10,7 @@ language: generic
 # DEV: Provisioning on an existing machine catches edge cases like forgetting to delete files
 env:
   - BOOTSTRAP_LAST_TAG=FALSE
-  - BOOTSTRAP_LAST_TAG=TRUE
+  # - BOOTSTRAP_LAST_TAG=TRUE
 
 # DEV: Due to the nature of Travis CI, we must use the `exec` backend for testing
 #   Additionally, since we need to execute some commands as root
