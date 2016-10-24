@@ -19,18 +19,15 @@ env:
 #   https://github.com/mizzy/specinfra/pull/509
 before_install:
   # Install bundler for the root user
-  - sudo su root -c "gem install bundler"
+  - sudo gem install bundler
 
   # Output OS information
   - sudo ruby --version
-  - echo $PATH
-  - which bundle || true
-  - sudo which bundle || true
-  - sudo bundle --version
+  - rvmsudo bundle --version
 
 install:
   # Install repo specific dependencies
-  - sudo bundle install
+  - rvmsudo bundle install
 
 script:
   # # If we want to provision the last tag, then provision it
