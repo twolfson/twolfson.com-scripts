@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.8.0 - Upgraded to `nginx=1.4.6-1ubuntu3.6` to fix Travis CI issues
+
 2.7.1 - Fixed Travis CI users more thoroughly
 
 2.7.0 - Upgraded to Node.js@0.10.48, sops@0.14, and OpenSSH@1:6.6p1-2ubuntu2.8 as well as fixed `sudo` in Travis CI
