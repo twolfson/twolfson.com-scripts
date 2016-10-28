@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.8.1 - Upgraded to `nginx=1.4.6-1ubuntu3.7` to fix Travis CI issues
+
 2.8.0 - Upgraded to `nginx=1.4.6-1ubuntu3.6` to fix Travis CI issues
 
 2.7.1 - Fixed Travis CI users more thoroughly
