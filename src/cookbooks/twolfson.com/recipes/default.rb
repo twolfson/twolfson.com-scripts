@@ -5,10 +5,9 @@ include_recipe "common"
 # @depends_on execute[apt-get-update-periodic]
 # https://github.com/nodesource/distributions/tree/564ec6b1413fbfc3f2e3a47725f0abfeca678b1e#installation-instructions
 # DEV: Equivalent to `sudo apt-get install -y "nodejs=6.9.1-1nodesource1~trusty1"`
-# TODO: Remove `node --version` check once we are done upgrading
 execute "add-nodejs-apt-repository" do
   command("curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -")
-  only_if("! which node || test \"$(node --version)\" = \"v0.10.48\"")
+  only_if("! which node")
 end
 apt_package "nodejs" do
   version("6.9.1-1nodesource1~trusty1")
