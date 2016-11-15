@@ -42,6 +42,11 @@ cd twolfson.com/
 # Checkout the requested branch
 git checkout "$branch"
 
+# Install its dependencies locally
+# DEV: We would prefer to do this remotely but as of Node.js@6, our 512MB RAM server runs out of memory
+#   For reference, here was our prior setup https://github.com/twolfson/twolfson.com-scripts/blob/2.10.0/bin/deploy-twolfson.com.sh#L65-L67
+bin/deploy-install.sh
+
 # Navigate back to containing folder
 cd ../
 
@@ -61,10 +66,6 @@ ssh "$target_host" "mkdir -p $base_target_dir"
 # Expanded -havz is `--human-readable --archive --verbose --compress`
 # DEV: We use trailing slashes to force uploading into non-nested directories
 rsync --human-readable --archive --verbose --compress "twolfson.com/" "$target_host":"$target_dir/"
-
-# On the remote server, install our dependencies
-# DEV: We perform this on the server to prevent inconsistencies between development and production
-ssh -A "$target_host" "cd $target_dir && bin/deploy-install.sh"
 
 # Replace our existing `main` server with the new one
 # DEV: We use `--no-dereference` to prevent creating a symlink in the existing `main` directory
