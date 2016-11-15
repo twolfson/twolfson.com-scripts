@@ -3,15 +3,16 @@ include_recipe "common"
 
 # Guarantee `node` is installed
 # @depends_on execute[apt-get-update-periodic]
-# https://github.com/nodesource/distributions/tree/96e9b7d40b6aff7ade7bc130d9e18fd140e9f4f8#installation-instructions
-# DEV: Equivalent to `sudo apt-get install -y "nodejs=0.10.48-1nodesource1~trusty1"`
+# https://github.com/nodesource/distributions/tree/564ec6b1413fbfc3f2e3a47725f0abfeca678b1e#installation-instructions
+# DEV: Equivalent to `sudo apt-get install -y "nodejs=6.9.1-1nodesource1~trusty1"`
+# TODO: Remove `node --version` check once we are done upgrading
 execute "add-nodejs-apt-repository" do
-  command("curl -sL https://deb.nodesource.com/setup_0.10 | sudo -E bash -")
-  only_if("! which node")
+  command("curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -")
+  only_if("! which node || test \"$(node --version)\" = \"v0.10.48\"")
 end
 apt_package "nodejs" do
-  version("0.10.48-1nodesource1~trusty1")
-  only_if("test \"$(node --version)\" != \"v0.10.48\"")
+  version("6.9.1-1nodesource1~trusty1")
+  only_if("test \"$(node --version)\" != \"v6.9.1\"")
 end
 
 # Configure NGINX for `twolfson.com` node
