@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.11.0 - Moved to installing dependencies locally for `bin/deploy-twolfson.com.sh` to resolve memory issues introduced by Node.js@6
+
 2.10.0 - Removed Node.js upgrade check
 
 2.9.0 - Upgraded to Node.js@6.9.1 due to Node.js@0.10 out of maintenance
