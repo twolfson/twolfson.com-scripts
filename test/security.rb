@@ -64,8 +64,9 @@ describe "Login shells" do
     # Most recent good lists:
     #   https://travis-ci.org/twolfson/twolfson.com-scripts/jobs/170069010#L1096
     #   https://travis-ci.org/twolfson/twolfson.com-scripts/jobs/170039391#L1109
+    #   https://travis-ci.org/twolfson/twolfson.com-scripts/jobs/180916955#L1092
     elsif ENV["TRAVIS"] == "true"
-      ALLOWED_USERS.push("carmen", "emma", "henrik", "konstantin", "konstantinhaase",
+      ALLOWED_USERS.push("carmen", "emma", "henrik", "igor", "konstantin", "konstantinhaase",
         "maria", "me", "solarce", "travis")
     end
 
