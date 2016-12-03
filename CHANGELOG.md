@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.11.1 - Added new Travis CI user based on nightly build
+
 2.11.0 - Moved to installing dependencies locally for `bin/deploy-twolfson.com.sh` to resolve memory issues introduced by Node.js@6
 
 2.10.0 - Removed Node.js upgrade check
