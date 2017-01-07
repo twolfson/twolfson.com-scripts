@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.14.0 - Upgraded to Node.js@6.9.4 to fix Travis CI issues
+
 2.13.0 - Upgraded to Node.js@6.9.3 to fix Travis CI issues
 
 2.12.0 - Upgraded to Node.js@6.9.2 to fix Travis CI issues
