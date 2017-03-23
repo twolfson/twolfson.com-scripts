@@ -4,14 +4,14 @@ include_recipe "common"
 # Guarantee `node` is installed
 # @depends_on execute[apt-get-update-periodic]
 # https://github.com/nodesource/distributions/tree/564ec6b1413fbfc3f2e3a47725f0abfeca678b1e#installation-instructions
-# DEV: Equivalent to `sudo apt-get install -y "nodejs=6.10.0-1nodesource1~trusty1"`
+# DEV: Equivalent to `sudo apt-get install -y "nodejs=6.10.1-1nodesource1~trusty1"`
 execute "add-nodejs-apt-repository" do
   command("curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -")
   only_if("! which node")
 end
 apt_package "nodejs" do
-  version("6.10.0-1nodesource1~trusty1")
-  only_if("test \"$(node --version)\" != \"v6.10.0\"")
+  version("6.10.1-1nodesource1~trusty1")
+  only_if("test \"$(node --version)\" != \"v6.10.1\"")
 end
 
 # Configure NGINX for `twolfson.com` node
