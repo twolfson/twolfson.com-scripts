@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.18.0 - Fixed apt version for Node.js to fix Travis CI issues
+
 2.17.0 - Upgraded to Node.js@6.10.1 to fix Travis CI issues
 
 2.16.0 - Upgraded to Node.js@6.10.0 to fix Travis CI issues
