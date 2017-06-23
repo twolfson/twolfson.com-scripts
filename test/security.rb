@@ -67,7 +67,7 @@ describe "Login shells" do
     #   https://travis-ci.org/twolfson/twolfson.com-scripts/jobs/180916955#L1092
     elsif ENV["TRAVIS"] == "true"
       ALLOWED_USERS.push("carmen", "emma", "henrik", "igor", "konstantin", "konstantinhaase",
-        "maria", "me", "solarce", "travis")
+        "maria", "me", "packer", "solarce", "travis")
     end
 
     # Collect the passwd entries for our users
