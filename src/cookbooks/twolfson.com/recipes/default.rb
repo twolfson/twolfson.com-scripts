@@ -10,7 +10,7 @@ execute "add-nodejs-apt-repository" do
   only_if("! which node")
 end
 apt_package "nodejs" do
-  version("6.11.1-1nodesource1~trusty1")
+  version("6.11.1-2nodesource1~trusty1")
   only_if("test \"$(node --version)\" != \"v6.11.1\"")
 end
 
