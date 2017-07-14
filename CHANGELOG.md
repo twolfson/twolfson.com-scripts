@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.23.0 - Upgraded to Node.js@6.11.1 and NGINX patch version to fix Travis CI issues
+
 2.22.0 - Added allowed "packer" user for Travis CI
 
 2.21.0 - Upgraded to Node.js@6.11.0 to fix Travis CI issues
