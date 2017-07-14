@@ -30,9 +30,9 @@ install:
   # Install repo specific dependencies
   - rvmsudo bundle install
 
-  # List installed apt dependencies (e.g. Node.js)
+  # Check if Node.js is installed
   # TODO: Remove debugging script
-  - dpkg --list
+  - node --version
 
 script:
   # If we want to provision the last tag, then provision it
