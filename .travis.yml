@@ -32,7 +32,7 @@ install:
 
   # List installed apt dependencies (e.g. Node.js)
   # TODO: Remove debugging script
-  - dkpg --list
+  - dpkg --list
 
 script:
   # If we want to provision the last tag, then provision it
