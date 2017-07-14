@@ -31,7 +31,7 @@ describe "Open ports" do
       if `which vagrant` != ""
         open_ports.select! { |open_port| ! %r{/(rpcbind|rpc.statd|dhclient)\s*$}.match(open_port) }
       elsif ENV["TRAVIS"] == "true"
-        open_ports.select! { |open_port| ! %r{/(dnsmasq|dhclient|ntpd)\s*$}.match(open_port) }
+        open_ports.select! { |open_port| ! %r{/(dnsmasq|dhclient|ntpd|memcached)\s*$}.match(open_port) }
       end
     end
 
@@ -66,8 +66,8 @@ describe "Login shells" do
     #   https://travis-ci.org/twolfson/twolfson.com-scripts/jobs/170039391#L1109
     #   https://travis-ci.org/twolfson/twolfson.com-scripts/jobs/180916955#L1092
     elsif ENV["TRAVIS"] == "true"
-      ALLOWED_USERS.push("carmen", "emma", "henrik", "igor", "konstantin", "konstantinhaase",
-        "maria", "me", "packer", "solarce", "travis")
+      ALLOWED_USERS.push("carmen", "couchdb", "emma", "henrik", "igor", "konstantin", "konstantinhaase",
+        "maria", "me", "packer", "postgres", "riak", "solarce", "travis")
     end
 
     # Collect the passwd entries for our users
