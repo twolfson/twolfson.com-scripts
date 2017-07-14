@@ -30,9 +30,11 @@ install:
   # Install repo specific dependencies
   - rvmsudo bundle install
 
-  # Check if Node.js is installed
-  # TODO: Remove debugging script
-  - node --version
+  # Hackishly remove Node.js
+  # DEV: It's not installed via `apt` and it's tedious to debug Travis CI
+  #   https://travis-ci.org/twolfson/twolfson.com-scripts/jobs/253497908#L580
+  #   https://travis-ci.org/twolfson/twolfson.com-scripts/jobs/253504794#L580
+  - sudo rm "$(which node)"
 
 script:
   # If we want to provision the last tag, then provision it
