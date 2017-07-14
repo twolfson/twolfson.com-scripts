@@ -1,7 +1,6 @@
 # Leverage 14.04 LTS, same as Vagrant
 sudo: required
 dist: trusty
-group: deprecated-2017Q3
 
 # Set our language to generic for a minimal setup
 # https://docs.travis-ci.com/user/trusty-ci-environment#Image-differences-from-Precise
