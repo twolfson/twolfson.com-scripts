@@ -30,6 +30,10 @@ install:
   # Install repo specific dependencies
   - rvmsudo bundle install
 
+  # List installed apt dependencies (e.g. Node.js)
+  # TODO: Remove debugging script
+  - dkpg --list
+
 script:
   # If we want to provision the last tag, then provision it
   # DEV: We allow this step to fail since we could have stale dependencies in past revisions
