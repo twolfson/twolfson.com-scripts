@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.24.0 - Upgraded to Node.js@6.11.2 to fix Travis CI issues
+
 2.23.1 - Fixed up one-off issues to remove deprecated flag from Travis CI
 
 2.23.0 - Upgraded to Node.js@6.11.1 and NGINX patch version to fix Travis CI issues
