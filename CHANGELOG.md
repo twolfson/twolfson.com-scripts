@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.27.0 - Added allowed "aj" user for Travis CI
+
 2.26.0 - Upgraded to Node.js@6.11.4 to fix Travis CI issues
 
 2.25.0 - Upgraded to Node.js@6.11.3 to fix Travis CI issues
