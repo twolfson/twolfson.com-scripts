@@ -9,6 +9,7 @@ vendor/
 node_modules/
 
 # Ignore binstubs from Bundler
+bin/bundle
 bin/htmldiff
 bin/ldiff
 bin/rspec
