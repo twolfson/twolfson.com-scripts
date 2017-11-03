@@ -1,6 +1,7 @@
 # Ignore third party and temporary files
 AllCops:
   Exclude:
+    - bin/bundle
     - bin/htmldiff
     - bin/ldiff
     - bin/rspec
