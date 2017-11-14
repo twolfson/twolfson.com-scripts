@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.29.1 - Replaced Gratipay with support me page
+
 2.29.0 - Upgraded to Node.js@6.12.0 to fix Travis CI issues
 
 2.28.1 - Added ignores for new `bin/bundle` to fix Travis CI issues
