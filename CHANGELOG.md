@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.32.1 - Fixed lint error
+
 2.32.0 - Added allowed "bogdana" user for Travis CI
 
 2.31.0 - Upgraded to Node.js@6.12.2 to fix Travis CI issues
