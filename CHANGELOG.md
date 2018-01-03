@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.33.0 - Added allowed "buck" user for Travis CI
+
 2.32.1 - Fixed lint error
 
 2.32.0 - Added allowed "bogdana" user for Travis CI
