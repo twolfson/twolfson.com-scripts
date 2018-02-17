@@ -18,12 +18,12 @@ n ls
 #   Latest version: 6.11.5
 
 # Replace all non-symlink references for Node.js version
-sed --in-place "s/{{our_version}}/{{latest_version}}/g" -- $(find src test -type f)
+sed --in-place "s/{{old_version}}/{{new_version}}/g" -- $(find src test -type f)
 #   Example:
 #   sed --in-place "s/6\.11\.4/6\.11\.5/g" -- $(find src test -type f)
 
 # Sanity check replacement
-git grep '{{version}}'
+git grep '{{old_version}}'
 #   Example:
 #   git grep '6\.11\.4'
 
@@ -31,7 +31,7 @@ git grep '{{version}}'
 git add -p
 
 # Commit changes
-git commit -m "Upgraded to Node.js {{version}} to fix Travis CI"
+git commit -m "Upgraded to Node.js {{new_version}} to fix Travis CI"
 #   Example:
 #   git commit -m "Upgraded to Node.js 6.11.5 to fix Travis CI"
 
