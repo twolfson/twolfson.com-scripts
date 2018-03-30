@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.35.0 - Upgraded to Node.js@6.14.1 to fix Travis CI issues
+
 2.34.0 - Upgraded to Node.js@6.13.0 to fix Travis CI issues
 
 2.33.1 - Upgraded to Node.js@6.12.3 and added "asari" user to fix Travis CI issues
