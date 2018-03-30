@@ -29,9 +29,9 @@ describe "Open ports" do
 
       # Filter out trusted programs
       if `which vagrant` != ""
-        open_ports.select! { |open_port| ! %r{/(rpcbind|rpc.statd|dhclient)\s*$}.match(open_port) }
+        open_ports.reject! { |open_port| %r{/(rpcbind|rpc.statd|dhclient)\s*$}.match(open_port) }
       elsif ENV["TRAVIS"] == "true"
-        open_ports.select! { |open_port| ! %r{/(dnsmasq|dhclient|ntpd|memcached|searchd)\s*$}.match(open_port) }
+        open_ports.reject! { |open_port| %r{/(dnsmasq|dhclient|ntpd|memcached|searchd)\s*$}.match(open_port) }
       end
     end
 

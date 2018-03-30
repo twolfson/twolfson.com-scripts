@@ -16,7 +16,7 @@ AllCops:
 # Don't require parameters to line up on same line
 # DEV: Sometimes we are nested and don't want to hit line limit easily
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/align_parameters.rb
-Style/AlignParameters:
+Layout/AlignParameters:
   Enabled: false
 
 # Don't require documentation for every class/module
@@ -55,7 +55,7 @@ Style/LineEndConcatenation:
 # Example: `package('bash').to(be_installed())`, not `to(be_installed)`
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/method_call_parentheses.rb
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/config/enabled.yml#L392
-Style/MethodCallParentheses:
+Style/MethodCallWithoutArgsParentheses:
   Enabled: false
 
 # Allow `self` to be used for clarity
@@ -66,7 +66,7 @@ Style/RedundantSelf:
 # Require no whitespace for default values in parametes
 # Example: `def hello(a=1)`, not `def hello(a = 1)`
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/space_around_equals_in_parameter_default.rb
-Style/SpaceAroundEqualsInParameterDefault:
+Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space
 
 # Require double quotes to always be used for consistency
@@ -87,8 +87,16 @@ Style/StringLiteralsInInterpolation:
 # Example: `[1,\n2,\n3,\n]`, not `[1,\n2,\n3\n]`
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/trailing_comma_in_literal.rb
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/config/enabled.yml#L797
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
+# Allow explicit symbols
+# Example: `[:enable, :start]`
+Style/SymbolArray:
   Enabled: false
 
 Metrics/LineLength:
   Max: 120
+
+Metrics/BlockLength:
+  Enabled: false
