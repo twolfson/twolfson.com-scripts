@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.37.0 - Upgraded to Node.js@6.14.3 to fix Travis CI issues
+
 2.36.0 - Upgraded to Node.js@6.14.2 to fix Travis CI issues
 
 2.35.1 - Moved to Ruby@2.2 to fix GitHub vulnerability warnings
