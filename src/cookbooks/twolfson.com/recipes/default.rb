@@ -31,6 +31,12 @@ data_file "/etc/nginx/conf.d/drive.twolfson.com.conf" do
   mode("644")
   notifies(:reload, "service[nginx]", :delayed)
 end
+data_file "/etc/nginx/conf.d/mentor.twolfson.com.conf" do
+  owner("root")
+  group("root")
+  mode("644")
+  notifies(:reload, "service[nginx]", :delayed)
+end
 data_file "/etc/nginx/conf.d/twolfsn.com.conf" do
   owner("root")
   group("root")
@@ -50,6 +56,11 @@ directory "/var/www" do
   mode("755") # u=rwx,g=rx,o=rx
 end
 directory "/var/www/drive.twolfson.com" do
+  owner("ubuntu")
+  group("ubuntu")
+  mode("755") # u=rwx,g=rx,o=rx
+end
+directory "/var/www/mentor.twolfson.com" do
   owner("ubuntu")
   group("ubuntu")
   mode("755") # u=rwx,g=rx,o=rx
