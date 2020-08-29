@@ -94,7 +94,17 @@ Host digital-my-server
     HostName 127.0.0.1
 ```
 
-- Install our SSL certificates and Diffie-Hellman group to the server
+- SSH into our server and set up basic provisions
+    - `ssh digital-my-server`
+    - Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)
+        ```bash
+        # https://weakdh.org/sysadmin.html
+        openssl dhparam -out dhparam.pem 2048
+        sudo mv dhparam.pem /etc/ssl/private/dhparam.pem
+        sudo chown root:root /etc/ssl/private/dhparam.pem
+        sudo chmod u=r,g=,o= /etc/ssl/private/dhparam.pem # Only user can read this file
+        ```
+- Install our Diffie-Hellman group to the server
     - `bin/install-nginx-data-remote.sh digital-my-server --crt path/to/my-domain.crt --key path/to/my-domain.key --dhparam path/to/dhparam.pem`
     - If you are trying to get a replica working (e.g. don't have these certificates), then self-signed certificates and a `dhparam.pem` can be generated via the `openssl` commands in `bin/bootstrap-vagrant.sh`
     - It's possible this can be generated via LetsEncrypt so consider removing this script altogether
