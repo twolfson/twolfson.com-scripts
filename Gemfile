@@ -2,7 +2,7 @@
 source("https://rubygems.org")
 
 # Restrict our Ruby version
-ruby("~> 2.2")
+ruby("~> 2")
 
 # Install dev dependencies
 group :development do
