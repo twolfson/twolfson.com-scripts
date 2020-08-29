@@ -98,6 +98,7 @@ Host digital-my-server
     - `bin/install-nginx-data-remote.sh digital-my-server --crt path/to/my-domain.crt --key path/to/my-domain.key --dhparam path/to/dhparam.pem`
     - If you are trying to get a replica working (e.g. don't have these certificates), then self-signed certificates and a `dhparam.pem` can be generated via the `openssl` commands in `bin/bootstrap-vagrant.sh`
 - Install certbot for LetsEncrypt backed domains
+    - Specify each subdomain/subdomain pair individually (e.g. `twolfsn.com` (1,2), `twolfson.com` (3,4)), otherwise LetsEncrypt will use the same file/certificate for all of them
 - Bootstrap our server
     - `bin/bootstrap-remote.sh digital-my-server`
 - Update `~/.ssh/config` to use `User ubuntu` instead of `User root`
