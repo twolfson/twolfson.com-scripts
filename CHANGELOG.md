@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.39.0 - Added mentor.twolfson.com and LetsEncrypt for drive.twolfson.com
+
 2.38.0 - Upgraded to Node.js@6.14.4 to fix Travis CI issues
 
 2.37.0 - Upgraded to Node.js@6.14.3 to fix Travis CI issues
