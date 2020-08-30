@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.41.0 - Updated NGINX configs to be consistent and more intuitively ordered/consolidated
+
 2.40.0 - Moved to LetsEncrypt for twolfsn.com and twolfson.com, fixed tests, relocated unnecessary scripts into documentation
 
 2.39.0 - Added mentor.twolfson.com and LetsEncrypt for drive.twolfson.com
