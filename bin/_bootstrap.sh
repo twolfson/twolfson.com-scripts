@@ -41,5 +41,6 @@ fi
 
 # Run our provisioner script
 cd "$src_dir"
-# sudo data_dir="$data_dir" chef-client --local-mode --override-runlist "recipe[twolfson.com]"
-sudo data_dir="$data_dir" chef-client --why-run --local-mode --override-runlist "recipe[twolfson.com]"
+# If you'd like a dry run, swap these lines
+# sudo data_dir="$data_dir" chef-client --why-run --local-mode --override-runlist "recipe[twolfson.com]"
+sudo data_dir="$data_dir" chef-client --local-mode --override-runlist "recipe[twolfson.com]"
