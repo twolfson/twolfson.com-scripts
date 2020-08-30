@@ -16,12 +16,19 @@ if test "$target_host" = ""; then
 fi
 branch="$2"
 if test "$branch" = ""; then
-  # DEV: We could set to `master` by default but for sanity, let's always require it
-  echo "Branch was not set. Please pass it as an argument to \`$0\`" 1>&2
+  # If we're on master, then assume `master`
   # * dev/more.cleanup -> dev/more.cleanup
-  echo "e.g. $(git branch | grep '^*' | cut -f 2 -d ' ')"
-  usage
-  exit 1
+  current_branch="$(git branch | grep '^*' | cut -f 2 -d ' ')"
+  if test "$current_branch" = "master"; then
+    branch="master"
+  # Otherwise, require branch to be specified
+  else
+    # DEV: We could set to `master` by default but for sanity, let's always require it
+    echo "Branch was not set and not on \`master\` branch. Please pass it as an argument to \`$0\` or move to \`master\` branch" 1>&2
+    echo "e.g. $current_branch" 1>&2
+    usage
+    exit 1
+  fi
 fi
 
 # Output future commands
