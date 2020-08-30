@@ -24,12 +24,12 @@ describe "NGINX" do
   end
 
   it "has proper permissions for SSL certs" do
-    crt_file = file("/etc/ssl/certs/twolfson.com.crt")
+    crt_file = file("/etc/letsencrypt/live/twolfson.com/fullchain.pem")
     expect(crt_file.mode).to(eq((USER_RWX | GROUP_RWX | OTHER_RWX).to_s(8)))
     expect(crt_file.owner).to(eq(ROOT_USER))
     expect(crt_file.group).to(eq(ROOT_GROUP))
 
-    key_file = file("/etc/ssl/private/twolfson.com.key")
+    key_file = file("/etc/letsencrypt/live/twolfson.com/privkey.pem")
     expect(key_file.mode).to(eq((USER_R | GROUP_NONE | OTHER_NONE).to_s(8)))
     expect(key_file.owner).to(eq(ROOT_USER))
     expect(key_file.group).to(eq(ROOT_GROUP))
