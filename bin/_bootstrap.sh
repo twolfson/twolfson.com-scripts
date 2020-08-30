@@ -40,4 +40,5 @@ if ! which chef-client &> /dev/null ||
 fi
 
 # Run our provisioner script
-. src/twolfson.com.sh
+cd "$src_dir"
+sudo data_dir="$data_dir" chef-client --local-mode --override-runlist "recipe[twolfson.com]"
