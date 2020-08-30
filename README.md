@@ -143,6 +143,10 @@ bin/bootstrap-remote.sh digital-my-server
 # bin/bootstrap-remote.com.sh digital-my-server dev/new.feature
 ```
 
+If you'd like to run a dry run, Chef has `--why-run` which explains everything it's doing. It's unclear if it fully stops running actions though
+
+This can be enabled by directly editing `bin/_bootstrap.sh`
+
 ### Deploying a service
 To deploy a service, use its respective `bin/deploy-*.sh` script. Here's an example with `twolfson.com`:
 
