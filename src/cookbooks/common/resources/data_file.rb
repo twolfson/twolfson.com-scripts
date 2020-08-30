@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Define an extension over `File` that auto-uses `data_dir` as `content`
 # http://stackoverflow.com/a/20732016
 # DEV: Not sure why but provisioning breaks if we don't use `Provider::DataFile` syntax

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Guarantee `apt-get update` has been run in past 24 hours
 # http://stackoverflow.com/a/9250482
 # DEV: Relies on apt hook

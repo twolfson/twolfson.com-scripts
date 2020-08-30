@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Load in our dependencies
 include_recipe "common"
 

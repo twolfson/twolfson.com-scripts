@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Load in our dependencies
 require_relative "utils/serverspec"
 

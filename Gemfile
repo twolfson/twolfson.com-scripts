@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Specify our source for gems
 source("https://rubygems.org")
 
