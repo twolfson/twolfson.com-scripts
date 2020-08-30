@@ -63,6 +63,10 @@ Style/MethodCallWithoutArgsParentheses:
 Style/RedundantSelf:
   Enabled: false
 
+# Allow `freeze` for future change defense
+Style/RedundantFreeze:
+  Enabled: false
+
 # Require no whitespace for default values in parametes
 # Example: `def hello(a=1)`, not `def hello(a = 1)`
 # https://github.com/bbatsov/rubocop/blob/v0.36.0/lib/rubocop/cop/style/space_around_equals_in_parameter_default.rb
