@@ -23,7 +23,8 @@ describe "NGINX" do
     expect(https_port).to(be_listening().on("::"))
   end
 
-  it "has proper permissions for SSL certs" do
+  # DEV: Skipping SSL permission check as LetsEncrypt will likely rotate files for symlinks
+  it.skip "has proper permissions for SSL certs" do
     crt_file = file("/etc/letsencrypt/live/twolfson.com/fullchain.pem")
     expect(crt_file.mode).to(eq((USER_RWX | GROUP_RWX | OTHER_RWX).to_s(8)))
     expect(crt_file.owner).to(eq(ROOT_USER))
