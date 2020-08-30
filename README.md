@@ -98,6 +98,7 @@ Host digital-my-server
     - `ssh digital-my-server`
     - Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)
         ```bash
+        # DEV: We could use `/etc/letsencrypt/ssl-dhparams.pem` for this but are opting out for easier testing
         # https://weakdh.org/sysadmin.html
         openssl dhparam -out dhparam.pem 2048
         sudo mv dhparam.pem /etc/ssl/private/dhparam.pem
