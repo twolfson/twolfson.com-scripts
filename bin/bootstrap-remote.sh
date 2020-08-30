@@ -2,16 +2,26 @@
 # Exit on first error
 set -e
 
+# Define our usage
+usage() {
+  echo "Usage: $0 \"name-of-host-in-ssh-config\" <branch>" 1>&2
+}
+
 # If there is no remote server to bootstrap on, then complain and leave
 target_host="$1"
 if test "$target_host" = ""; then
   echo "Target host was not set. Please pass it as an argument to \`$0\`" 1>&2
-  echo "Usage: $0 \"name-of-host-in-ssh-config\" <branch>" 1>&2
+  usage
   exit 1
 fi
 branch="$2"
 if test "$branch" = ""; then
-  branch="master"
+  # DEV: We could set to `master` by default but for sanity, let's always require it
+  echo "Branch was not set. Please pass it as an argument to \`$0\`" 1>&2
+  # * dev/more.cleanup -> dev/more.cleanup
+  echo "e.g. $(git branch | grep '^*' | cut -f 2 -d ' ')"
+  usage
+  exit 1
 fi
 
 # Output future commands
