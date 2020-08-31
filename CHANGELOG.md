@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.42.0 - Added /index.html -> / redirect for mentor.twolfson.com
+
 2.41.0 - Updated NGINX configs to be consistent and more intuitively ordered/consolidated
 
 2.40.0 - Moved to LetsEncrypt for twolfsn.com and twolfson.com, fixed tests, relocated unnecessary scripts into documentation
