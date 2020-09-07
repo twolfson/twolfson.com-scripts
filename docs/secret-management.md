@@ -42,6 +42,9 @@ Based on the logic above, we use the following downgrade chain:
 - If there's an existing solution use that
   - Company has intranet secret management
   - Provider has UI to manage secrets
-- Otherwise, use local `.env` and maintain a file on server which is symlinked
-  - Avoid committing `.env` if possible as who knows when the repo might go public
+- Otherwise, use a local file on the server (e.g. `.env`, `secrets.json`)
+  - Avoid committing file in repo if possible as who knows when the repo might go public
   - However, this can also be a tolerable risk (e.g. leaking source code might expose other known vulnerabilities in dependencies)
+  - Use symlinking to make maintenance as easy as possible (same filepath always)
+  - Use as little indentation as possible to avoid unnecessary complexity
+  - Keep keys sorted if possible for easier maintenance
