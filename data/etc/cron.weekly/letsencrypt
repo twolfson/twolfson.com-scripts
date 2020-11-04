@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Exit on first error, unset variable or pipe failure
+set -euo pipefail
+
+# Run certificate renewal, doesn't care about too frequently
+# https://certbot.eff.org/docs/using.html?highlight=cron#modifying-the-renewal-configuration-file
+certbot-auto renew
