@@ -65,7 +65,7 @@ ssh "$target_host" "mkdir -p $base_target_dir"
 # TODO: Consider deleting `.git`
 # Expanded -havz is `--human-readable --archive --verbose --compress`
 # DEV: We use trailing slashes to force uploading into non-nested directories
-rsync --human-readable --archive --verbose --compress "twolfson.com/" "$target_host":"$target_dir/"
+rsync --human-readable --archive --verbose --compress --progress "twolfson.com/" "$target_host":"$target_dir/"
 
 # Replace our existing `main` server with the new one
 # DEV: We use `--no-dereference` to prevent creating a symlink in the existing `main` directory
