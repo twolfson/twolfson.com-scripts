@@ -235,18 +235,3 @@ execute "update-supervisorctl" do
   # DEV: We must wait until `/etc/init.d/supervisord` has launched
   subscribes(:run, "data_file[/etc/supervisord.conf]", :delayed)
 end
-
-# Guarantee SOPS is installed
-# https://github.com/mozilla/sops/tree/0494bc41911bc6e050ddd8a5da2bbb071a79a5b7#up-and-running-in-60-seconds
-# @depends_on execute[upgrade-pip]
-apt_package("gcc")
-apt_package("libffi-dev")
-apt_package("libssl-dev")
-apt_package("libyaml-dev")
-apt_package("make")
-apt_package("openssl")
-apt_package("python-dev")
-execute "install-sops" do
-  command("sudo pip install \"sops==1.14\"")
-  only_if("! pip freeze | grep \"sops==1.14\"")
-end

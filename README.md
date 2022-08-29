@@ -49,14 +49,13 @@ As a high level overview of our setup, we use the following:
 - Provisioning is currently done by [Chef][]
     - This is to maximize reuse of common setup
     - For ease of approach to new developers, we typically prefer [bash][]
-- Secrets are managed via [SOPS][]
+- Secrets are managed via environment variables
 - Services are currently all [Node.js][]/[JavaScript][] based
 - Tests are done via [Serverspec][]
     - These are both meant to cover sanity and security
 
 [Chef]: https://www.chef.io/
 [bash]: https://www.gnu.org/software/bash/
-[SOPS]: https://github.com/mozilla/sops
 [Node.js]: https://nodejs.org/
 [JavaScript]: https://en.wikipedia.org/wiki/JavaScript
 [Serverspec]: http://serverspec.org/
@@ -117,22 +116,8 @@ Host digital-my-server
 
 [data/home/ubuntu/.ssh/authorized_keys]: data/home/ubuntu/.ssh/authorized_keys
 
-### Managing PGP data
-We use [PGP][] and [SOPS][] for storing our secrets. To add a new PGP key, follow the steps below:
-
-- Find full fingerprint of key we want to export
-    - `gpg --fingerprint`
-    - Fingerprint will be `740D DBFA...` in `Key fingerprint = 740D DBFA...`
-- Extract private key to file
-    - `gpg --export-secret-keys --armor {{fingerprint}} > private.rsa`
-    - `--armor` exports a human-friendly ASCII format instead of binary
-- Upload/import private key to our server
-    ```bash
-    # Run outside of the server, can also use copy/paste if desired
-    ssh my-digital-server "echo \"$(cat "path/to/file.pem")\" | gpg --import -"
-    ```
-
-[PGP]: https://en.wikipedia.org/wiki/Pretty_Good_Privacy
+### Managing secrets
+Secrets are maintained on each server by hand. To add/edit/remove a secret, modify the relevant file in `/etc/profile.d`
 
 ### Updating a server configuration
 We reuse our provisioning script for managing server state. As a result, we can reuse it for updates:
