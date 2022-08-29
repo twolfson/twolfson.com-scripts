@@ -117,7 +117,7 @@ Host digital-my-server
 [data/home/ubuntu/.ssh/authorized_keys]: data/home/ubuntu/.ssh/authorized_keys
 
 ### Managing secrets
-Secrets are maintained on each server by hand. To add/edit/remove a secret, modify the relevant file in `/etc/profile.d`
+Secrets are maintained on each server by hand. To add/edit/remove a secret, modify the relevant section in `/etc/supervisor.conf`
 
 ### Updating a server configuration
 We reuse our provisioning script for managing server state. As a result, we can reuse it for updates:
