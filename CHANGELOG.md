@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+2.44.0 - Migrated from SOPS to environment variables
+
 2.43.0 - Added 404 page for mentor.twolfson.com
 
 2.42.0 - Added /index.html -> / redirect for mentor.twolfson.com
