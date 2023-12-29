@@ -171,6 +171,8 @@ bin/deploy-twolfson.com.sh digital-my-server
 ### Testing
 TODO: Update notes
 
+TODO: Testing should just be linting, with serverspec as its own command
+
 As mentioned in the high level overview, we use [Serverspec][] for testing. This is a [Ruby][] gem so you will need it installed to run our tests:
 
 ```bash
