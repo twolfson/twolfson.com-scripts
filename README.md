@@ -18,26 +18,20 @@ We believe this means we've overinvested in automation, and instead believe dive
 For more reading, please see: https://twolfson.com/2022-07-30-startup-time-investing-operational-processes
 
 ## Getting Started
-If you don't have the following dependencies set up, please install them:
+To get a server running or verifying server integrity, we have documented runbooks for each of those tasks.
+
+There are common dependencies needed to check your work. Please install the following:
 
 - Ruby, https://www.ruby-lang.org/en/documentation/installation/
-To get a local server running, we have created a [Vagrant][] setup.
 
-If you don't have Vagrant installed, then please follow the instructions at <http://www.vagrantup.com/>.
-
-[Vagrant]: http://www.vagrantup.com/
-
-Once Vagrant is installed, follow the steps below:
+Once all dependencies are installed, follow the steps below:
 
 ```bash
 # Clone our repository
 git clone https://github.com/twolfson/twolfson.com-scripts
+cd twolfson.com-scripts
 
-# Start up a Vagrant instance
-vagrant up
-
-# SSH into the machine and poke around
-vagrant ssh
+# Follow relevant documentation
 ```
 
 ## Documentation
