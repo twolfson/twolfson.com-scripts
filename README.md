@@ -22,7 +22,15 @@ To get a server running or verifying server integrity, we have documented runboo
 
 There are common dependencies needed to check your work. Please install the following:
 
-- Ruby, https://www.ruby-lang.org/en/documentation/installation/
+- Ruby @ 2.7, https://www.ruby-lang.org/en/documentation/installation/
+- Bundler @ 2.4.22, https://rubygems.org/gems/bundler
+
+For those on Ubuntu, this will look like:
+
+```bash
+sudo apt-get install ruby==1:2.7+1
+sudo gem install bundler -v 2.4.22
+```
 
 Once all dependencies are installed, follow the steps below:
 
@@ -30,6 +38,9 @@ Once all dependencies are installed, follow the steps below:
 # Clone our repository
 git clone https://github.com/twolfson/twolfson.com-scripts
 cd twolfson.com-scripts
+
+# Install our dependencies
+bundle install
 
 # Follow relevant documentation
 ```
@@ -56,21 +67,22 @@ As a high level overview of our setup, we use the following:
 
 **Development:**
 
-- Provisioning is currently done by [Chef][]
-    - This is to maximize reuse of common setup
-    - For ease of approach to new developers, we typically prefer [bash][]
+- Provisioning is done by hand and maintained via runbooks (documented in README)
+- Deployments are scripted in [bash][]
+    - We prefer this for ease of approach to new developers
 - Secrets are managed via environment variables
 - Services are currently all [Node.js][]/[JavaScript][] based
 - Tests are done via [Serverspec][]
     - These are both meant to cover sanity and security
 
-[Chef]: https://www.chef.io/
 [bash]: https://www.gnu.org/software/bash/
 [Node.js]: https://nodejs.org/
 [JavaScript]: https://en.wikipedia.org/wiki/JavaScript
 [Serverspec]: http://serverspec.org/
 
 ### File structure
+TODO: Update after scripts updated
+
 This repository has the following file structure:
 
 - `.bundle/` - Configuration for Bundler (used for managing Ruby gems)
@@ -86,6 +98,8 @@ This repository has the following file structure:
 - `Vagrantfile` - Configuration for Vagrant
 
 ### Provisioning a new server
+TODO: Possibly move to a new folder, pull in GitHub issues
+
 To provision a new server via [Digital Ocean][], follow the steps below:
 
 - If we don't have a Digital Ocean SSH key pair yet, then generate one
@@ -115,6 +129,7 @@ Host digital-my-server
         sudo chmod u=r,g=,o= /etc/ssl/private/dhparam.pem # Only user can read this file
         ```
     - Upload/import PGP privte key for SOPS, see [Managing PGP data](#managing-pgp-data)
+        - TODO: Drop SOPS mention
 - Install certbot for LetsEncrypt backed domains
     - Specify each subdomain/subdomain pair individually (e.g. `twolfsn.com` (1,2), `twolfson.com` (3,4)), otherwise LetsEncrypt will use the same file/certificate for all of them
 - Bootstrap our server
@@ -154,16 +169,11 @@ bin/deploy-twolfson.com.sh digital-my-server
 ```
 
 ### Testing
+TODO: Update notes
+
 As mentioned in the high level overview, we use [Serverspec][] for testing. This is a [Ruby][] gem so you will need it installed to run our tests:
 
 ```bash
-# Install bundler to manage gems for local directory
-gem install bundler
-
-# Install dependencies for this repo
-bundle install
-
-# Run our tests
 ./test.sh
 ```
 
