@@ -1,10 +1,26 @@
 # twolfson.com-scripts [![Build status](https://travis-ci.org/twolfson/twolfson.com-scripts.png?branch=master)](https://travis-ci.org/twolfson/twolfson.com-scripts)
 
-Scripts used for bootstrapping and deploying services for `twolfson.com` and its subdomains.
+Runbooks and scripts used for bootstrapping and deploying services for `twolfson.com` and its subdomains.
 
 This was created to provide a dotfiles-like setup that documents my personal server setup.
 
+## Breaking changes in 3.0.0
+We've dropped Vagrant, Chef, and scripted bootstrapping support.
+
+We're keeping Serverspec to ensure server integrity and have moved to runbooks for documenting setup.
+
+We don't touch this server often, but whenever we want to, we find iteration slow and difficult.
+
+i.e. Versioning is too brittle, commands change upon upgrading, deploying/testing requires a feedback loop.
+
+We believe this means we've overinvested in automation, and instead believe divesting will lead to faster results.
+
+For more reading, please see: https://twolfson.com/2022-07-30-startup-time-investing-operational-processes
+
 ## Getting Started
+If you don't have the following dependencies set up, please install them:
+
+- Ruby, https://www.ruby-lang.org/en/documentation/installation/
 To get a local server running, we have created a [Vagrant][] setup.
 
 If you don't have Vagrant installed, then please follow the instructions at <http://www.vagrantup.com/>.
