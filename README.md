@@ -144,6 +144,15 @@ Host digital-my-server
 ### Managing secrets
 Secrets are maintained on each server by hand. To add/edit/remove a secret, modify the relevant section in `/etc/supervisor.conf`
 
+TODO:
+- Would prefer to be able to sync file as-is, no handcoded secrets
+- Could do `/` level file for `env` but doesn't allow per-repo config
+    - Let's do that for `ENV` and `NODE_ENV` I guess
+- but then also `.env` for repo-specific config (e.g. Sentry)
+    - Also nice because it allows repo level config/override + example tracking
+    - A little annoying for deployments (i.e. copy from last `main`), but we'll live
+- In explanation, prob talk through Docker, how it's nice but also 1 more layer of encapsulation + reference to `if-i-were-to-build-a-startup-web-app`
+
 ### Updating a server configuration
 We reuse our provisioning script for managing server state. As a result, we can reuse it for updates:
 
