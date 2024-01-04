@@ -101,48 +101,7 @@ This repository has the following file structure:
 - `Vagrantfile` - Configuration for Vagrant
 
 ### Provisioning a new server
-TODO: Possibly move to a new folder, pull in GitHub issues
-
-To provision a new server via [Digital Ocean][], follow the steps below:
-
-- If we don't have a Digital Ocean SSH key pair yet, then generate one
-    - https://help.github.com/articles/generating-ssh-keys/
-- Create a new Ubuntu based droplet with our SSH key (14.04 x64)
-- Add public key to [data/home/ubuntu/.ssh/authorized_keys][] so we can `ssh` into the `ubuntu` user
-    - Digital Ocean's SSH key will initially be registered to `root` user but we dislike having direct SSH access into a `root` user
-- Once droplet has started, set up our `~/.ssh/config` on the local machine
-
-```
-# Replace `digital-my-server` with a better name
-# Replace 127.0.0.1 with droplet's public IP
-Host digital-my-server
-    User root
-    HostName 127.0.0.1
-```
-
-- SSH into our server and set up basic provisions
-    - `ssh digital-my-server`
-    - Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)
-        ```bash
-        # DEV: We could use `/etc/letsencrypt/ssl-dhparams.pem` for this but are opting out for easier testing
-        # https://weakdh.org/sysadmin.html
-        openssl dhparam -out dhparam.pem 2048
-        sudo mv dhparam.pem /etc/ssl/private/dhparam.pem
-        sudo chown root:root /etc/ssl/private/dhparam.pem
-        sudo chmod u=r,g=,o= /etc/ssl/private/dhparam.pem # Only user can read this file
-        ```
-    - Upload/import PGP privte key for SOPS, see [Managing PGP data](#managing-pgp-data)
-        - TODO: Drop SOPS mention
-- Install certbot for LetsEncrypt backed domains
-    - Specify each subdomain/subdomain pair individually (e.g. `twolfsn.com` (1,2), `twolfson.com` (3,4)), otherwise LetsEncrypt will use the same file/certificate for all of them
-- Bootstrap our server
-    - `bin/bootstrap-remote.sh digital-my-server`
-- Update `~/.ssh/config` to use `User ubuntu` instead of `User root`
-    - During the bootstrap process, we intentionally lock our `root` access via `ssh` for security
-- Run our tests on the server
-    - `bin/test-remote.sh digital-my-server`
-
-[data/home/ubuntu/.ssh/authorized_keys]: data/home/ubuntu/.ssh/authorized_keys
+See [docs/provisioning-a-server.md](docs/provisioning-a-server.md)
 
 ### Managing secrets
 Secrets are maintained on each server by hand. To add/edit/remove a secret, modify the relevant section in `/etc/supervisor.conf`
