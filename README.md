@@ -9,7 +9,7 @@ We've dropped Vagrant, Chef, and scripted bootstrapping.
 
 As the replacement, we've moved to runbooks, which are easier to maintain over sparse iteration cycles.
 
-i.e. There was always a slow ramp-up period for how things worked, deploying/testing has a slow feedback loop, and when something is upgraded, there can be a large cascade of changes necessary (which becomes cumbersome with the slow feedback loop).
+i.e. There was always a slow "how did that work again?" period, iteration required deployments (slow), and cascades of changes from minor upgrades became even slower due to this feedback loop.
 
 In short, we overinvested in automation, and believe divesting will lead to faster results.
 
