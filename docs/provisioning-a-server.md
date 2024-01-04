@@ -74,6 +74,7 @@ sudo chmod u=rw,g=,o= /home/ubuntu/.ssh/authorized_keys
 7. In a separate terminal, SSH as `ubuntu` user to verify the above all worked
 
 ```bash
+# In new tab
 ssh digital-twolfson.com
 ```
 
@@ -82,6 +83,19 @@ ssh digital-twolfson.com
 ```bash
 ls /root # Should be denied
 sudo ls /root  # Should work, no password required
+```
+
+9. Close `root` SSH session
+
+```bash
+# In root tab
+exit
+```
+
+10. Continue provisioning in `ubuntu` SSH session
+
+```bash
+# In ubuntu tab
 ```
 
 6. Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)
