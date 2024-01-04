@@ -30,6 +30,19 @@ Host digital-twolfson.com
 ssh digital-twolfson.com
 ```
 
+6. Run the following commands
+
+```bash
+# Update apt cache
+sudo apt-get update
+
+# Sanity check timezone is configured as UTC
+# DEV: This was a legacy Ubuntu 14 issue, resolved in 22, https://www.digitalocean.com/community/questions/how-to-change-the-timezone-on-ubuntu-14
+#   https://serverfault.com/a/84528
+# Feel free to double check via: `cat /etc/timezone` and `cat /etc/localtime`
+sudo dpkg-reconfigure --frontend noninteractive tzdata
+```
+
 6. Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)
 
 ```bash
