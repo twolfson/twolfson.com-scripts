@@ -15,9 +15,9 @@ Host digital-twolfson.com
     HostName xxx.xxx.xxx.xxx
 ```
 
-- SSH into our server and set up basic provisions
-    - `ssh digital-twolfson.com`
-    - Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)
+5. SSH into our server and set up basic provisions
+    1 `ssh digital-twolfson.com`
+    2. Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)
         ```bash
         # DEV: We could use `/etc/letsencrypt/ssl-dhparams.pem` for this but are opting out for easier testing
         # https://weakdh.org/sysadmin.html
@@ -26,13 +26,13 @@ Host digital-twolfson.com
         sudo chown root:root /etc/ssl/private/dhparam.pem
         sudo chmod u=r,g=,o= /etc/ssl/private/dhparam.pem # Only user can read this file
         ```
-- Install certbot for LetsEncrypt backed domains
+6. Install certbot for LetsEncrypt backed domains
     - Specify each subdomain/subdomain pair individually (e.g. `twolfsn.com` (1,2), `twolfson.com` (3,4)), otherwise LetsEncrypt will use the same file/certificate for all of them
-- Bootstrap our server (TODO: No longer functional) (TODO: Delete Chef)
+7. Bootstrap our server (TODO: No longer functional) (TODO: Delete Chef)
     - `bin/bootstrap-remote.sh digital-my-server`
-- Update `~/.ssh/config` to use `User ubuntu` instead of `User root`
+8. Update `~/.ssh/config` to use `User ubuntu` instead of `User root`
     - During the bootstrap process, we intentionally lock our `root` access via `ssh` for security
-- Run our tests on the server
+9. Run our tests on the server
     - `bin/test-remote.sh digital-my-server`
 
-[data/home/ubuntu/.ssh/authorized_keys]: data/home/ubuntu/.ssh/authorized_keys
+[data/home/ubuntu/.ssh/authorized_keys]: ../data/home/ubuntu/.ssh/authorized_keys
