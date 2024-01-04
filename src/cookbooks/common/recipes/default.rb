@@ -1,12 +1,3 @@
-# Guarantee we have authorized keys synced
-# @depends_on user[ubuntu] (to prevent lock out)
-# @depends_on directory[/home/ubuntu/.ssh] (for directory creation)
-# DEV: This won't brick Vagrant since it uses a `vagrant` user for ssh
-data_file "/home/ubuntu/.ssh/authorized_keys" do
-  owner("ubuntu")
-  group("ubuntu")
-  mode("600") # u=rw,g=,o=
-end
 # WARNING: THIS WILL LOCK OUT THE ROOT USER
 directory "/root/.ssh" do
   owner("root")

@@ -20,14 +20,14 @@ To provision a new server via [DigitalOcean][], follow the steps below:
 ```
 # Replace xxx.xxx.xxx.xxx with droplet's public IP
 Host digital-twolfson.com
-    User root
+    User ubuntu
     HostName xxx.xxx.xxx.xxx
 ```
 
-5. SSH into our server
+5. SSH into our server as `root` user to set up `ubuntu` one
 
 ```bash
-ssh digital-twolfson.com
+ssh root@digital-twolfson.com
 ```
 
 6. Run the following provisioning commands
@@ -52,9 +52,6 @@ adduser ubuntu --disabled-password --gecos "Ubuntu" \
 sudo chown -R ubuntu:ubuntu /home/ubuntu  # Not necessary, but feel free to be paranoid
 sudo chmod u=rwx,g=rx,o=rx /home/ubuntu
 
-# Create SSH folder for `ubuntu` user
-mkdir ubuntu:ubuntu --mode u=rwx,g=,o= /home/ubuntu/.ssh
-
 # Set up sudoers for `ubuntu`, and enumerate explicit permissions
 #   https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file
 gpasswd -a ubuntu sudo
@@ -65,6 +62,26 @@ ubuntu ALL=(ALL) NOPASSWD:ALL
 EOF
 sudo chown root:root /etc/sudoers.d/ubuntu
 sudo chmod u=r,g=,o= /etc/sudoers.d/ubuntu
+
+# Set up SSH for `ubuntu` user using current `root` SSH keys
+mkdir ubuntu:ubuntu --mode u=rwx,g=,o= /home/ubuntu/.ssh
+sudo chown ubuntu:ubuntu /home/ubuntu/.ssh  # `ubuntu:ubuntu` in last line didn't stick apparently?
+cp /root/.ssh/authorized_keys /home/ubuntu/.ssh/authorized_keys
+sudo chown ubuntu:ubuntu /home/ubuntu/.ssh/authorized_keys
+sudo chmod u=rw,g=,o= /home/ubuntu/.ssh/authorized_keys
+```
+
+7. In a separate terminal, SSH as `ubuntu` user to verify the above all worked
+
+```bash
+ssh digital-twolfson.com
+```
+
+8. Confirm permissions are as expected
+
+```bash
+ls /root # Should be denied
+sudo ls /root  # Should work, no password required
 ```
 
 6. Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)
