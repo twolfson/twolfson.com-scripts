@@ -43,7 +43,7 @@ bundle install
 # Follow relevant documentation
 ```
 
-- [Provisioning a server](docs/provision-a-server.md)
+- [Provisioning a server](docs/provisioning-a-server.md)
 - [Deploying a service](#deploying-a-service)
 - [Verify server integrity](#verifying-server-integrity)
 - Additional actions documented below
