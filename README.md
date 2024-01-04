@@ -5,7 +5,7 @@ Runbooks and scripts used for bootstrapping and deploying services for `twolfson
 This was created to provide a dotfiles-like setup that documents my personal server setup.
 
 ## Breaking changes in 3.0.0
-We've dropped Vagrant, Chef, and scripted bootstrapping.
+We've dropped Vagrant, Chef, and scripted bootstrapping. [See previous version here](https://github.com/twolfson/twolfson.com-scripts/tree/2.44.0).
 
 As the replacement, we've moved to runbooks, which are easier to maintain over sparse iteration cycles.
 

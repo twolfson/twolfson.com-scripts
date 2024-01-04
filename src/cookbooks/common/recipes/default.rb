@@ -1,21 +1,3 @@
-# Guarantee `.ssh` directory for authorized keys
-# @depends_on user[ubuntu] (for owner/group reference)
-# @depends_on directory[/home/ubuntu] (for parent directory creation)
-# DEV: Equivalent to `mkdir ubuntu:ubuntu --mode u=rwx,g=,o= /home/ubuntu/.ssh`
-directory "/home/ubuntu/.ssh" do
-  owner("ubuntu")
-  group("ubuntu")
-  mode("700") # u=rwx,g=,o=
-end
-# Guarantee `sudo` rights for `ubuntu` for developer sanity
-# https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on-ubuntu-and-centos
-# @depends_on user[ubuntu] (for `user` reference)
-data_file "/etc/sudoers.d/ubuntu" do
-  owner("root")
-  group("root")
-  mode("400") # u=r,g=,o=
-end
-
 # Guarantee we have authorized keys synced
 # @depends_on user[ubuntu] (to prevent lock out)
 # @depends_on directory[/home/ubuntu/.ssh] (for directory creation)

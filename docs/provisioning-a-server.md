@@ -46,12 +46,25 @@ sudo dpkg-reconfigure --frontend noninteractive tzdata
 # DEV: GECOS is a comment field in /etc/passwd, https://en.wikipedia.org/wiki/Gecos_field
 adduser ubuntu --disabled-password --gecos "Ubuntu" \
     --home /home/ubuntu --shell /bin/bash
-gpasswd -a ubuntu sudo
 # Can check user existence and groups via `id ubuntu`
 
 # Adjust home folder permissions for easier third party execution
 sudo chown -R ubuntu:ubuntu /home/ubuntu  # Not necessary, but feel free to be paranoid
 sudo chmod u=rwx,g=rx,o=rx /home/ubuntu
+
+# Create SSH folder for `ubuntu` user
+mkdir ubuntu:ubuntu --mode u=rwx,g=,o= /home/ubuntu/.ssh
+
+# Set up sudoers for `ubuntu`, and enumerate explicit permissions
+#   https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file
+gpasswd -a ubuntu sudo
+sudo cat << EOF > /etc/sudoers.d/ubuntu
+# Based off of AWS' sudoers.d
+# User rules for ubuntu
+ubuntu ALL=(ALL) NOPASSWD:ALL
+EOF
+sudo chown root:root /etc/sudoers.d/ubuntu
+sudo chmod u=r,g=,o= /etc/sudoers.d/ubuntu
 ```
 
 6. Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)
