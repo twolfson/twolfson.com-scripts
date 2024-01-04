@@ -30,7 +30,7 @@ Host digital-twolfson.com
 ssh digital-twolfson.com
 ```
 
-6. Run the following commands
+6. Run the following provisioning commands
 
 ```bash
 # Update apt cache
@@ -64,3 +64,5 @@ sudo chmod u=r,g=,o= /etc/ssl/private/dhparam.pem # Only user can read this file
 
 [create-droplet]: https://cloud.digitalocean.com/droplets
 [data/home/ubuntu/.ssh/authorized_keys]: ../data/home/ubuntu/.ssh/authorized_keys
+
+TODO: Consider unattended upgrades
