@@ -1,1 +1,0 @@
-cookbooks/twolfson.com/recipes/default.rb
