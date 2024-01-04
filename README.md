@@ -70,12 +70,12 @@ As a high level overview of our setup, we use the following:
 
 **Development:**
 
-- Provisioning is done by hand and maintained via runbooks (documented in README)
+- Provisioning is done by hand and maintained via runbooks
 - Deployments are scripted in [bash][]
-    - We prefer this for ease of approach to new developers
+    - We prefer this since it's consisently available in most environments
 - Secrets are managed via environment variables
 - Services are currently all [Node.js][]/[JavaScript][] based
-- Tests are done via [Serverspec][]
+- Integrity checks are done via [Serverspec][]
     - These are both meant to cover sanity and security
 
 [bash]: https://www.gnu.org/software/bash/
