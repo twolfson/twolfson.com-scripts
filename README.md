@@ -5,15 +5,13 @@ Runbooks and scripts used for bootstrapping and deploying services for `twolfson
 This was created to provide a dotfiles-like setup that documents my personal server setup.
 
 ## Breaking changes in 3.0.0
-We've dropped Vagrant, Chef, and scripted bootstrapping support.
+We've dropped Vagrant, Chef, and scripted bootstrapping.
 
-We're keeping Serverspec to ensure server integrity and have moved to runbooks for documenting setup.
+As the replacement, we've moved to runbooks, which are easier to maintain over sparse iteration cycles.
 
-We don't touch this server often, but whenever we want to, we find iteration slow and difficult.
+i.e. There was always a slow ramp-up period for how things worked, deploying/testing has a slow feedback loop, and when something is upgraded, there can be a large cascade of changes necessary (which becomes cumbersome with the slow feedback loop).
 
-i.e. Versioning is too brittle, commands change upon upgrading, deploying/testing requires a feedback loop.
-
-We believe this means we've overinvested in automation, and instead believe divesting will lead to faster results.
+In short, we overinvested in automation, and believe divesting will lead to faster results.
 
 For more reading, please see: https://twolfson.com/2022-07-30-startup-time-investing-operational-processes
 
