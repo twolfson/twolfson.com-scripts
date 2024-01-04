@@ -41,6 +41,17 @@ sudo apt-get update
 #   https://serverfault.com/a/84528
 # Feel free to double check via: `cat /etc/timezone` and `cat /etc/localtime`
 sudo dpkg-reconfigure --frontend noninteractive tzdata
+
+# Create an `ubuntu` user as DigitalOcean's Ubuntu images only provide `root`
+# DEV: GECOS is a comment field in /etc/passwd, https://en.wikipedia.org/wiki/Gecos_field
+adduser ubuntu --disabled-password --gecos "Ubuntu" \
+    --home /home/ubuntu --shell /bin/bash
+gpasswd -a ubuntu sudo
+# Can check user existence and groups via `id ubuntu`
+
+# Adjust home folder permissions for easier third party execution
+sudo chown -R ubuntu:ubuntu /home/ubuntu  # Not necessary, but feel free to be paranoid
+sudo chmod u=rwx,g=rx,o=rx /home/ubuntu
 ```
 
 6. Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)

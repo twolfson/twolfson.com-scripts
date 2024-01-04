@@ -1,33 +1,3 @@
-# Guarantee we have a `ubuntu` user provisioned
-# DEV: Digital Ocean's Ubuntu images provision us as the root user so we must create an ubuntu user
-# DEV: Equivalent to `id ubuntu` then `adduser ubuntu --disabled-password --gecos "Ubuntu`
-#   https://github.com/mizzy/specinfra/blob/v2.47.0/lib/specinfra/command/base/user.rb#L3-L5
-#   https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04
-user "ubuntu" do
-  # Create our user with a non-crypt password
-  # DEV: `*` allows for non-password SSH login whereas `!` prevents it
-  #   http://linux.die.net/man/5/shadow
-  action([:create])
-  password("*")
-
-  # Define common user info
-  home("/home/ubuntu")
-  shell("/bin/bash")
-  # DEV: `comment` acts as `adduser --gecos`
-  comment("Ubuntu")
-end
-# Add `ubuntu` to `sudo` group
-# DEV: Equivalent to `gpasswd -a ubuntu sudo`
-group "sudo" do
-  members("ubuntu")
-end
-# Guarantee home directory for ubuntu user
-# @depends_on user[ubuntu] (for owner/group reference)
-directory "/home/ubuntu" do
-  owner("ubuntu")
-  group("ubuntu")
-  mode("755") # u=rwx,g=rx,o=rx
-end
 # Guarantee `.ssh` directory for authorized keys
 # @depends_on user[ubuntu] (for owner/group reference)
 # @depends_on directory[/home/ubuntu] (for parent directory creation)
