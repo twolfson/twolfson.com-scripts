@@ -16,7 +16,7 @@ In short, we overinvested in automation, and believe divesting will lead to fast
 For more reading, please see: https://twolfson.com/2022-07-30-startup-time-investing-operational-processes
 
 ## Getting Started
-To get a server running or verifying server integrity, we have documented runbooks for each of those tasks.
+To provision a server, deploy a service, or verify integrity, we have runbooks for each of those tasks.
 
 There are common dependencies needed to check your work. Please install the following:
 
@@ -42,6 +42,11 @@ bundle install
 
 # Follow relevant documentation
 ```
+
+- [Provisioning a server](docs/provision-a-server.md)
+- [Deploying a service](#deploying-a-service)
+- [Verify server integrity](#verifying-server-integrity)
+- Additional actions documented below
 
 ## Documentation
 As a high level overview of our setup, we use the following:
@@ -195,8 +200,8 @@ SKIP_LINT=TRUE SKIP_PROVISION=TRUE ./test.sh
 
 [Ruby]: https://www.ruby-lang.org/en/
 
-### Validating production
-To run our test suite against a production machine, we can use the `bin/test-remote.sh` script.
+### Verifying server integrity
+To run Serverspec against a server, we can use the `bin/test-remote.sh` script.
 
 ```bash
 # Before running our tests, please add the remote server to ~/.ssh/config
