@@ -2,8 +2,17 @@
 To provision a new server via [Digital Ocean][], follow the steps below:
 
 1. If we don't have a Digital Ocean SSH key pair yet, then generate one
-    - https://help.github.com/articles/generating-ssh-keys/
-2. Create a new Ubuntu based droplet with our SSH key (14.04 x64)
+    - [GitHub has ideal instructions for generating a new key (ideal flags)](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+    - [Digital Ocean documentation for adding new SSH key](https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/to-team/)
+2. [Create a new Digital Ocean droplet][create-droplet] with the following configuration
+    - Region: NYC1 (more realistic lag since I'm in SF, plus middleground for EU)
+    - OS: Ubuntu LTS (22.04 x64)
+    - Droplet: Regular, $4/mo (512MB CPU, 10GB SSD, 500GB transfer)
+        - Context: Repo is ~200MB per deployment, giving us plenty of space still
+        - and we've run on 512MB CPU since 2016-01-19 just fine
+    - Authentication method: SSH key from previous step
+    - Enable improved metrics and monitoring
+    - Hostname: twolfson.com
 3. Add public key to [data/home/ubuntu/.ssh/authorized_keys][] so we can `ssh` into the `ubuntu` user
     - Digital Ocean's SSH key will initially be registered to `root` user but we dislike having direct SSH access into a `root` user
 4. Once droplet has started, set up our `~/.ssh/config` on the local machine
@@ -35,4 +44,5 @@ Host digital-twolfson.com
 9. Run our tests on the server
     - `bin/test-remote.sh digital-my-server`
 
+[create-droplet]: https://cloud.digitalocean.com/droplets
 [data/home/ubuntu/.ssh/authorized_keys]: ../data/home/ubuntu/.ssh/authorized_keys
