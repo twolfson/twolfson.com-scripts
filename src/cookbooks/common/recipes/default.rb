@@ -1,21 +1,3 @@
-# Configure root for security (e.g. no direct `root` login, restrict SSL algorithms)
-# @depends_on exectue[apt-get-update-periodic] (to make sure apt is updated)
-# @depends_on data_file[/home/ubuntu/.ssh/ubuntu/authorized_keys] (to prevent lock out)
-# WARNING: SSHD_CONFIG UPDATE WILL LOCK OUT THE ROOT USER
-# Update `openssh-server` for security
-#   https://lobste.rs/s/mzodhj/openssh_client_bug_can_leak_keys_to_malicious_servers
-#   http://undeadly.org/cgi?action=article&sid=20160114142733
-apt_package "openssh-server" do
-  version("1:6.6p1-2ubuntu2.8")
-end
-# DEV: Equivalent to `sudo service ssh *`
-service "ssh" do
-  # Always enable and run our SSH server
-  # https://docs.chef.io/resource_service.html#examples
-  provider(Chef::Provider::Service::Upstart)
-  supports(:reload => true, :restart => true, :status => true)
-  action([:enable, :start])
-end
 data_file "/etc/ssh/sshd_config" do
   owner("root")
   group("root")
@@ -26,12 +8,6 @@ data_file "/etc/ssh/sshd_config" do
   notifies(:reload, "service[ssh]", :immediately)
 end
 
-# Guarantee `nginx` is installed
-# @depends_on exectue[apt-get-update-periodic] (to make sure apt is updated)
-# DEV: Equivalent to `sudo apt-get install -y "nginx=1.4.6-1ubuntu3.8"`
-apt_package "nginx" do
-  version("1.4.6-1ubuntu3.8")
-end
 # DEV: Equivalent to `sudo /etc/init.d/nginx *`
 service "nginx" do
   provider Chef::Provider::Service::Init
@@ -47,31 +23,6 @@ file "/etc/nginx/sites-enabled/default" do
   notifies(:reload, "service[nginx]", :immediately)
 end
 
-# Guarantee `python` and `pip` are installed
-# @depends_on exectue[apt-get-update-periodic] (to make sure apt is updated)
-# DEV: Equivalent to `sudo apt-get install -y "python-setuptools=3.3-1ubuntu2" "python-pip=1.5.4-1ubuntu3"`
-apt_package "python-setuptools" do
-  version("3.3-1ubuntu2")
-end
-apt_package "python-pip" do
-  version("1.5.4-1ubuntu4")
-end
-# If pip is out of date, then upgrade it
-execute "upgrade-pip" do
-  command("sudo pip install \"pip==7.1.2\"")
-  # `pip --version`: `pip 7.1.2 from /usr/local/lib/python2.7/dist-packages (python 2.7)`
-  # DEV: Equivalent to `! pip --version | grep "pip 7.1.2" &> /dev/null`
-  only_if("! pip --version | grep \"pip 7.1.2\"")
-end
-
-# Guarantee `supervisor` is installed and configured
-# @depends_on execute[upgrade-pip]
-execute "install-supervisor" do
-  command("sudo pip install \"supervisor==3.2.0\"")
-  # `pip --version`: `pip 7.1.2 from /usr/local/lib/python2.7/dist-packages (python 2.7)`
-  # DEV: Equivalent to `! pip --version | grep "pip 7.1.2" &> /dev/null`
-  only_if("test \"$(supervisord --version)\" != \"3.2.0\"")
-end
 # Create folder for log files
 directory "/var/log/supervisor" do
   owner("root")

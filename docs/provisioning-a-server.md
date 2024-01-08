@@ -117,6 +117,32 @@ sudo usermod --shell /usr/sbin/nologin sync
 # Sanity check no other users have shell permissions
 cat /etc/passwd | grep -v /sbin/nologin | grep -v /bin/false
 # Should only be `ubuntu` user
+
+# At this point, in another tab, feel free to try out `root` SSH again
+# ssh root@digital-twolfson.com
+
+
+# Install `twolfson.com` dependencies:
+
+# (1) Sanity check `openssh-server` version to be at least 7.1, for CVE-2016-0777 and 0778
+#   https://undeadly.org/cgi?action=article&sid=20160114142733
+#   https://lobste.rs/s/mzodhj/openssh_client_bug_can_leak_keys_to_malicious_servers
+dpkg --list | grep openssh-server
+# Current version: 1:8.9p1-3ubuntu0.1
+
+# (2) Apt level dependencies
+# DEV: Versions are for tracking, not for enforcement (can find via `dpkg --list | grep`)
+sudo apt-get install -y \
+    nginx \  # NGINX, for reverse proxy, 1.18.0-6ubuntu14.4
+    python-setuptools \  # Setuptools, unsure why, 44.1.1-1.2ubuntu0.22.04.1
+    python3-pip  # pip, for installing supervisor, 20.3.4+dfsg-4
+# If prompted around "Daemons using outdated libraries", navigate to "Cancel"
+
+# Verify `pip` version (needed 7.1.2 from past notes, currently 22.0.2)
+pip --version
+
+# (3) Supervisor dependencies
+sudo pip install supervisor  # Version used: 4.2.5 (see `pip freeze`)
 ```
 
 6. Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)
