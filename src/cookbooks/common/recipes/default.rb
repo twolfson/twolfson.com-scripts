@@ -1,29 +1,3 @@
-# WARNING: THIS WILL LOCK OUT THE ROOT USER
-directory "/root/.ssh" do
-  owner("root")
-  group("root")
-  mode("700") # u=rwx,g=,o=
-end
-# @depends_on directory[/root/.ssh] (for directory creation)
-data_file "/root/.ssh/authorized_keys" do
-  owner("root")
-  group("root")
-  mode("600") # u=rw,g=,o=
-end
-
-# Lock out SSH shells for non-`ubuntu` users
-# @depends_on data_file[/home/ubuntu/.ssh/ubuntu/authorized_keys] (to prevent lock out)
-# DEV: Equivalent to `test "$(getent passwd root | cut -f 7 -d ":")" != "/usr/sbin/nologin"`
-#   and `sudo usermod --shell /usr/sbin/nologin root`
-# https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L53-L55
-# https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L61-L63
-user "root" do
-  shell("/usr/sbin/nologin")
-end
-user "sync" do
-  shell("/usr/sbin/nologin")
-end
-
 # Configure root for security (e.g. no direct `root` login, restrict SSL algorithms)
 # @depends_on exectue[apt-get-update-periodic] (to make sure apt is updated)
 # @depends_on data_file[/home/ubuntu/.ssh/ubuntu/authorized_keys] (to prevent lock out)

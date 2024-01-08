@@ -89,6 +89,8 @@ sudo ls /root  # Should work, no password required
 
 ```bash
 # In root tab
+
+# Exit session
 exit
 ```
 
@@ -96,6 +98,25 @@ exit
 
 ```bash
 # In ubuntu tab
+
+# Remove root user SSH permissions:
+
+# (1) Verify permissions on SSH folder + files
+sudo ls -la /root/.ssh
+# Should be:
+# drwx------ 2 root root 4096 [...] .
+# -rw------- 1 root root [..] [...] authorized_keys
+
+# (2) Empty out authorized keys
+sudo su --command "echo '' > /root/.ssh/authorized_keys"
+
+# (3) Lock out SSH shells for non-ubuntu users
+#   https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L61-L63
+sudo usermod --shell /usr/sbin/nologin root
+sudo usermod --shell /usr/sbin/nologin sync
+# Sanity check no other users have shell permissions
+cat /etc/passwd | grep -v /sbin/nologin | grep -v /bin/false
+# Should only be `ubuntu` user
 ```
 
 6. Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)
