@@ -1,5 +1,9 @@
 # twolfson.com-scripts [![Build status](https://travis-ci.org/twolfson/twolfson.com-scripts.png?branch=master)](https://travis-ci.org/twolfson/twolfson.com-scripts)
 
+TODO: See TODOs
+TODO: Unsymlink test.sh
+TODO: Move to GitHub Actions instead of Travis CI
+
 Runbooks and scripts used for bootstrapping and deploying services for `twolfson.com` and its subdomains.
 
 This was created to provide a dotfiles-like setup that documents my personal server setup.
