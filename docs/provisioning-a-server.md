@@ -99,18 +99,18 @@ exit
 ```bash
 # In ubuntu tab
 
-# Remove root user SSH permissions:
+# (1) Remove root user SSH permissions
 
-# (1) Verify permissions on SSH folder + files
+# (1.1) Verify permissions on SSH folder + files
 sudo ls -la /root/.ssh
 # Should be:
 # drwx------ 2 root root 4096 [...] .
 # -rw------- 1 root root [..] [...] authorized_keys
 
-# (2) Empty out authorized keys
+# (1.2) Empty out authorized keys
 sudo su --command "echo '' > /root/.ssh/authorized_keys"
 
-# (3) Lock out SSH shells for non-ubuntu users
+# (1.3) Lock out SSH shells for non-ubuntu users
 #   https://github.com/mizzy/specinfra/blob/v2.44.7/lib/specinfra/command/base/user.rb#L61-L63
 sudo usermod --shell /usr/sbin/nologin root
 sudo usermod --shell /usr/sbin/nologin sync
@@ -122,15 +122,15 @@ cat /etc/passwd | grep -v /sbin/nologin | grep -v /bin/false
 # ssh root@digital-twolfson.com
 
 
-# Install `twolfson.com` dependencies:
+# (2) Install `twolfson.com` dependencies:
 
-# (1) Sanity check `openssh-server` version to be at least 7.1, for CVE-2016-0777 and 0778
+# (2.1) Sanity check `openssh-server` version to be at least 7.1, for CVE-2016-0777 and 0778
 #   https://undeadly.org/cgi?action=article&sid=20160114142733
 #   https://lobste.rs/s/mzodhj/openssh_client_bug_can_leak_keys_to_malicious_servers
 dpkg --list | grep openssh-server
 # Current version: 1:8.9p1-3ubuntu0.1
 
-# (2) Apt level dependencies
+# (2.2) Apt level dependencies
 # DEV: Versions are for tracking, not for enforcement (can find via `dpkg --list | grep`)
 sudo apt-get install -y \
     nginx \  # NGINX, for reverse proxy, 1.18.0-6ubuntu14.4
@@ -141,7 +141,7 @@ sudo apt-get install -y \
 # Verify `pip` version (needed 7.1.2 from past notes, currently 22.0.2)
 pip --version
 
-# (3) Supervisor dependencies
+# (2.3) Supervisor dependencies
 sudo pip install supervisor  # Version used: 4.2.5 (see `pip freeze`)
 ```
 
