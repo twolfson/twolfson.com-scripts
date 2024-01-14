@@ -154,11 +154,15 @@ sudo /etc/init.d/ssh reload
 
 ```bash
 # Apt level dependencies
+# DEV: Node.js requires apt override, https://github.com/nodesource/distributions/tree/27fffb96936373a2a4a5e7834f0dd335dd198fdf#using-ubuntu-1
+#   https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 # DEV: Versions are for tracking, not for enforcement (can find via `dpkg --list | grep`)
 sudo apt-get install -y \
-    nginx \  # NGINX, for reverse proxy, 1.18.0-6ubuntu14.4
-    python-setuptools \  # Setuptools, unsure why, 44.1.1-1.2ubuntu0.22.04.1
-    python3-pip  # pip, for installing supervisor, 20.3.4+dfsg-4
+    nginx `# NGINX, for reverse proxy, 1.18.0-6ubuntu14.4` \
+    python-setuptools `# Setuptools, unsure why, 44.1.1-1.2ubuntu0.22.04.1` \
+    python3-pip `# pip, for installing supervisor, 20.3.4+dfsg-4` \
+    nodejs  `# Node.js runtime, 20.11.0-1nodesource1`
 # If prompted around "Daemons using outdated libraries", navigate to "Cancel"
 
 # Verify `pip` version (needed 7.1.2 from past notes, currently 22.0.2)
@@ -240,3 +244,5 @@ TODO: Ensure certbot is still installed at the end
 TODO: Consider unattended upgrades
 
 TODO: If there was an old server being transferred from, can delete it + remove from `~/.ssh/config`
+
+TODO: Callout that gifsockets is not in this setup at all
