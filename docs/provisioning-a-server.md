@@ -264,6 +264,32 @@ sudo update-rc.d supervisord defaults
 bin/deploy-twolfson.com.sh digital-twolfson.com
 ```
 
+```bash
+# Back on the server, we can check it's running:
+curl 127.0.0.1:8080 # Should see website content
+sudo supervisorctl status # Should see RUNNING status
+```
+
+15. Shutdown server to verify autostart works for supervisor
+
+```bash
+sudo poweroff
+```
+
+16. Start server via Digital Ocean UI
+
+17. Reopen SSH connection via `ssh digital-twolfson.com`
+
+```bash
+# Verify server automatically started
+curl 127.0.0.1:8080 # Should see website content
+sudo supervisorctl status # Should see RUNNING status
+```
+
+18. Update DNS records to point to new IP
+
+19. Set up HTTPS certificates via Let's Encrypt
+
 TODO: Ensure certbot is still installed at the end
 
 7. Install certbot for LetsEncrypt backed domains
