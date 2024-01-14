@@ -195,6 +195,8 @@ sudo rm -rf /var/www/html
 # Set up `drive.twolfson.com` and other static content sites
 mkdir /var/www/drive.twolfson.com
 mkdir /var/www/mentor.twolfson.com
+chmod u=rwx,g=rx,o=rx /var/www/drive.twolfson.com
+chmod u=rwx,g=rx,o=rx /var/www/mentor.twolfson.com
 sudo chown ubuntu:ubuntu /var/www/*
 # Verify: ls -la /var/www
 # Expect: . is `root:root` and `u=rwx,g=rx,o=rx`
@@ -225,7 +227,6 @@ sudo /etc/init.d/nginx restart
 
 # Sanity check that NGINX is working:
 # curl --include --insecure -H "Host: drive.twolfson.com" https://137.184.49.25/favicon.ico
-# TODO: Only getting 403 Forbidden... why...
 ```
 
 14. Configure and deploy twolfson.com
