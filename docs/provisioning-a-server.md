@@ -196,12 +196,14 @@ sudo chown ubuntu:ubuntu /var/www/*
 #   https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04
 # We'll set up Let's Encrypt once DNS is transferred
 # DEV: For prompts, just press enter through them
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout privkey.pem -out fullchain.pem
 for domain in "drive.twolfson.com" "mentor.twolfson.com" "twolfsn.com" "twolfson.com"; do
     sudo mkdir -p "/etc/letsencrypt/live/${domain}"
-    sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-        -keyout "/etc/letsencrypt/live/${domain}/privkey.pem" \
-        -out "/etc/letsencrypt/live/${domain}/fullchain.pem"
+    sudo cp privkey.pem "/etc/letsencrypt/live/${domain}/privkey.pem"
+    sudo cp fullchain.pem "/etc/letsencrypt/live/${domain}/fullchain.pem"
 done
+rm privkey.pem fullchain.pem
 
 # If you're transferring between servers, now is a good time to transfer `/var/www` files
 rsync --rsync-path="sudo rsync" digital-twolfson.com-old:/var/www
