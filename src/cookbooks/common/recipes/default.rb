@@ -1,13 +1,3 @@
-data_file "/etc/ssh/sshd_config" do
-  owner("root")
-  group("root")
-  mode("644") # u=rw,g=r,o=r
-
-  # When we update, reload our ssh service
-  # http://unix.stackexchange.com/a/127887
-  notifies(:reload, "service[ssh]", :immediately)
-end
-
 # DEV: Equivalent to `sudo /etc/init.d/nginx *`
 service "nginx" do
   provider Chef::Provider::Service::Init

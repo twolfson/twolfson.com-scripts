@@ -135,6 +135,15 @@ cat /etc/passwd | grep -v /sbin/nologin | grep -v /bin/false
 #   https://lobste.rs/s/mzodhj/openssh_client_bug_can_leak_keys_to_malicious_servers
 dpkg --list | grep openssh-server
 # Current version: 1:8.9p1-3ubuntu0.1
+
+# Update `sshd_config`
+cd ~/twolfson.com-scripts
+sudo chown root:root data/etc/ssh/sshd_config
+sudo chmod u=rw,g=r,o=r data/etc/ssh/sshd_config
+sudo mv data/etc/ssh/sshd_config /etc/ssh/sshd_config
+
+# Reload SSH
+sudo /etc/init.d/ssh reload
 ```
 
 ## Setting up services
