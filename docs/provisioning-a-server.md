@@ -192,6 +192,10 @@ sudo chown ubuntu:ubuntu /var/www/*
 # Expect: . is `root:root` and `u=rwx,g=rx,o=rx`
 # Expect: Subfolders are `ubuntu:ubuntu` and `u=rwx,g=rx,o=rx`
 
+# 2 options now (we can think of): Comment out lines (annoying) or self-signed certs
+# Self-signed certs sounding much better, since no risk with NGINX complaining about no certs specified
+
+
 # If you're transferring between servers, now is a good time to transfer both `/var/www` and `/etc/letsencrypt` files
 rsync --rsync-path="sudo rsync" digital-twolfson.com-old:/etc/letsencrypt letsencrypt
 rsync --chmod u=rw,g=,o= \
