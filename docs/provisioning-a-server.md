@@ -23,6 +23,9 @@ To provision a new server via [DigitalOcean][], follow the steps below
 Host digital-twolfson.com
     User ubuntu
     HostName xxx.xxx.xxx.xxx
+
+# If there's an old server you're transferring from,
+# rename it to: digital-twolfson.com-old
 ```
 
 5. SSH into our server as `root` user to set up `ubuntu` one
@@ -206,14 +209,18 @@ done
 rm privkey.pem fullchain.pem
 
 # If you're transferring between servers, now is a good time to transfer `/var/www` files
-rsync --rsync-path="sudo rsync" digital-twolfson.com-old:/var/www
-rsync --chmod u=rw,g=,o= \
+rsync -r --human-readable --archive --verbose --compress digital-twolfson.com-old:/var/www .
+rsync --chmod u=rw,g=rw,o=r \
     --human-readable --archive --verbose --compress \
-    www digital-twolfson.com:/var/www
-# Don't forget to `rm` the
+    www digital-twolfson.com:/var
+# Don't forget to `rm` the `www` folder
 
-# Reload NGINX service
-sudo /etc/init.d/nginx reload
+# Restart NGINX service (reload wasn't sticking)
+sudo /etc/init.d/nginx restart
+
+# Sanity check that NGINX is working:
+# curl --include --insecure -H "Host: drive.twolfson.com" https://137.184.49.25/favicon.ico
+# TODO: Only getting 403 Forbidden... why...
 ```
 
 TODO: Ensure certbot is still installed at the end
@@ -231,3 +238,5 @@ TODO: Ensure certbot is still installed at the end
 [data/home/ubuntu/.ssh/authorized_keys]: ../data/home/ubuntu/.ssh/authorized_keys
 
 TODO: Consider unattended upgrades
+
+TODO: If there was an old server being transferred from, can delete it + remove from `~/.ssh/config`
