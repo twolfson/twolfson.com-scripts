@@ -1,6 +1,7 @@
 # Provisioning a server
-To provision a new server via [DigitalOcean][], follow the steps below:
+To provision a new server via [DigitalOcean][], follow the steps below
 
+## Creating and connecting to our server
 1. If we don't have a DigitalOcean SSH key pair yet, then generate one
     - [GitHub has ideal instructions for generating a new key (ideal flags)](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
     - [DigitalOcean documentation for adding new SSH key](https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/to-team/)
@@ -30,6 +31,7 @@ Host digital-twolfson.com
 ssh root@digital-twolfson.com
 ```
 
+## Setting up users and security
 6. Run the following provisioning commands
 
 ```bash
@@ -39,7 +41,7 @@ sudo apt-get update
 # Sanity check timezone is configured as UTC
 # DEV: This was a legacy Ubuntu 14 issue, resolved in 22, https://www.digitalocean.com/community/questions/how-to-change-the-timezone-on-ubuntu-14
 #   https://serverfault.com/a/84528
-# Feel free to double check via: `cat /etc/timezone` and `cat /etc/localtime`
+# Feel free to double check via: `cat /etc/timezone` and `cat /etc/localtime` (should be Etc/UTC)
 sudo dpkg-reconfigure --frontend noninteractive tzdata
 
 # Create an `ubuntu` user as DigitalOcean's Ubuntu images only provide `root`
@@ -97,9 +99,13 @@ exit
 10. Upload files required for following steps
 
 ```bash
+# In a new tab
+rsync --chmod u=rw,g=,o= \
+    --human-readable --archive --verbose --compress \
+    data digital-twolfson.com:/home/ubuntu/twolfson.com-scripts-data
 ```
 
-10. Remove SSH access to `root` user
+11. Remove SSH access to `root` user
 
 ```bash
 # In ubuntu tab
@@ -131,7 +137,8 @@ dpkg --list | grep openssh-server
 # Current version: 1:8.9p1-3ubuntu0.1
 ```
 
-11. Install `twolfson.com` dependencies
+## Setting up services
+12. Install `twolfson.com` dependencies
 
 ```bash
 # Apt level dependencies
