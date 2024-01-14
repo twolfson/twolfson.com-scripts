@@ -192,18 +192,19 @@ sudo chown ubuntu:ubuntu /var/www/*
 # Expect: . is `root:root` and `u=rwx,g=rx,o=rx`
 # Expect: Subfolders are `ubuntu:ubuntu` and `u=rwx,g=rx,o=rx`
 
-# 2 options now (we can think of): Comment out lines (annoying) or self-signed certs
-# Self-signed certs sounding much better, since no risk with NGINX complaining about no certs specified
+# Create self-signed certificates to let NGINX to reload configs
+#   https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04
+# We'll set up Let's Encrypt once DNS is transferred
+sudo mkdir -p /etc/letsencrypt/live/drive.twolfson.com
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/letsencrypt/live/drive.twolfson.com/privkey.pem \
+    -out /etc/letsencrypt/live/drive.twolfson.com/fullchain.pem
 
-
-# If you're transferring between servers, now is a good time to transfer both `/var/www` and `/etc/letsencrypt` files
-rsync --rsync-path="sudo rsync" digital-twolfson.com-old:/etc/letsencrypt letsencrypt
+# If you're transferring between servers, now is a good time to transfer `/var/www` files
+rsync --rsync-path="sudo rsync" digital-twolfson.com-old:/var/www
 rsync --chmod u=rw,g=,o= \
     --human-readable --archive --verbose --compress \
-    letsencrypt digital-twolfson.com:/etc/letsencrypt
-rsync --chmod u=rw,g=,o= \
-    --human-readable --archive --verbose --compress \
-    digital-twolfson.com-old:/var/www digital-twolfson.com:/var/www
+    www digital-twolfson.com:/var/www
 # Don't forget to `rm` the
 
 # Reload NGINX service
