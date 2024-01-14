@@ -257,8 +257,11 @@ sudo /etc/init.d/supervisord start
 
 sudo update-rc.d supervisord defaults
 # You should see new `supervisord` files in `ls /etc/rc*`
+```
 
-# TODO: Deploy twolfson.com
+```bash
+# In a new tab, run our `twolfson.com` deploy script
+bin/deploy-twolfson.com.sh digital-twolfson.com
 ```
 
 TODO: Ensure certbot is still installed at the end
