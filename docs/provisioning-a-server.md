@@ -191,7 +191,22 @@ sudo chown ubuntu:ubuntu /var/www/*
 # Verify: ls -la /var/www
 # Expect: . is `root:root` and `u=rwx,g=rx,o=rx`
 # Expect: Subfolders are `ubuntu:ubuntu` and `u=rwx,g=rx,o=rx`
+
+# If you're transferring between servers, now is a good time to transfer both `/var/www` and `/etc/letsencrypt` files
+rsync --rsync-path="sudo rsync" digital-twolfson.com-old:/etc/letsencrypt letsencrypt
+rsync --chmod u=rw,g=,o= \
+    --human-readable --archive --verbose --compress \
+    letsencrypt digital-twolfson.com:/etc/letsencrypt
+rsync --chmod u=rw,g=,o= \
+    --human-readable --archive --verbose --compress \
+    digital-twolfson.com-old:/var/www digital-twolfson.com:/var/www
+# Don't forget to `rm` the
+
+# Reload NGINX service
+sudo /etc/init.d/nginx reload
 ```
+
+TODO: Ensure certbot is still installed at the end
 
 7. Install certbot for LetsEncrypt backed domains
     - Specify each subdomain/subdomain pair individually (e.g. `twolfsn.com` (1,2), `twolfson.com` (3,4)), otherwise LetsEncrypt will use the same file/certificate for all of them
