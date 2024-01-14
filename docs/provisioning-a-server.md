@@ -147,7 +147,7 @@ sudo /etc/init.d/ssh reload
 ```
 
 ## Setting up services
-12. Install `twolfson.com` dependencies
+12. Install system level dependencies
 
 ```bash
 # Apt level dependencies
@@ -165,14 +165,32 @@ pip --version
 sudo pip install supervisor  # Version used: 4.2.5 (see `pip freeze`)
 ```
 
-6. Create a Diffie-Hellman parameter for NGINX with HTTPS (SSL)
+13. Configure NGINX
 
 ```bash
-# https://weakdh.org/sysadmin.html
-openssl dhparam -out dhparam.pem 2048
-sudo mv dhparam.pem /etc/ssl/private/dhparam.pem
-sudo chown root:root /etc/ssl/private/dhparam.pem
-sudo chmod u=r,g=,o= /etc/ssl/private/dhparam.pem # Only user can read this file
+# Remove default site
+# If you want a before/after, then visit this server's IP address in a browser
+sudo rm /etc/nginx/sites-enabled/default
+sudo /etc/init.d/nginx reload
+
+# Remove undesired files from our `conf.d`, https://askubuntu.com/a/929385
+rm -i data/etc/nginx/conf.d
+
+# Install our sites via `conf.d` (weak preference to `sites-enabled/`sites-available`)
+sudo chown root:root data/etc/nginx/conf.d/*
+sudo chmod u=rw,g=r,o=r data/etc/nginx/conf.d/*
+sudo mv data/etc/nginx/conf.d/* /etc/nginx/conf.d/
+
+# Remove placeholder static HTML
+sudo rm -rf /var/www/html
+
+# Set up `drive.twolfson.com` and other static content sites
+mkdir /var/www/drive.twolfson.com
+mkdir /var/www/mentor.twolfson.com
+sudo chown ubuntu:ubuntu /var/www/*
+# Verify: ls -la /var/www
+# Expect: . is `root:root` and `u=rwx,g=rx,o=rx`
+# Expect: Subfolders are `ubuntu:ubuntu` and `u=rwx,g=rx,o=rx`
 ```
 
 7. Install certbot for LetsEncrypt backed domains

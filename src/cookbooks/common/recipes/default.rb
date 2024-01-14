@@ -1,18 +1,3 @@
-# DEV: Equivalent to `sudo /etc/init.d/nginx *`
-service "nginx" do
-  provider Chef::Provider::Service::Init
-  supports(:reload => true, :restart => true, :status => true)
-  action([:start])
-end
-# If there are default NGINX configuration files, then remove them
-# DEV: Equivalent to `test "$(ls /etc/nginx/sites-enabled)" != ""` -> `rm /etc/nginx/sites-enabled/*`
-file "/etc/nginx/sites-enabled/default" do
-  action(:delete)
-
-  # Upon deletion, reload NGINX
-  notifies(:reload, "service[nginx]", :immediately)
-end
-
 # Create folder for log files
 directory "/var/log/supervisor" do
   owner("root")
