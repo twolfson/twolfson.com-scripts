@@ -26,6 +26,7 @@ Host digital-twolfson.com
 
 # If there's an old server you're transferring from,
 # rename it to: digital-twolfson.com-old
+# DEV: We recommend a timestamp comment as well, for clarity on age
 ```
 
 5. SSH into our server as `root` user to set up `ubuntu` one
@@ -225,6 +226,39 @@ sudo /etc/init.d/nginx restart
 # Sanity check that NGINX is working:
 # curl --include --insecure -H "Host: drive.twolfson.com" https://137.184.49.25/favicon.ico
 # TODO: Only getting 403 Forbidden... why...
+```
+
+14. Configure and deploy twolfson.com
+
+```bash
+# Create folder for log files
+sudo mkdir /var/log/supervisor
+# `ls -la /var/log/supervisor` should be `root:root` u=rwx,g=rx,o=rx
+
+# Install twolfson.com supervisor config
+sudo chown root:root data/etc/supervisord.conf
+sudo chmod u=rw,g=r,o=r data/etc/supervisord.conf
+sudo mv data/etc/supervisord.conf /etc/supervisord.conf
+
+# Modify supervisord.conf with appropriate secrets
+# TODO: Task up using `.env` instead for this
+sudo pico /etc/supervisord.conf
+
+# If we update the `supervisord.conf` after setup, run `sudo supervisorctl update` after
+
+# Set up supervisor `init` script and autostart
+# http://supervisord.org/running.html#running-supervisord-automatically-on-startup
+# http://serverfault.com/a/96500
+sudo chown root:root data/etc/init.d/supervisord
+sudo chmod u=rwx,g=rx,o=rx data/etc/init.d/supervisord
+sudo mv data/etc/init.d/supervisord /etc/init.d/supervisord
+
+sudo /etc/init.d/supervisord start
+
+sudo update-rc.d supervisord defaults
+# You should see new `supervisord` files in `ls /etc/rc*`
+
+# TODO: Deploy twolfson.com
 ```
 
 TODO: Ensure certbot is still installed at the end
