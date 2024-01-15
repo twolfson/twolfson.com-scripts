@@ -2,6 +2,9 @@
 # Exit on first error
 set -e
 
+# TODO: Handle all the outcomes that our tests aren't compatible with
+#   Maybe also move `test` to `spec` for consistency with Ruby again
+
 # If there is target host variable set, then complain and leave
 target_host="$1"
 if test "$target_host" = ""; then
