@@ -294,8 +294,9 @@ sudo supervisorctl status # Should see RUNNING status
     - Ideally keep the TTL low (e.g. "60" for 60s)
 
 19. Set up HTTPS certificates via Let's Encrypt
-    - https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal&tab=standard
-    - Since we have Let's Encrypt in our NGINX already, you can use the `certonly` version
+    - For each subdomain, remove the self-signed certificate
+        - `rm -r /etc/letsencrypt/live/{SUBDOMAIN}/`
+    - and run the installation instructions, https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal&tab=standard
     - At install time, `systemctl list-timers`  renewal gets (without need for `cert` or `certonly`)
 
 20. Verify all websites look good
