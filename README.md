@@ -20,7 +20,7 @@ In short, we overinvested in automation, and believe divesting will lead to fast
 For more reading, please see: https://twolfson.com/2022-07-30-startup-time-investing-operational-processes
 
 ## Getting Started
-To provision a server, deploy a service, or verify integrity, we have runbooks for each of those tasks.
+To provision a server, deploy a service, or validate integrity, we have runbooks for each of those tasks.
 
 There are common dependencies needed to check your work. Please install the following:
 
@@ -49,7 +49,7 @@ bundle install
 
 - [Provisioning a server](docs/provisioning-a-server.md)
 - [Deploying a service](#deploying-a-service)
-- [Verify server integrity](#verifying-server-integrity)
+- [Validate server integrity](#validating-server-integrity)
 - Additional actions documented below
 
 ## Documentation
@@ -137,7 +137,8 @@ This can be enabled by directly editing `bin/_bootstrap.sh`
 To deploy a service, use its respective `bin/deploy-*.sh` script. Here's an example with `twolfson.com`:
 
 ```bash
-bin/deploy-twolfson.com.sh digital-my-server
+# `digital-twolfson.com` should be configured in `~/.ssh/config` as per provisioning notes
+bin/deploy-twolfson.com.sh digital-twolfson.com
 
 # If we need to deploy a non-master ref, then pass as a second parameter
 # bin/deploy-twolfson.com.sh digital-my-server dev/new.feature
@@ -163,16 +164,12 @@ SKIP_LINT=TRUE SKIP_PROVISION=TRUE ./test.sh
 
 [Ruby]: https://www.ruby-lang.org/en/
 
-### Verifying server integrity
-To run Serverspec against a server, we can use the `bin/test-remote.sh` script.
+### Validating server integrity
+To run Serverspec against a server, we can use the `bin/validate-remote.sh` script.
 
 ```bash
-# Before running our tests, please add the remote server to ~/.ssh/config
-# For example:
-# Host my-server
-#     User ubuntu
-#     HostName 127.0.0.1
-TARGET_HOST="{{name-of-host-in-ssh-config}}" bin/test-remote.sh
+# `digital-twolfson.com` should be configured in `~/.ssh/config` as per provisioning notes
+TARGET_HOST="digital-twolfson.com" bin/test-remote.sh
 ```
 
 ## Contributing
