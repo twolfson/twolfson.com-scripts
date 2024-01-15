@@ -205,21 +205,10 @@ sudo chown ubuntu:ubuntu /var/www/*
 # Expect: . is `root:root` and `u=rwx,g=rx,o=rx`
 # Expect: Subfolders are `ubuntu:ubuntu` and `u=rwx,g=rx,o=rx`
 
-# Remove `ssl_certificate` lines from each NGINX config
+# Comment out `ssl_certificate` lines from each NGINX config
+# DEV: NGINX doesn't need these to run,
+#   but files at `/etc/letsencrypt` confuses Let's Encrypt `certbot`
 sudo pico /etc/nginx/conf.d/{DOMAIN}.conf
-
-# Create self-signed certificates to let NGINX to reload configs
-#   https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04
-# We'll set up Let's Encrypt once DNS is transferred
-# DEV: For prompts, just press enter through them
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout privkey.pem -out fullchain.pem
-for domain in "drive.twolfson.com" "mentor.twolfson.com" "twolfsn.com" "twolfson.com"; do
-    sudo mkdir -p "/etc/letsencrypt/live/${domain}"
-    sudo cp privkey.pem "/etc/letsencrypt/live/${domain}/privkey.pem"
-    sudo cp fullchain.pem "/etc/letsencrypt/live/${domain}/fullchain.pem"
-done
-rm privkey.pem fullchain.pem
 
 # If you're transferring between servers, now is a good time to transfer `/var/www` files
 rsync -r --human-readable --archive --verbose --compress digital-twolfson.com-old:/var/www .
@@ -298,12 +287,16 @@ sudo supervisorctl status # Should see RUNNING status
 
 19. Set up HTTPS certificates via Let's Encrypt
     - Run the installation instructions, https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal&tab=standard
+    - Use `certonly` not `certbot` since we already have `ssl_certificate` lines in our configs
     - At install time, `systemctl list-timers`  renewal gets (without need for `certbot` or `certonly`)
     - If you run into trouble with self-signed certificates, [this forum discussion was useful](https://community.letsencrypt.org/t/how-to-overwrite-existing-certificates-to-use-on-different-websites/124923/4)
 
-20. Verify all websites look good
+21. Re-enable `ssl_certificate` in each NGINX config
+    - `sudo pico /etc/nginx/conf.d/{DOMAIN}.conf`
 
-21. Increase DNS TTL to "1800" (30 minutes)
+21. Verify all websites look good
+
+22. Increase DNS TTL to "1800" (30 minutes)
 
 TODO: Ensure certbot is still installed at the end
 
