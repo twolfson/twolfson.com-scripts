@@ -205,6 +205,9 @@ sudo chown ubuntu:ubuntu /var/www/*
 # Expect: . is `root:root` and `u=rwx,g=rx,o=rx`
 # Expect: Subfolders are `ubuntu:ubuntu` and `u=rwx,g=rx,o=rx`
 
+# Remove `ssl_certificate` lines from each NGINX config
+sudo pico /etc/nginx/conf.d/{DOMAIN}.conf
+
 # Create self-signed certificates to let NGINX to reload configs
 #   https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04
 # We'll set up Let's Encrypt once DNS is transferred
@@ -294,10 +297,9 @@ sudo supervisorctl status # Should see RUNNING status
     - Ideally keep the TTL low (e.g. "60" for 60s)
 
 19. Set up HTTPS certificates via Let's Encrypt
-    - For each subdomain, remove the self-signed certificate
-        - `rm -r /etc/letsencrypt/live/{SUBDOMAIN}/`
-    - and run the installation instructions, https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal&tab=standard
-    - At install time, `systemctl list-timers`  renewal gets (without need for `cert` or `certonly`)
+    - Run the installation instructions, https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal&tab=standard
+    - At install time, `systemctl list-timers`  renewal gets (without need for `certbot` or `certonly`)
+    - If you run into trouble with self-signed certificates, [this forum discussion was useful](https://community.letsencrypt.org/t/how-to-overwrite-existing-certificates-to-use-on-different-websites/124923/4)
 
 20. Verify all websites look good
 
