@@ -330,3 +330,5 @@ TODO: Consider unattended upgrades
 TODO: If there was an old server being transferred from, can delete it + remove from `~/.ssh/config`
 
 TODO: Callout that gifsockets is not in this setup at all
+
+TODO: Clean up all files in ~
