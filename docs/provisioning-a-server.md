@@ -208,7 +208,8 @@ sudo chown ubuntu:ubuntu /var/www/*
 # Comment out `ssl_certificate` lines from each NGINX config
 # DEV: NGINX doesn't need these to run,
 #   but files at `/etc/letsencrypt` confuses Let's Encrypt `certbot`
-sudo pico /etc/nginx/conf.d/{DOMAIN}.conf
+sudo pico /etc/nginx/conf.d/*
+Trying with `break`, nope
 
 # If you're transferring between servers, now is a good time to transfer `/var/www` files
 rsync -r --human-readable --archive --verbose --compress digital-twolfson.com-old:/var/www .
@@ -292,7 +293,7 @@ sudo supervisorctl status # Should see RUNNING status
     - If you run into trouble with self-signed certificates, [this forum discussion was useful](https://community.letsencrypt.org/t/how-to-overwrite-existing-certificates-to-use-on-different-websites/124923/4)
 
 21. Re-enable `ssl_certificate` in each NGINX config
-    - `sudo pico /etc/nginx/conf.d/{DOMAIN}.conf`
+    - `sudo pico /etc/nginx/conf.d/*`
 
 21. Verify all websites look good
 
