@@ -27,6 +27,9 @@ Host digital-twolfson.com
 # If there's an old server you're transferring from,
 # rename it to: digital-twolfson.com-old
 # DEV: We recommend a timestamp comment as well, for clarity on age
+
+# Also (still if transferring),
+# now would be a great time to reduce DNS TTL (e.g. "60" for 60s)
 ```
 
 5. SSH into our server as `root` user to set up `ubuntu` one
@@ -288,8 +291,14 @@ sudo supervisorctl status # Should see RUNNING status
 ```
 
 18. Update DNS records to point to new IP
+    - Ideally keep the TTL low (e.g. "60" for 60s)
 
 19. Set up HTTPS certificates via Let's Encrypt
+    - https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal&tab=standard
+
+20. Verify all websites look good
+
+21. Increase DNS TTL to "1800" (30 minutes)
 
 TODO: Ensure certbot is still installed at the end
 
