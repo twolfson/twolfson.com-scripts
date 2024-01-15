@@ -6,7 +6,13 @@ We try to keep our services as secure as possible via the following means:
 - Restricting permissions on sensitive files (e.g. SSL certificates, NGINX configurations)
 
 ## Patched major CVE's
-We have gone out of our way to patch the following CVE's:
+We have gone out of our way to patch the following CVE's
+
+### Current
+We have not needed to patch anything yet for a new server.
+
+### Historical
+These applied to previous servers and major versions:
 
 - [x] Shellshock - Patched by upgrading bash (default is fine on Ubuntu 14.04)
     - http://krebsonsecurity.com/2014/09/shellshock-bug-spells-trouble-for-web-security/
@@ -17,10 +23,3 @@ We have gone out of our way to patch the following CVE's:
     - https://cipherli.st/
 - [x] Logjam - Patched by using new Diffie-Hellman group
     - https://weakdh.org/sysadmin.html
-
-## Tools
-We rely on the following tools to keep up to date with new vulnerabilities:
-
-- [PatrolServer][] - Monitors server externally
-
-[PatrolServer]: http://patrolserver.com/
