@@ -300,17 +300,20 @@ sudo supervisorctl status # Should see RUNNING status
     - Use `certbot` which will overwrite the placeholder `ssl_certificate` lines in our configs
     - For shared certificates (e.g. `twolfson.com` + `www.twolfson.com`, use "1,2" syntax when prompted
         - Without this, Let's Encrypt uses the same file/certificate for all subdomains
-    - At install time, `systemctl list-timers`  renewal gets (without need for `certbot` or `certonly`)
+    - At install time, `systemctl list-timers`  renewal gets (without need for `certbot`)
     - If you run into trouble with self-signed certificates, [this forum discussion was useful](https://community.letsencrypt.org/t/how-to-overwrite-existing-certificates-to-use-on-different-websites/124923/4)
+    - If you run into limits of certificates, [consider a joint certificate temporarily](https://letsencrypt.org/docs/duplicate-certificate-limit/#workaround)
 
 20. Clean up each NGINX config if you see fit (e.g. maybe path changes, maybe indent is unexpected)
-    - `sudo pico /etc/nginx/conf.d/*`
+
+```bash
+sudo pico /etc/nginx/conf.d/*
+sudo /etc/init.d/nginx reload
+```
 
 21. Verify all websites look good
 
 22. Increase DNS TTL to "1800" (30 minutes)
-
-TODO: Ensure certbot is still installed at the end
 
 8. Bootstrap our server (TODO: No longer functional) (TODO: Delete Chef)
     - `bin/bootstrap-remote.sh digital-my-server`
