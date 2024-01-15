@@ -15,5 +15,5 @@ export SSH_CONFIG="$HOME/.ssh/config"
 export TARGET_HOST="$target_host"
 export SERVERSPEC_BACKEND="ssh"
 
-# Run our tests
-. bin/_test.sh
+# Run our rspec tests (depends on SSH_CONFIG, TARGET_HOST)
+bin/rspec --color test/*.rb
