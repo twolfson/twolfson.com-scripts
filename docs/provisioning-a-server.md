@@ -315,10 +315,15 @@ sudo /etc/init.d/nginx reload
 
 22. Increase DNS TTL to "1800" (30 minutes)
 
-8. Bootstrap our server (TODO: No longer functional) (TODO: Delete Chef)
-    - `bin/bootstrap-remote.sh digital-my-server`
-1. Update `~/.ssh/config` to use `User ubuntu` instead of `User root`
-    - During the bootstrap process, we intentionally lock our `root` access via `ssh` for security
+23. Clean up files from setup
+
+```bash
+rm ~/tmp-fullchain.pem ~/tmp-privkey.pem
+rm -i -r ~/twolfson.com-scripts  # -i to sanity check no linginer files
+```
+
+TODO: Update remainder of docs
+
 1. Run our tests on the server
     - `bin/test-remote.sh digital-my-server`
 
@@ -330,5 +335,3 @@ TODO: Consider unattended upgrades
 TODO: If there was an old server being transferred from, can delete it + remove from `~/.ssh/config`
 
 TODO: Callout that gifsockets is not in this setup at all
-
-TODO: Clean up all files in ~
