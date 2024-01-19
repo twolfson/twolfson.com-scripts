@@ -63,9 +63,9 @@ main_target_dir="$base_target_dir/main"
 ssh "$target_host" "mkdir -p $base_target_dir"
 
 # Upload our server files
-# TODO: Consider deleting `.git`
 # Expanded -havz is `--human-readable --archive --verbose --compress`
 # DEV: We use trailing slashes to force uploading into non-nested directories
+# DEV: `.git` is bulky but we've left it for now for potential future Sentry version reporting
 rsync --human-readable --archive --verbose --compress "twolfson.com/" "$target_host":"$target_dir/"
 
 # Replace our existing `main` server with the new one
@@ -73,7 +73,6 @@ rsync --human-readable --archive --verbose --compress "twolfson.com/" "$target_h
 # DEV: We use a local relative target to make the symlink portable
 #   ln --symbolic 20151222.073547.761299235 twolfson.com/main
 #   twolfson.com/main -> 20151222.073547.761299235
-# TODO: Add health check (verify server is running) and load balance before swap
 ssh "$target_host" <<EOF
 # Exit upon first error and echo commands
 set -e
