@@ -52,7 +52,8 @@ cd ../
 
 # Find a timestamp to use for our deploy
 timestamp="$(ssh "$target_host" "date --utc +%Y%m%d.%H%M%S.%N")"
-# TODO: Consider tagging repository
+# DEV: We could tag our repo, but a server is unlike libraries. It's always running "latest"
+#   Caveat: Since this is a public repo, we can tag release, just shouldn't be part of deploy
 base_target_dir="/home/ubuntu/twolfson.com"
 target_dir="$base_target_dir/$timestamp"
 main_target_dir="$base_target_dir/main"
@@ -86,4 +87,4 @@ sudo supervisorctl restart twolfson.com-server
 EOF
 
 # Notify the user of success
-echo "Server restarted. Please manually verify the server is running at http://twolfson.com/"
+echo "Server restarted. Please manually verify the server is running at https://twolfson.com/"
