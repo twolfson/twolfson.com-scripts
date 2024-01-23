@@ -168,7 +168,8 @@ sudo apt-get install -y \
     nginx `# NGINX, for reverse proxy, 1.18.0-6ubuntu14.4` \
     python-setuptools `# Setuptools, unsure why, 44.1.1-1.2ubuntu0.22.04.1` \
     python3-pip `# pip, for installing supervisor, 20.3.4+dfsg-4` \
-    nodejs  `# Node.js runtime, 20.11.0-1nodesource1`
+    nodejs  `# Node.js runtime, 20.11.0-1nodesource1` \
+    net-tools  `# Has netstat, used by serverspec/security.rb`
 # If prompted around "Daemons using outdated libraries", navigate to "Cancel"
 
 # Verify `pip` version (needed 7.1.2 from past notes, currently 22.0.2)
