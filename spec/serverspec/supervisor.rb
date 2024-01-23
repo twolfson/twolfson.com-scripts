@@ -8,17 +8,17 @@ describe "Supervisor" do
   it "is installed" do
     supervisor_version_result = command("supervisorctl version")
     expect(supervisor_version_result.exit_status).to(eq(0))
-    expect(supervisor_version_result.stdout.strip()).to(eq("3.2.0"))
+    expect(supervisor_version_result.stdout.strip()).to(eq("4.2.5"))
   end
 
   it "has automatic start setup for supervisord" do
-    expect(file("/etc/rc0.d/K20supervisord").link_target).to(eq("../init.d/supervisord"))
-    expect(file("/etc/rc1.d/K20supervisord").link_target).to(eq("../init.d/supervisord"))
-    expect(file("/etc/rc2.d/S20supervisord").link_target).to(eq("../init.d/supervisord"))
-    expect(file("/etc/rc3.d/S20supervisord").link_target).to(eq("../init.d/supervisord"))
-    expect(file("/etc/rc4.d/S20supervisord").link_target).to(eq("../init.d/supervisord"))
-    expect(file("/etc/rc5.d/S20supervisord").link_target).to(eq("../init.d/supervisord"))
-    expect(file("/etc/rc6.d/K20supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc0.d/K01supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc1.d/K01supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc2.d/S01supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc3.d/S01supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc4.d/S01supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc5.d/S01supervisord").link_target).to(eq("../init.d/supervisord"))
+    expect(file("/etc/rc6.d/K01supervisord").link_target).to(eq("../init.d/supervisord"))
   end
 
   it "has expected permissions for log directory" do
