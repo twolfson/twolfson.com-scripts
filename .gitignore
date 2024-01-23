@@ -12,6 +12,7 @@ node_modules/
 bin/bundle
 bin/htmldiff
 bin/ldiff
+bin/racc
 bin/rspec
 bin/rubocop
 bin/ruby-parse
