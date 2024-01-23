@@ -1,7 +1,5 @@
 # twolfson.com-scripts [![Build status](https://travis-ci.org/twolfson/twolfson.com-scripts.png?branch=master)](https://travis-ci.org/twolfson/twolfson.com-scripts)
 
-TODO: See TODOs
-
 Runbooks and scripts used for bootstrapping and deploying services for `twolfson.com` and its subdomains.
 
 This was created to provide a dotfiles-like setup that documents my personal server setup.
@@ -106,28 +104,10 @@ See [docs/provisioning-a-server.md](docs/provisioning-a-server.md)
 ### Managing secrets
 Secrets are maintained on each server by hand. To add/edit/remove a secret, modify the relevant section in `/etc/supervisor.conf`
 
-TODO:
-- Would prefer to be able to sync file as-is, no handcoded secrets
-- Could do `/` level file for `env` but doesn't allow per-repo config
-    - Let's do that for `ENV` and `NODE_ENV` I guess
-- but then also `.env` for repo-specific config (e.g. Sentry)
-    - Also nice because it allows repo level config/override + example tracking
-    - A little annoying for deployments (i.e. copy from last `main`), but we'll live
-- In explanation, prob talk through Docker, how it's nice but also 1 more layer of encapsulation + reference to `if-i-were-to-build-a-startup-web-app`
-
 ### Updating a server configuration
-We reuse our provisioning script for managing server state. As a result, we can reuse it for updates:
+We use our runbook provisioning setup as a "good enough" approximation of the server's state.
 
-```bash
-bin/bootstrap-remote.sh digital-my-server
-
-# If we need to use a non-master ref, then pass it as a second parameter
-# bin/bootstrap-remote.com.sh digital-my-server dev/new.feature
-```
-
-If you'd like to run a dry run, Chef has `--why-run` which explains everything it's doing. It's unclear if it fully stops running actions though
-
-This can be enabled by directly editing `bin/_bootstrap.sh`
+As a result, SSH into the machine to make changes, then when done update the files in this repo and its docs.
 
 ### Deploying a service
 To deploy a service, use its respective `bin/deploy-*.sh` script. Here's an example with `twolfson.com`:
@@ -141,24 +121,18 @@ bin/deploy-twolfson.com.sh digital-twolfson.com
 ```
 
 ### Testing
-TODO: Update notes
-
-TODO: Testing should just be linting, with serverspec as its own command
-
-As mentioned in the high level overview, we use [Serverspec][] for testing. This is a [Ruby][] gem so you will need it installed to run our tests:
+Our test suite can be run via:
 
 ```bash
 ./test.sh
 ```
 
-To make iterating on our test suite faster, we have set up `SKIP_LINT` and `SKIP_PROVISION` environment variables. This skips running linting and `vagrant provision` in our tests:
+To make iterating on our test suite faster, we have set up `SKIP_LINT` environment variables. This skips running linting in our tests:
 
 ```bash
-# Skip both linting and provisioning
-SKIP_LINT=TRUE SKIP_PROVISION=TRUE ./test.sh
+# Skip linting
+SKIP_LINT=TRUE ./test.sh
 ```
-
-[Ruby]: https://www.ruby-lang.org/en/
 
 ### Validating server integrity
 To run Serverspec against a server, we can use the `bin/validate-remote.sh` script.
