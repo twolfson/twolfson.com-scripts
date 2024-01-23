@@ -3,7 +3,6 @@
 set -e
 
 # TODO: Handle all the outcomes that our tests aren't compatible with
-#   Maybe also move `test` to `spec` for consistency with Ruby again
 
 # If there is target host variable set, then complain and leave
 target_host="$1"
@@ -19,4 +18,4 @@ export TARGET_HOST="$target_host"
 export SERVERSPEC_BACKEND="ssh"
 
 # Run our rspec tests (depends on SSH_CONFIG, TARGET_HOST)
-bin/rspec --color test/*.rb
+bin/rspec --color spec/serverspec/*.rb
