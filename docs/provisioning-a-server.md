@@ -211,7 +211,6 @@ sudo chown ubuntu:ubuntu /var/www/*
 # DEV: NGINX requires these, but writing to `/etc/letsencrypt` confuses `certbot`
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /home/ubuntu/tmp-privkey.pem -out /home/ubuntu/tmp-fullchain.pem
-# TODO: Delete these at end
 
 # Replace `ssl_certificate` lines from each NGINX config with the following
 echo << EOF
@@ -247,7 +246,7 @@ sudo chmod u=rw,g=r,o=r data/etc/supervisord.conf
 sudo mv data/etc/supervisord.conf /etc/supervisord.conf
 
 # Modify supervisord.conf with appropriate secrets
-# TODO: Task up using `.env` instead for this
+# TASK: Move to .env to remove this step, https://github.com/twolfson/twolfson.com-scripts/issues/15
 sudo pico /etc/supervisord.conf
 
 # If we update the `supervisord.conf` after setup, run `sudo supervisorctl update` after
@@ -333,5 +332,3 @@ TODO: Update remainder of docs
 TODO: Consider unattended upgrades
 
 TODO: If there was an old server being transferred from, can delete it + remove from `~/.ssh/config`
-
-TODO: Callout that gifsockets is not in this setup at all
