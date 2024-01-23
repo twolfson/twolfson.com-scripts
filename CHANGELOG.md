@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+3.0.0 - Removed Vagrant, Chef, and scripted bootstrapping. Added runbook for provisioning
+
 2.44.0 - Migrated from SOPS to environment variables
 
 2.43.0 - Added 404 page for mentor.twolfson.com
