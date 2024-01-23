@@ -170,8 +170,6 @@ To run Serverspec against a server, we can use the `bin/validate-remote.sh` scri
 bin/test-remote.sh digital-twolfson.com
 ```
 
-If you run into `Net::SSH::AuthenticationFailed`, then try `ssh-add` as per [StackOverflow](https://stackoverflow.com/a/41903640/1960509) (even if it appears in `ssh-add -l`
-
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Testing information can be found in the [Testing section](#testing).
 
