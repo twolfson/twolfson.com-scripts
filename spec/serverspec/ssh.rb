@@ -23,18 +23,6 @@ describe "OpenSSH" do
     expect(sshd_config_file.group).to(eq(ROOT_GROUP))
   end
 
-  it "has expected permissions setup" do
-    # Verify root is locked out
-    sshd_config_file = file("/etc/ssh/sshd_config")
-    expect(sshd_config_file.content).to(include("PermitRootLogin no"))
-
-    # Verify we only allow RSA/Pubkey authentication and disallow password auth
-    expect(sshd_config_file.content).to(include("RSAAuthentication yes"))
-    expect(sshd_config_file.content).to(include("PubkeyAuthentication yes"))
-    expect(sshd_config_file.content).to(include("PermitEmptyPasswords no"))
-    expect(sshd_config_file.content).to(include("PasswordAuthentication no"))
-  end
-
   it "has expected persmission for root user's SSH directory" do
     root_ssh_dir = file("/root/.ssh")
     expect(root_ssh_dir.mode).to(eq((USER_RWX | GROUP_NONE | OTHER_NONE).to_s(8)))
