@@ -321,14 +321,16 @@ rm ~/tmp-fullchain.pem ~/tmp-privkey.pem
 rm -i -r ~/twolfson.com-scripts  # -i to sanity check no linginer files
 ```
 
-TODO: Update remainder of docs
+25. Validate our server configuration
 
-1. Run our tests on the server
-    - `bin/test-remote.sh digital-my-server`
+```bash
+# From the host computer
+bin/validate-remote.sh digital-twolfson.com
+```
+
+26. If there was an old server being transferred from, it can be removed from `~/.ssh/config`
+
+27. Disco!
 
 [create-droplet]: https://cloud.digitalocean.com/droplets
 [data/home/ubuntu/.ssh/authorized_keys]: ../data/home/ubuntu/.ssh/authorized_keys
-
-TODO: Consider unattended upgrades
-
-TODO: If there was an old server being transferred from, can delete it + remove from `~/.ssh/config`

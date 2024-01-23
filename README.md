@@ -160,8 +160,6 @@ To make iterating on our test suite faster, we have set up `SKIP_LINT` and `SKIP
 SKIP_LINT=TRUE SKIP_PROVISION=TRUE ./test.sh
 ```
 
-TODO: It'd be great to drop Travis CI as well
-
 [Ruby]: https://www.ruby-lang.org/en/
 
 ### Validating server integrity
