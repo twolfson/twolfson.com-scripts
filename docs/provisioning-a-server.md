@@ -1,6 +1,8 @@
 # Provisioning a server
 To provision a new server via [DigitalOcean][], follow the steps below
 
+[DigitalOcean]: https://www.digitalocean.com/
+
 ## Creating and connecting to our server
 1. If we don't have a DigitalOcean SSH key pair yet, then generate one
     - [GitHub has ideal instructions for generating a new key (ideal flags)](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
@@ -283,6 +285,7 @@ sudo poweroff
 
 16. Start server via Digital Ocean UI
 
+# Expose services to Internet
 17. Reopen SSH connection via `ssh digital-twolfson.com`
 
 ```bash
@@ -312,6 +315,7 @@ sudo /etc/init.d/nginx reload
 
 21. Verify all websites look good
 
+# Cleanup
 22. Increase DNS TTL to "1800" (30 minutes)
 
 23. Clean up files from setup
@@ -330,7 +334,7 @@ bin/validate-remote.sh digital-twolfson.com
 
 26. If there was an old server being transferred from, it can be removed from `~/.ssh/config`
 
-27. Disco!
+27. Disco! 🎉
 
 [create-droplet]: https://cloud.digitalocean.com/droplets
 [data/home/ubuntu/.ssh/authorized_keys]: ../data/home/ubuntu/.ssh/authorized_keys
