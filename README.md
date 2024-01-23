@@ -11,7 +11,7 @@ We've dropped Vagrant, Chef, and scripted bootstrapping. [See previous version h
 
 As the replacement, we've moved to runbooks, which are easier to maintain over sparse iteration cycles.
 
-i.e. There was always a slow "how did that work again?" period, iteration required deployments (slow), and cascades of changes from minor upgrades became even slower due to this feedback loop.
+i.e. There was always a slow "how did that work again?" period, iterating required deployments (slow), and cascades of changes from minor upgrades became even slower due to this feedback loop.
 
 In short, we overinvested in automation, and believe divesting will lead to faster results.
 
@@ -86,8 +86,6 @@ As a high level overview of our setup, we use the following:
 [Serverspec]: https://serverspec.org/
 
 ### File structure
-TODO: Update after scripts updated
-
 This repository has the following file structure:
 
 - `.bundle/` - Configuration for Bundler (used for managing Ruby gems)
@@ -96,11 +94,11 @@ This repository has the following file structure:
     - This starts at `/` as if it were the root of a file system
     - For multiple environment projects, it's good to have a `data/{{env}}` for each setup (e.g. `data/development`, `data/production`)
 - `src/` - Container for our bootstrapping scripts
-- `test/` - Container for our test files
+- `spec/` - Container for our test files
+    - `serverspec/` - Files for validating machines via Serverspec
 - `CHANGELOG.md` - CHANGELOG of what has changed during each release of this repository
 - `README.md` - Documentation for this repository
 - `SECURITY.md` - Documentation for security considerations in this repository
-- `Vagrantfile` - Configuration for Vagrant
 
 ### Provisioning a new server
 See [docs/provisioning-a-server.md](docs/provisioning-a-server.md)
