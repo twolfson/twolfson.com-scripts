@@ -2,8 +2,6 @@
 # Exit on first error
 set -e
 
-# TODO: Handle all the outcomes that our tests aren't compatible with
-
 # If there is target host variable set, then complain and leave
 target_host="$1"
 if test "$target_host" = ""; then
