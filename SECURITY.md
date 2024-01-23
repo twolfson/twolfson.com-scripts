@@ -15,9 +15,9 @@ We have not needed to patch anything yet for a new server.
 These applied to previous servers and major versions:
 
 - [x] Shellshock - Patched by upgrading bash (default is fine on Ubuntu 14.04)
-    - http://krebsonsecurity.com/2014/09/shellshock-bug-spells-trouble-for-web-security/
+    - https://krebsonsecurity.com/2014/09/shellshock-bug-spells-trouble-for-web-security/
 - [x] Heartbleed - Patched by upgrading NGINX (default is fine on Ubuntu 14.04)
-    - http://heartbleed.com/
+    - https://heartbleed.com/
 - [x] POODLE - Patched by restricting SSL methods used by NGINX
     - https://access.redhat.com/articles/1232123
     - https://cipherli.st/

@@ -1,7 +1,7 @@
 #! /bin/sh
 #
 # Downloaded from:
-# http://bazaar.launchpad.net/~ubuntu-branches/ubuntu/trusty/supervisor/trusty/view/head:/debian/supervisor.init
+# https://bazaar.launchpad.net/~ubuntu-branches/ubuntu/trusty/supervisor/trusty/view/head:/debian/supervisor.init
 # Actually downloaded/modified from :
 # https://github.com/Supervisor/initscripts/blob/75a634ddacf60fd4b47109906131ff16bf7db5ef/ubuntu
 #

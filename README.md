@@ -55,16 +55,16 @@ As a high level overview of our setup, we use the following:
 
 **Operations:**
 
-- [Digital Ocean][] for hosting our servers and DNS management
+- [DigitalOcean][] for hosting our servers and DNS management
 - [Google Apps][] for email management
 - [Supervisor][] for process management
 - Metrics
-    - Currently, we only have Digital Ocean for metrics
+    - Currently, we only have DigitalOcean for metrics
 - Monitoring
     - We use [UptimeRobot][] and [VisualPing][]
     - In-service error reporting depends on the service
 
-[Digital Ocean]: http://digitalocean.com/
+[DigitalOcean]: https://digitalocean.com/
 [Google Apps]: https://apps.google.com/
 [Supervisor]: https://github.com/Supervisor/supervisor
 [UptimeRobot]: https://uptimerobot.com/
@@ -83,7 +83,7 @@ As a high level overview of our setup, we use the following:
 [bash]: https://www.gnu.org/software/bash/
 [Node.js]: https://nodejs.org/
 [JavaScript]: https://en.wikipedia.org/wiki/JavaScript
-[Serverspec]: http://serverspec.org/
+[Serverspec]: https://serverspec.org/
 
 ### File structure
 TODO: Update after scripts updated
@@ -176,10 +176,10 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ## Donating
 Support this project and [others by twolfson][twolfson-projects] via [donations][twolfson-support-me].
 
-<http://twolfson.com/support-me>
+<https://twolfson.com/support-me>
 
-[twolfson-projects]: http://twolfson.com/projects
-[twolfson-support-me]: http://twolfson.com/support-me
+[twolfson-projects]: https://twolfson.com/projects
+[twolfson-support-me]: https://twolfson.com/support-me
 
 ## Unlicense
 As of Dec 08 2015, Todd Wolfson has released this repository and its contents to the public domain.

@@ -255,8 +255,8 @@ sudo pico /etc/supervisord.conf
 # If we update the `supervisord.conf` after setup, run `sudo supervisorctl update` after
 
 # Set up supervisor `init` script and autostart
-# http://supervisord.org/running.html#running-supervisord-automatically-on-startup
-# http://serverfault.com/a/96500
+# https://supervisord.org/running.html#running-supervisord-automatically-on-startup
+# https://serverfault.com/a/96500
 sudo chown root:root data/etc/init.d/supervisord
 sudo chmod u=rwx,g=rx,o=rx data/etc/init.d/supervisord
 sudo mv data/etc/init.d/supervisord /etc/init.d/supervisord
