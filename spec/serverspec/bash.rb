@@ -10,6 +10,6 @@ describe "bash" do
   end
 
   it "has our expected version" do
-    expect(command("bash --version").stdout).to(include("version 4.3.11(1)-release"))
+    expect(command("bash --version").stdout).to(include("version 5.1.16(1)-release"))
   end
 end

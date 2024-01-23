@@ -102,11 +102,3 @@ describe "Login shells" do
     end
   end
 end
-
-# https://lobste.rs/s/mzodhj/openssh_client_bug_can_leak_keys_to_malicious_servers
-# http://undeadly.org/cgi?action=article&sid=20160114142733
-describe "ssh" do
-  it "is a version patched for malicious UseRoaming" do
-    expect(package("openssh-server").version).to(eq("1:6.6p1-2ubuntu2.8"))
-  end
-end

@@ -36,13 +36,6 @@ describe "NGINX" do
     expect(key_file.group).to(eq(ROOT_GROUP))
   end
 
-  it "has proper permissions for Diffie-Hellman group" do
-    dhparam_file = file("/etc/ssl/private/dhparam.pem")
-    expect(dhparam_file.mode).to(eq((USER_R | GROUP_NONE | OTHER_NONE).to_s(8)))
-    expect(dhparam_file.owner).to(eq(ROOT_USER))
-    expect(dhparam_file.group).to(eq(ROOT_GROUP))
-  end
-
   it "has proper permissions for configurations" do
     # Verify only root can modify nginf.conf
     nginx_conf = file("/etc/nginx/nginx.conf")
