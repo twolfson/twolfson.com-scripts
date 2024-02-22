@@ -1,4 +1,6 @@
 # twolfson.com-scripts changelog
+3.1.1 - Updated secret management instructions
+
 3.1.0 - Moved from supervisord.conf having custom secrets to .env.*.local
 
 3.0.0 - Removed Vagrant, Chef, and scripted bootstrapping. Added runbook for provisioning
