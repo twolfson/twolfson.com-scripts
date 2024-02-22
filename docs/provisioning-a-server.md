@@ -248,12 +248,14 @@ sudo chown root:root data/etc/supervisord.conf
 sudo chmod u=rw,g=r,o=r data/etc/supervisord.conf
 sudo mv data/etc/supervisord.conf /etc/supervisord.conf
 
+# If we update the `supervisord.conf` after setup, run `sudo supervisorctl update` after
+
 # Create a placeholder `.env.production.local` to get picked up during deployment
 mkdir -p /home/todd/twolfson.com/tmp
 ln --symbolic --force --no-dereference "/home/todd/twolfson.com/tmp" "/home/todd/twolfson.com/main"
 pico /home/todd/twolfson.com/main/.env.production.local
 
-# If we update the `supervisord.conf` after setup, run `sudo supervisorctl update` after
+# If we update the `.env` after setup, run `sudo supervisorctl restart` after
 
 # Set up supervisor `init` script and autostart
 # https://supervisord.org/running.html#running-supervisord-automatically-on-startup
