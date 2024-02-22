@@ -80,7 +80,7 @@ set -x
 
 # Copy over any .env.*.local files from current deployment
 if test -d "${main_target_dir}"; then
-  cp "${main_target_dir}/.env*.local" "${target_dir}"
+  cp "${main_target_dir}"/.env*.local "${target_dir}"
 fi
 
 # Swap directories
