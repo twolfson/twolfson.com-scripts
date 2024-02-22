@@ -248,9 +248,10 @@ sudo chown root:root data/etc/supervisord.conf
 sudo chmod u=rw,g=r,o=r data/etc/supervisord.conf
 sudo mv data/etc/supervisord.conf /etc/supervisord.conf
 
-# Modify supervisord.conf with appropriate secrets
-# TASK: Move to .env to remove this step, https://github.com/twolfson/twolfson.com-scripts/issues/15
-sudo pico /etc/supervisord.conf
+# Create a placeholder `.env.production.local` to get picked up during deployment
+mkdir -p /home/todd/twolfson.com/tmp
+ln --symbolic --force --no-dereference "/home/todd/twolfson.com/tmp" "/home/todd/twolfson.com/main"
+pico /home/todd/twolfson.com/main/.env.production.local
 
 # If we update the `supervisord.conf` after setup, run `sudo supervisorctl update` after
 
